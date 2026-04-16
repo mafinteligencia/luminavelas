@@ -6,48 +6,48 @@
 
 @layer base {
   :root {
-    --background: 34 33% 96%;
-    --foreground: 25 15% 20%;
+    --background: 40 30% 97%;
+    --foreground: 25 20% 18%;
 
-    --card: 34 25% 93%;
-    --card-foreground: 25 15% 20%;
+    --card: 38 25% 95%;
+    --card-foreground: 25 20% 18%;
 
-    --popover: 34 33% 96%;
-    --popover-foreground: 25 15% 20%;
+    --popover: 40 30% 97%;
+    --popover-foreground: 25 20% 18%;
 
-    --primary: 25 30% 42%;
-    --primary-foreground: 34 33% 96%;
+    --primary: 38 55% 42%;
+    --primary-foreground: 40 30% 97%;
 
-    --secondary: 30 20% 88%;
-    --secondary-foreground: 25 15% 25%;
+    --secondary: 36 25% 92%;
+    --secondary-foreground: 25 20% 22%;
 
-    --muted: 30 15% 90%;
-    --muted-foreground: 25 10% 50%;
+    --muted: 35 18% 92%;
+    --muted-foreground: 25 12% 48%;
 
-    --accent: 38 50% 65%;
-    --accent-foreground: 25 15% 15%;
+    --accent: 38 60% 55%;
+    --accent-foreground: 25 20% 12%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 20% 85%;
-    --input: 30 20% 85%;
-    --ring: 25 30% 42%;
+    --border: 35 22% 88%;
+    --input: 35 22% 88%;
+    --ring: 38 55% 42%;
 
     --radius: 1rem;
 
-    --logo-bg: 50 33% 93%;
-    --gold: 38 60% 55%;
+    --logo-bg: 46 28% 91%;
+    --gold: 38 65% 52%;
     --nude: 20 25% 80%;
-    --warm-cream: 36 40% 95%;
+    --warm-cream: 40 40% 96%;
     --rose-muted: 10 30% 70%;
 
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Raleway', system-ui, sans-serif;
 
-    --glass-bg: 34 33% 96% / 0.6;
-    --glass-border: 34 33% 96% / 0.3;
-    --glass-shadow: 0 8px 32px 0 rgba(80, 60, 40, 0.08);
+    --glass-bg: 40 30% 97% / 0.65;
+    --glass-border: 38 40% 90% / 0.5;
+    --glass-shadow: 0 8px 32px 0 rgba(180, 150, 100, 0.08);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -82,23 +82,26 @@
     box-shadow: var(--glass-shadow);
   }
   .glass-strong {
-    background: hsla(34, 33%, 96%, 0.8);
+    background: hsla(40, 30%, 97%, 0.85);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid hsla(34, 33%, 96%, 0.4);
-    box-shadow: var(--glass-shadow);
+    border: 1px solid hsla(38, 40%, 90%, 0.6);
+    box-shadow: 0 12px 40px rgba(180, 150, 100, 0.1);
   }
   .text-gold {
     color: hsl(var(--gold));
   }
   .bg-logo {
-    background-color: hsl(var(--logo-bg));
+    background-color: #EDEADD;
   }
   .font-serif {
     font-family: var(--font-serif);
   }
   .font-sans {
     font-family: var(--font-sans);
+  }
+  .gold-glow {
+    box-shadow: 0 0 30px rgba(212, 168, 83, 0.2), 0 0 60px rgba(212, 168, 83, 0.1);
   }
 }
 
