@@ -10,8 +10,16 @@ const proofs = [
 ];
 
 const ProofSection = () => (
-  <section className="py-20 px-6">
+  <section className="py-24 px-6 relative">
     <div className="max-w-6xl mx-auto">
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="text-xs tracking-[0.3em] uppercase text-gold text-center mb-4"
+      >
+        ✦ Artesanal ✦
+      </motion.p>
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +37,7 @@ const ProofSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15, duration: 0.6 }}
-            className="glass rounded-2xl overflow-hidden group"
+            className="glass rounded-2xl overflow-hidden group hover:gold-glow transition-shadow duration-500"
           >
             <div className="h-64 overflow-hidden">
               <img
