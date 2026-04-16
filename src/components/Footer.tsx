@@ -1,9 +1,11 @@
 import logo from "@/assets/logo-lumina.jpg";
 
 const Footer = () => (
-  <footer className="py-12 px-6 bg-logo">
+  <footer className="py-12 px-6" style={{ backgroundColor: "#EDEADD" }}>
     <div className="max-w-4xl mx-auto text-center">
-      <img src={logo} alt="Lumina" className="w-32 mx-auto mb-6 rounded-lg" />
+      <div className="rounded-xl overflow-hidden w-32 mx-auto mb-6" style={{ backgroundColor: "#EDEADD" }}>
+        <img src={logo} alt="Lumina" className="w-full object-contain" />
+      </div>
 
       <div className="flex justify-center gap-6 mb-6">
         <a
