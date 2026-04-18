@@ -6,59 +6,48 @@
 
 @layer base {
   :root {
-    /* Doceria Dal Pizzol — chocolate, gold, cream */
-    --background: 36 30% 96%;
-    --foreground: 22 30% 14%;
+    --background: 40 30% 97%;
+    --foreground: 25 20% 18%;
 
-    --card: 36 25% 94%;
-    --card-foreground: 22 30% 14%;
+    --card: 38 25% 95%;
+    --card-foreground: 25 20% 18%;
 
-    --popover: 36 30% 96%;
-    --popover-foreground: 22 30% 14%;
+    --popover: 40 30% 97%;
+    --popover-foreground: 25 20% 18%;
 
-    --primary: 25 45% 22%;            /* deep chocolate */
-    --primary-foreground: 36 30% 96%;
+    --primary: 38 55% 42%;
+    --primary-foreground: 40 30% 97%;
 
-    --secondary: 34 28% 90%;
-    --secondary-foreground: 22 30% 18%;
+    --secondary: 36 25% 92%;
+    --secondary-foreground: 25 20% 22%;
 
-    --muted: 34 18% 90%;
-    --muted-foreground: 25 12% 42%;
+    --muted: 35 18% 92%;
+    --muted-foreground: 25 12% 48%;
 
-    --accent: 36 65% 52%;             /* gold */
-    --accent-foreground: 22 30% 12%;
+    --accent: 38 60% 55%;
+    --accent-foreground: 25 20% 12%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 34 22% 86%;
-    --input: 34 22% 86%;
-    --ring: 36 65% 52%;
+    --border: 35 22% 88%;
+    --input: 35 22% 88%;
+    --ring: 38 55% 42%;
 
     --radius: 1rem;
 
-    /* Logo background — deep chocolate matching the Dal Pizzol logo */
-    --logo-bg: 22 35% 10%;
-
-    --gold: 36 65% 52%;
-    --gold-soft: 36 55% 70%;
-    --chocolate: 22 35% 10%;
-    --chocolate-light: 25 30% 22%;
-    --cream: 36 35% 94%;
-    --peach: 22 60% 78%;
+    --logo-bg: 46 28% 91%;
+    --gold: 38 65% 52%;
+    --nude: 20 25% 80%;
+    --warm-cream: 40 40% 96%;
+    --rose-muted: 10 30% 70%;
 
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Raleway', system-ui, sans-serif;
 
-    --glass-bg: 36 30% 96% / 0.65;
-    --glass-border: 36 40% 85% / 0.5;
-    --glass-shadow: 0 8px 32px 0 rgba(80, 50, 20, 0.1);
-
-    --gradient-gold: linear-gradient(135deg, hsl(36 70% 58%) 0%, hsl(32 55% 42%) 100%);
-    --gradient-chocolate: linear-gradient(180deg, hsl(22 35% 10%) 0%, hsl(25 30% 18%) 100%);
-    --gradient-cream: linear-gradient(180deg, hsl(36 35% 96%) 0%, hsl(34 28% 90%) 100%);
-    --shadow-gold: 0 10px 40px rgba(196, 144, 60, 0.35), 0 4px 15px rgba(50, 30, 10, 0.1);
-    --shadow-soft: 0 20px 60px -20px rgba(80, 50, 20, 0.25);
+    --glass-bg: 40 30% 97% / 0.65;
+    --glass-border: 38 40% 90% / 0.5;
+    --glass-shadow: 0 8px 32px 0 rgba(180, 150, 100, 0.08);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -93,42 +82,17 @@
     box-shadow: var(--glass-shadow);
   }
   .glass-strong {
-    background: hsla(36, 30%, 96%, 0.88);
+    background: hsla(40, 30%, 97%, 0.85);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid hsla(36, 40%, 85%, 0.6);
-    box-shadow: 0 12px 40px rgba(80, 50, 20, 0.12);
-  }
-  .glass-dark {
-    background: hsla(22, 35%, 10%, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid hsla(36, 65%, 52%, 0.25);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid hsla(38, 40%, 90%, 0.6);
+    box-shadow: 0 12px 40px rgba(180, 150, 100, 0.1);
   }
   .text-gold {
     color: hsl(var(--gold));
   }
-  .text-chocolate {
-    color: hsl(var(--chocolate));
-  }
   .bg-logo {
-    background-color: hsl(var(--logo-bg));
-  }
-  .bg-chocolate {
-    background-color: hsl(var(--chocolate));
-  }
-  .bg-cream {
-    background-color: hsl(var(--cream));
-  }
-  .bg-gradient-gold {
-    background: var(--gradient-gold);
-  }
-  .bg-gradient-chocolate {
-    background: var(--gradient-chocolate);
-  }
-  .bg-gradient-cream {
-    background: var(--gradient-cream);
+    background-color: #EDEADD;
   }
   .font-serif {
     font-family: var(--font-serif);
@@ -137,24 +101,7 @@
     font-family: var(--font-sans);
   }
   .gold-glow {
-    box-shadow: 0 0 30px rgba(196, 144, 60, 0.25), 0 0 60px rgba(196, 144, 60, 0.12);
-  }
-  .shadow-gold {
-    box-shadow: var(--shadow-gold);
-  }
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
-  }
-  .text-shimmer {
-    background: linear-gradient(135deg, hsl(36 80% 65%) 0%, hsl(36 65% 45%) 50%, hsl(36 80% 65%) 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 4s linear infinite;
-  }
-  @keyframes shimmer {
-    to { background-position: 200% center; }
+    box-shadow: 0 0 30px rgba(212, 168, 83, 0.2), 0 0 60px rgba(212, 168, 83, 0.1);
   }
 }
 

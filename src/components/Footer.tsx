@@ -1,38 +1,35 @@
-import logo from "@/assets/logo-dalpizzol.jpg";
+import logo from "@/assets/logo-lumina.jpg";
 
 const Footer = () => (
-  <footer className="py-16 px-6 bg-logo text-white/90">
+  <footer className="py-12 px-6" style={{ backgroundColor: "#EDEADD" }}>
     <div className="max-w-4xl mx-auto text-center">
-      <div className="inline-block bg-logo rounded-full p-2 mb-6 gold-glow">
-        <img
-          src={logo}
-          alt="Doceria Dal Pizzol"
-          className="w-20 h-20 rounded-full object-cover"
-        />
+      <div className="rounded-xl overflow-hidden w-32 mx-auto mb-6" style={{ backgroundColor: "#EDEADD" }}>
+        <img src={logo} alt="Lumina" className="w-full object-contain" />
       </div>
-      <p className="font-serif text-2xl mb-2 text-shimmer">Doceria Dal Pizzol</p>
-      <p className="text-xs tracking-[0.3em] uppercase text-gold mb-6">
-        Doces que abraçam o coração
-      </p>
-      <p className="text-sm text-white/70 mb-2">📍 Barra da Lagoa · Florianópolis</p>
-      <p className="text-sm text-white/70 mb-8">💬 (48) 99133-8766</p>
 
-      <div className="flex justify-center gap-6 mb-8">
+      <div className="flex justify-center gap-6 mb-6">
         <a
-          href="https://instagram.com/doceriadalpizzol"
+          href="https://instagram.com/lumina.velasartesanais"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white/60 hover:text-gold transition-colors text-sm tracking-wider uppercase"
+          className="text-muted-foreground hover:text-foreground transition-colors text-sm"
         >
-          @doceriadalpizzol
+          Instagram
+        </a>
+        <a
+          href="https://wa.me/5548999999999"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+        >
+          WhatsApp
         </a>
       </div>
 
-      <div className="border-t border-gold/20 pt-6">
-        <p className="text-xs text-white/40">
-          © {new Date().getFullYear()} Doceria Dal Pizzol — Feito com 💌 em Floripa
-        </p>
-      </div>
+      <p className="font-serif text-lg text-foreground mb-1">Ilumine seus momentos</p>
+      <p className="text-xs text-muted-foreground">
+        © {new Date().getFullYear()} Lumina Velas Artesanais · Barra da Lagoa, Florianópolis
+      </p>
     </div>
   </footer>
 );
