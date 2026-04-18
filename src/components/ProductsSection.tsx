@@ -1,85 +1,116 @@
 import { motion } from "framer-motion";
-import bgLumi from "@/assets/bg-lumi.jpg";
-import bg03 from "@/assets/bg-lumina-03.jpg";
-import bgRockets from "@/assets/bg-lumina-rockets.jpg";
-import bg4444 from "@/assets/bg-lumina-4444.jpg";
+import bolo from "@/assets/produto-bolo.jpg";
+import brigadeiros from "@/assets/produto-brigadeiros.jpg";
+import love from "@/assets/produto-love.jpg";
+import pave from "@/assets/produto-pave.jpg";
+import palha from "@/assets/produto-palha.jpg";
+import presente from "@/assets/produto-presente.jpg";
 
-const WHATSAPP_URL = "https://wa.me/5548999999999?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20uma%20vela%20Lumina";
+const WHATSAPP_BASE = "https://wa.me/5548991338766?text=";
 
-const products = [
+const items = [
   {
-    image: bgLumi,
-    name: "Vela Bubble",
-    desc: "Vela decorativa artesanal em formato escultural. Perfeita para presentear.",
+    img: bolo,
+    title: "Bolos Decorados",
+    tagline: "Datas especiais",
+    desc: "Bolos artesanais com acabamento sofisticado — para aniversários, casamentos e celebrações que merecem doçura.",
+    cta: "Encomendar%20um%20bolo%20personalizado",
   },
   {
-    image: bg03,
-    name: "Cravo & Canela",
-    desc: "Vela aromática no vidro com notas quentes de cravo e canela. Aconchego em cada chama.",
+    img: brigadeiros,
+    title: "Brigadeiros Gourmet",
+    tagline: "Doces finos",
+    desc: "Brigadeiros premium em sabores únicos — chocolate belga, pistache, ninho, beijinho e nossas criações exclusivas.",
+    cta: "Pedir%20brigadeiros%20gourmet",
   },
   {
-    image: bgRockets,
-    name: "Coleção Criativa",
-    desc: "Velas lúdicas feitas com cera de coco. Peças decorativas e divertidas.",
+    img: love,
+    title: "Coleção Love",
+    tagline: "Presentes afetivos",
+    desc: "Doces em formato de coração, perfeitos para declarações, datas românticas e momentos para presentear quem se ama.",
+    cta: "Encomendar%20a%20Cole%C3%A7%C3%A3o%20Love",
   },
   {
-    image: bg4444,
-    name: "Essência de Mãe",
-    desc: "Edição especial Dia das Mães. Chá branco, canela e champagne — com embalagem gift.",
+    img: pave,
+    title: "Pavês & Sobremesas",
+    tagline: "Para a mesa",
+    desc: "Pavês cremosos, mousses e sobremesas em camadas — para fechar refeições especiais com chave de ouro.",
+    cta: "Pedir%20um%20pav%C3%AA",
+  },
+  {
+    img: palha,
+    title: "Doces de Festa",
+    tagline: "Bem casados & mais",
+    desc: "Palha italiana, bombons recheados, trufas e bem casados — feitos para encantar em festas e casamentos.",
+    cta: "Pedir%20doces%20de%20festa",
+  },
+  {
+    img: presente,
+    title: "Caixas Presente",
+    tagline: "Para presentear",
+    desc: "Embalagens premium com seleção de doces — o jeito mais doce de dizer 'estou pensando em você'.",
+    cta: "Montar%20uma%20caixa%20presente",
   },
 ];
 
 const ProductsSection = () => (
-  <section className="py-20 px-6 bg-secondary/40">
-    <div className="max-w-6xl mx-auto">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+  <section id="cardapio" className="py-24 px-6 bg-background">
+    <div className="max-w-7xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="font-serif text-3xl md:text-4xl text-center text-foreground mb-4"
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
       >
-        Nossos Produtos
-      </motion.h2>
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="text-center text-muted-foreground text-sm mb-14 font-light"
-      >
-        Calor, presença e propósito em cada detalhe
-      </motion.p>
+        <p className="text-xs tracking-[0.3em] uppercase text-gold mb-3">✦ Nosso cardápio ✦</p>
+        <h2 className="font-serif text-4xl md:text-5xl text-foreground font-light mb-4">
+          Cada doce, uma <em className="text-shimmer not-italic">história</em>
+        </h2>
+        <p className="text-muted-foreground font-light max-w-xl mx-auto">
+          Selecionamos o melhor da casa para você. Toque em qualquer item para encomendar pelo WhatsApp.
+        </p>
+      </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {products.map((p, i) => (
-          <motion.div
-            key={p.name}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {items.map((item, i) => (
+          <motion.a
+            key={item.title}
+            href={`${WHATSAPP_BASE}Ol%C3%A1!%20Gostaria%20de%20${item.cta}`}
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.6 }}
-            className="glass rounded-2xl overflow-hidden group flex flex-col"
+            transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
+            whileHover={{ y: -8 }}
+            className="group block rounded-3xl overflow-hidden bg-card shadow-soft hover:shadow-gold transition-all duration-500"
           >
-            <div className="h-56 overflow-hidden">
+            <div className="relative aspect-[4/3] overflow-hidden">
               <img
-                src={p.image}
-                alt={p.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                src={item.img}
+                alt={item.title}
                 loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-chocolate/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-logo/90 backdrop-blur-sm">
+                <p className="text-[10px] tracking-[0.25em] uppercase text-gold">{item.tagline}</p>
+              </div>
             </div>
-            <div className="p-5 flex flex-col flex-1">
-              <h3 className="font-serif text-lg text-foreground mb-1">{p.name}</h3>
-              <p className="text-muted-foreground text-xs font-light flex-1 mb-4">{p.desc}</p>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-center bg-primary text-primary-foreground text-xs tracking-wide uppercase py-3 rounded-full hover:opacity-90 transition-opacity"
-              >
-                Quero Comprar
-              </a>
+            <div className="p-6">
+              <h3 className="font-serif text-2xl text-foreground mb-2 group-hover:text-gold transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-sm text-muted-foreground font-light leading-relaxed mb-4">
+                {item.desc}
+              </p>
+              <p className="text-xs tracking-[0.2em] uppercase text-gold flex items-center gap-2">
+                Encomendar
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </p>
             </div>
-          </motion.div>
+          </motion.a>
         ))}
       </div>
     </div>
