@@ -14,10 +14,19 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ["Fraunces", "Georgia", "serif"],
-        sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        serif: ["Playfair Display", "Georgia", "serif"],
+        sans: ["Montserrat", "system-ui", "sans-serif"],
+        script: ["Dancing Script", "cursive"],
       },
       colors: {
+        /* Identidade visual Doceria Dalpizzol (brand board 2026) */
+        rosa: { DEFAULT: "#EBA0A6", deep: "#D9868D", soft: "#F5CDD0" },
+        salvia: { DEFAULT: "#A6B693", deep: "#8A9A76", soft: "#D9E0CF" },
+        creme: { DEFAULT: "#F7F2EA", deep: "#EFE6D8" },
+        dourado: { DEFAULT: "#D1B071", deep: "#B8965A" },
+        marrom: { DEFAULT: "#8B6B4F", deep: "#6B5038" },
+        offwhite: "#FAFAF6",
+        ink: "#4A3728",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
