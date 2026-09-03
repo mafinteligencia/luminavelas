@@ -50,13 +50,15 @@ export const CAKE_SIZES: Size[] = [
   { id: "G", label: "Grande", hint: "20 fatias" },
 ];
 
-export type Category = { id: string; label: string; emoji: string };
+import type { IconKey } from "./icons";
+
+export type Category = { id: string; label: string; icon: IconKey };
 
 export const CATEGORIES: Category[] = [
-  { id: "bolos", label: "Bolos", emoji: "🎂" },
-  { id: "doces", label: "Doces finos", emoji: "🍬" },
-  { id: "potes", label: "No pote", emoji: "🍮" },
-  { id: "presentes", label: "Presentes", emoji: "🎁" },
+  { id: "bolos", label: "Bolos", icon: "cake" },
+  { id: "doces", label: "Doces finos", icon: "bonbon" },
+  { id: "potes", label: "No pote", icon: "jar" },
+  { id: "presentes", label: "Presentes", icon: "gift" },
 ];
 
 export type Product = {
@@ -147,30 +149,35 @@ export const PRODUCTS: Product[] = [
 export const productById = (id: string) => PRODUCTS.find((p) => p.id === id);
 
 /* ---------- Ocasiões (encomendas) ---------- */
-export const OCCASIONS = [
+export const OCCASIONS: {
+  id: string;
+  title: string;
+  desc: string;
+  icon: IconKey;
+}[] = [
   {
     id: "aniversario",
     title: "Aniversários",
     desc: "Bolos personalizados do seu jeito.",
-    emoji: "🎈",
+    icon: "balloon",
   },
   {
     id: "datas",
     title: "Datas especiais",
     desc: "Dia das Mães, Namorados e Natal.",
-    emoji: "💐",
+    icon: "bouquet",
   },
   {
     id: "presentes",
     title: "Presentes",
     desc: "Caixas e kits prontos para entregar.",
-    emoji: "🎁",
+    icon: "gift",
   },
   {
     id: "festas",
     title: "Festas",
     desc: "Mesas de doces e bem-casados.",
-    emoji: "✨",
+    icon: "sparkle",
   },
 ];
 
@@ -191,13 +198,17 @@ export const STORY = {
     {
       title: "Ingredientes de qualidade",
       desc: "Selecionados um a um.",
-      emoji: "🌿",
+      icon: "sprig" as IconKey,
     },
-    { title: "Feito com amor", desc: "Do forno para a sua mesa.", emoji: "💗" },
+    {
+      title: "Feito com amor",
+      desc: "Do forno para a sua mesa.",
+      icon: "heart" as IconKey,
+    },
     {
       title: "Tradição de família",
       desc: "Receitas que atravessam gerações.",
-      emoji: "👩‍👩‍👧",
+      icon: "family" as IconKey,
     },
   ],
   // Donas conforme o brand board (Juliana e Sandra). Ordem das fotos a confirmar com o cliente.

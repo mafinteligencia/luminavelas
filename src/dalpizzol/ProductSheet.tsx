@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { ShoppingBag } from "lucide-react";
+import { IconBag } from "./icons";
 import {
   Drawer,
   DrawerContent,
@@ -47,7 +47,7 @@ export const ProductSheet = ({
               <img
                 src={product.img}
                 alt={product.name}
-                className="w-full h-56 sm:h-72 object-cover rounded-3xl"
+                className="w-full h-56 sm:h-72 object-cover rounded-3xl ring-1 ring-dourado/30 outline outline-[5px] outline-white/70"
               />
             </div>
             <div className="px-5 pt-5">
@@ -144,7 +144,7 @@ export const ProductSheet = ({
                     onClose();
                   }}
                 >
-                  <ShoppingBag className="w-4 h-4" /> Adicionar ao pedido
+                  <IconBag className="w-4 h-4" /> Adicionar ao pedido
                 </Button>
                 <LinkButton
                   full

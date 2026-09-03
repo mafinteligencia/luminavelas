@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Home,
-  Cake,
-  ClipboardList,
-  Heart,
-  ShoppingBag,
-  X,
-  Download,
-} from "lucide-react";
+  IconBag,
+  IconCake,
+  IconClose,
+  IconDownload,
+  IconHeart,
+  IconHome,
+  IconOrderList,
+} from "./icons";
 import { BRAND, WHATSAPP_URL } from "./data";
 import { useCart } from "./cart";
 import { WhatsAppIcon } from "./ui";
@@ -17,10 +17,10 @@ import { cn } from "@/lib/utils";
 import { ScrollProgressBar } from "./motion";
 
 const TABS = [
-  { to: "/", label: "Início", icon: Home, end: true },
-  { to: "/bolos", label: "Bolos", icon: Cake },
-  { to: "/encomendar", label: "Encomendar", icon: ClipboardList },
-  { to: "/sobre", label: "Sobre", icon: Heart },
+  { to: "/", label: "Início", icon: IconHome, end: true },
+  { to: "/bolos", label: "Bolos", icon: IconCake },
+  { to: "/encomendar", label: "Encomendar", icon: IconOrderList },
+  { to: "/sobre", label: "Sobre", icon: IconHeart },
 ];
 
 /* ---- Badge do carrinho com "pulo" ao mudar ---- */
@@ -110,14 +110,14 @@ const InstallBanner = () => {
               }}
               className="h-9 px-3 rounded-full bg-rosa text-white text-[12px] font-semibold inline-flex items-center gap-1.5"
             >
-              <Download className="w-3.5 h-3.5" /> Instalar
+              <IconDownload className="w-3.5 h-3.5" /> Instalar
             </button>
             <button
               onClick={dismiss}
               aria-label="Fechar"
               className="text-ink/40"
             >
-              <X className="w-4 h-4" />
+              <IconClose className="w-4 h-4" />
             </button>
           </div>
         </motion.div>
@@ -142,8 +142,8 @@ const TopBar = () => {
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-300 safe-top",
         solid
-          ? "bg-creme/85 backdrop-blur-xl shadow-[0_6px_24px_rgba(139,107,79,0.10)]"
-          : "bg-transparent",
+          ? "glass-warm border-x-0 border-t-0 rounded-none"
+          : "bg-transparent border-transparent shadow-none",
       )}
     >
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
@@ -151,7 +151,7 @@ const TopBar = () => {
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="w-10 h-10 rounded-full shadow-sm ring-2 ring-white/70"
+            className="w-11 h-11 rounded-full ring-1 ring-dourado/40 shadow-[0_4px_12px_-4px_rgba(139,107,79,0.4)]"
           />
           <span className="leading-none">
             <span className="block text-[9px] tracking-[0.28em] uppercase text-marrom">
@@ -187,9 +187,9 @@ const TopBar = () => {
           <NavLink
             to="/encomendar"
             aria-label="Meu pedido"
-            className="relative w-10 h-10 rounded-full bg-white/80 border border-marrom/10 grid place-items-center text-marrom-deep active:scale-95"
+            className="relative medallion w-11 h-11 text-marrom-deep active:scale-95"
           >
-            <ShoppingBag className="w-[18px] h-[18px]" />
+            <IconBag className="w-[18px] h-[18px]" />
             <Badge count={count} className="-top-1 -right-1" />
           </NavLink>
           <a
@@ -214,7 +214,7 @@ const BottomNav = () => {
       className="fixed bottom-0 inset-x-0 z-50 md:hidden px-3 pb-[calc(env(safe-area-inset-bottom)+10px)] pt-2 pointer-events-none"
       aria-label="Navegação principal"
     >
-      <div className="pointer-events-auto max-w-md mx-auto grid grid-cols-4 rounded-[28px] bg-creme/90 backdrop-blur-xl border border-white/70 shadow-[0_14px_40px_rgba(139,107,79,0.22)] p-1.5">
+      <div className="pointer-events-auto max-w-md mx-auto grid grid-cols-4 rounded-[28px] glass-warm p-1.5">
         {TABS.map((t) => (
           <NavLink
             key={t.to}
