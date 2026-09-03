@@ -189,14 +189,30 @@ const About = () => (
           />
           <Seal className="absolute right-5 bottom-4 w-16 h-16 text-dourado/35" />
           <h3 className="font-serif text-lg text-ink">Visite a gente</h3>
-          <p className="mt-2 text-[13px] text-ink/70 inline-flex items-center gap-1.5">
-            <IconPin className="w-4 h-4 text-rosa-deep" /> {BRAND.city}
-          </p>
-          <br />
-          <p className="mt-1 text-[13px] text-ink/70 inline-flex items-center gap-1.5">
-            <IconClock className="w-4 h-4 text-salvia-deep" /> {BRAND.hours}
-          </p>
-          <div className="mt-4 grid sm:grid-cols-2 gap-2.5">
+          <div className="mt-3 flex items-start gap-2">
+            <IconPin className="w-4 h-4 text-rosa-deep shrink-0 mt-0.5" />
+            <p className="text-[13.5px] text-ink/80 leading-relaxed">
+              {BRAND.street}
+              <br />
+              {BRAND.district} · {BRAND.cityState}
+              <br />
+              <span className="text-ink/55">CEP {BRAND.zip}</span>
+            </p>
+          </div>
+          <div className="mt-2.5 flex items-start gap-2">
+            <IconClock className="w-4 h-4 text-salvia-deep shrink-0 mt-0.5" />
+            <p className="text-[13.5px] text-ink/80">{BRAND.hours}</p>
+          </div>
+          <LinkButton
+            variant="secondary"
+            className="mt-4 h-11 w-full sm:w-auto"
+            href={BRAND.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconPin className="w-4 h-4" /> Como chegar
+          </LinkButton>
+          <div className="mt-2.5 grid sm:grid-cols-2 gap-2.5">
             <LinkButton
               full
               variant="whatsapp"

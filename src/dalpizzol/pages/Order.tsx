@@ -298,6 +298,28 @@ const Order = () => {
                 </div>
               </Field>
 
+              {d.mode === "retirada" && (
+                <div className="rounded-2xl bg-creme/70 border border-dourado/30 px-4 py-3 flex items-start gap-2.5">
+                  <IconStore className="w-4 h-4 text-marrom-deep shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-[12.5px] font-semibold text-ink leading-snug">
+                      Retirada em {BRAND.street}
+                    </p>
+                    <p className="text-[11.5px] text-ink/60 leading-snug">
+                      {BRAND.district} · {BRAND.cityState} · {BRAND.hours}
+                    </p>
+                    <a
+                      href={BRAND.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 inline-flex items-center gap-1 text-[11.5px] font-semibold text-rosa-deep"
+                    >
+                      Como chegar <IconChevronRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              )}
+
               {d.mode === "entrega" && (
                 <Field
                   label="Endereço de entrega"

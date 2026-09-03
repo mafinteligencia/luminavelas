@@ -506,10 +506,20 @@ export const FooterBand = () => (
         viewport={{ once: true }}
         transition={{ delay: 0.8, duration: 0.6 }}
       >
-        <p className="mt-4 text-[12px] text-white/80 inline-flex items-center gap-1.5">
-          <IconPin className="w-3.5 h-3.5" /> {BRAND.city}
-        </p>
-        <p className="mt-1 text-[12px] text-white/80">
+        <a
+          href={BRAND.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-start gap-1.5 text-[12.5px] text-white/90 leading-snug hover:text-white transition"
+        >
+          <IconPin className="w-4 h-4 shrink-0 mt-px" />
+          <span>
+            {BRAND.street}
+            <br />
+            {BRAND.district} · {BRAND.cityState} · {BRAND.zip}
+          </span>
+        </a>
+        <p className="mt-2 text-[12px] text-white/80">
           {BRAND.hours} · {BRAND.phoneDisplay}
         </p>
         <div className="mt-4 flex items-center justify-center gap-3">
