@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Search, X } from "lucide-react";
+import { Icon, IconClose, IconHeart, IconSearch } from "../icons";
+import { GoldRule } from "../ornaments";
 import { CATEGORIES, PRODUCTS, type Product } from "../data";
 import { Chip, SectionTitle } from "../ui";
 import { ProductCard } from "../ProductCard";
@@ -8,7 +9,6 @@ import { ProductSheet } from "../ProductSheet";
 import { FooterBand } from "./Home";
 import { useFavorites } from "../favorites";
 import { FloralPattern } from "../Pattern";
-import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { ClipReveal } from "../motion";
 
@@ -45,18 +45,22 @@ const Catalog = () => {
     <>
       <section className="relative pattern-creme pt-24 pb-5 px-5 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <FloralPattern color="#8B6B4F" opacity={0.08} />
+          <FloralPattern color="#8B6B4F" opacity={0.07} />
         </div>
         <div className="relative max-w-5xl mx-auto">
           <ClipReveal>
-            <SectionTitle
-              eyebrow="Cardápio"
-              title="Escolha o seu doce"
-              subtitle="Toque em um item para ver tamanhos e montar o seu pedido."
-            />
+            <div className="text-center">
+              <SectionTitle
+                center
+                eyebrow="Cardápio"
+                title="Escolha o seu doce"
+                subtitle="Toque em um item para ver tamanhos e montar o seu pedido."
+              />
+              <GoldRule className="mx-auto mt-3 text-dourado" width={130} />
+            </div>
           </ClipReveal>
-          <label className="mt-5 flex items-center gap-2.5 h-12 rounded-2xl bg-white border border-marrom/10 px-4 shadow-sm">
-            <Search className="w-4 h-4 text-marrom" />
+          <label className="mt-5 flex items-center gap-2.5 h-12 rounded-2xl card-lux px-4">
+            <IconSearch className="w-[18px] h-[18px] text-marrom" />
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
@@ -70,14 +74,14 @@ const Catalog = () => {
                 aria-label="Limpar busca"
                 className="text-ink/40"
               >
-                <X className="w-4 h-4" />
+                <IconClose className="w-4 h-4" />
               </button>
             )}
           </label>
         </div>
       </section>
 
-      <div className="sticky top-16 z-30 bg-offwhite/95 backdrop-blur-md border-b border-marrom/10">
+      <div className="sticky top-16 z-30 glass-warm border-x-0 border-t-0 rounded-none">
         <div className="overflow-x-auto no-scrollbar">
           <div className="flex gap-2 px-5 py-3 w-max md:max-w-5xl md:mx-auto md:w-auto">
             <Chip active={cat === "todos"} onClick={() => setCat("todos")}>
@@ -88,8 +92,9 @@ const Catalog = () => {
                 key={c.id}
                 active={cat === c.id}
                 onClick={() => setCat(c.id)}
+                className="inline-flex items-center gap-1.5"
               >
-                {c.emoji} {c.label}
+                <Icon name={c.icon} className="w-4 h-4" /> {c.label}
               </Chip>
             ))}
             <Chip
@@ -97,10 +102,7 @@ const Catalog = () => {
               onClick={() => setCat("favoritos")}
               className="inline-flex items-center gap-1.5"
             >
-              <Heart
-                className="w-3.5 h-3.5"
-                fill={cat === "favoritos" ? "currentColor" : "none"}
-              />{" "}
+              <IconHeart className="w-4 h-4" duotone={cat === "favoritos"} />{" "}
               Favoritos
               {favIds.length > 0 && (
                 <span className="opacity-70">({favIds.length})</span>
@@ -117,7 +119,13 @@ const Catalog = () => {
           </p>
           {items.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-4xl">{cat === "favoritos" ? "💗" : "🧁"}</p>
+              <span className="medallion w-16 h-16 mx-auto text-rosa-deep">
+                {cat === "favoritos" ? (
+                  <IconHeart duotone className="w-8 h-8" />
+                ) : (
+                  <IconSearch className="w-8 h-8" />
+                )}
+              </span>
               <p className="mt-3 font-serif text-lg text-ink">
                 {cat === "favoritos"
                   ? "Você ainda não salvou favoritos"

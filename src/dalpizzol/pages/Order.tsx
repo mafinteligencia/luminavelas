@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
-  Trash2,
-  ChevronRight,
-  CalendarDays,
-  Store,
-  Truck,
-  CheckCircle2,
-  Sparkles,
-} from "lucide-react";
+  IconCake,
+  IconCalendarHeart,
+  IconCheck,
+  IconChevronRight,
+  IconSparkle,
+  IconStore,
+  IconTrash,
+  IconTruck,
+} from "../icons";
+import { CornerFlourish, GoldRule } from "../ornaments";
 import {
   Drawer,
   DrawerContent,
@@ -146,7 +148,7 @@ const Order = () => {
 
   return (
     <>
-      <section className="pattern-creme pt-24 pb-5 px-5">
+      <section className="pattern-creme grain pt-24 pb-5 px-5 relative overflow-hidden">
         <div className="max-w-3xl mx-auto">
           <SectionTitle
             eyebrow="Encomendar"
@@ -166,7 +168,7 @@ const Order = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="card-soft p-4"
+            className="card-lux p-4"
           >
             <div className="flex items-center justify-between">
               <h3 className="font-serif text-lg text-ink">Seu pedido</h3>
@@ -182,7 +184,9 @@ const Order = () => {
 
             {!hasItems ? (
               <div className="mt-3 text-center py-6">
-                <p className="text-4xl">🎂</p>
+                <span className="medallion w-16 h-16 mx-auto text-rosa-deep">
+                  <IconCake duotone className="w-8 h-8" />
+                </span>
                 <p className="mt-2 text-[13.5px] text-ink/65">
                   Seu pedido ainda está vazio.
                 </p>
@@ -190,7 +194,7 @@ const Order = () => {
                   to="/bolos"
                   className="mt-3 inline-flex items-center gap-1 h-10 px-4 rounded-full bg-rosa text-white text-[12.5px] font-semibold"
                 >
-                  Escolher doces <ChevronRight className="w-4 h-4" />
+                  Escolher doces <IconChevronRight className="w-4 h-4" />
                 </Link>
               </div>
             ) : (
@@ -229,7 +233,7 @@ const Order = () => {
                         aria-label="Remover"
                         className="text-ink/35 p-1"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <IconTrash className="w-4 h-4" />
                       </button>
                     </li>
                   );
@@ -272,9 +276,9 @@ const Order = () => {
                       {
                         id: "retirada",
                         label: "Retirada na loja",
-                        icon: Store,
+                        icon: IconStore,
                       },
-                      { id: "entrega", label: "Entrega", icon: Truck },
+                      { id: "entrega", label: "Entrega", icon: IconTruck },
                     ] as const
                   ).map((m) => (
                     <button
@@ -314,7 +318,7 @@ const Order = () => {
                   hint={`Mínimo ${BRAND.leadTimeHours}h de antecedência.`}
                 >
                   <div className="relative">
-                    <CalendarDays className="w-4 h-4 text-marrom absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <IconCalendarHeart className="w-[18px] h-[18px] text-marrom absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <input
                       type="date"
                       min={minDate}
@@ -442,8 +446,17 @@ const Order = () => {
       <Drawer open={sent} onOpenChange={setSent} shouldScaleBackground={false}>
         <DrawerContent className="rounded-t-[32px] border-0 bg-offwhite outline-none">
           <div className="px-6 pt-4 pb-[calc(env(safe-area-inset-bottom)+20px)] text-center">
-            <span className="mx-auto w-16 h-16 rounded-full bg-salvia/25 grid place-items-center">
-              <CheckCircle2 className="w-8 h-8 text-salvia-deep" />
+            <CornerFlourish
+              className="left-2 top-0 text-dourado/40"
+              delay={0.1}
+            />
+            <CornerFlourish
+              className="right-2 top-0 text-dourado/40"
+              flip
+              delay={0.2}
+            />
+            <span className="mx-auto medallion w-16 h-16">
+              <IconCheck className="w-9 h-9 text-salvia-deep" />
             </span>
             <DrawerTitle className="mt-4 font-serif text-2xl text-ink">
               Pedido a caminho do WhatsApp
@@ -470,7 +483,7 @@ const Order = () => {
                   setSent(false);
                 }}
               >
-                <Sparkles className="w-4 h-4" /> Concluir e limpar pedido
+                <IconSparkle className="w-4 h-4" /> Concluir e limpar pedido
               </Button>
             </div>
           </div>

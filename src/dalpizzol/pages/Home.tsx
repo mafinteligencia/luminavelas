@@ -7,14 +7,17 @@ import {
   useTransform,
 } from "framer-motion";
 import {
-  ChevronRight,
-  Truck,
-  CalendarHeart,
-  Star,
-  MapPin,
-  Clock,
-  ChevronDown,
-} from "lucide-react";
+  Icon,
+  IconChevronDown,
+  IconChevronRight,
+  IconCalendarHeart,
+  IconClock,
+  IconPin,
+  IconStar,
+  IconTruck,
+  IconInstagram,
+} from "../icons";
+import { CornerFlourish, EdgeWave, GoldRule, Seal } from "../ornaments";
 import {
   BRAND,
   CATEGORIES,
@@ -93,7 +96,7 @@ const Hero = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.25em] uppercase text-salvia-deep bg-white/70 px-3 py-1.5 rounded-full"
           >
-            <MapPin className="w-3 h-3" /> {BRAND.city}
+            <IconPin className="w-3.5 h-3.5" /> {BRAND.city}
           </motion.p>
           <h1 className="mt-4 font-serif text-[38px] leading-[1.05] sm:text-5xl md:text-[56px] text-ink">
             <motion.span
@@ -133,7 +136,7 @@ const Hero = () => {
               to="/bolos"
               className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 h-12 text-[13px] font-semibold bg-rosa text-white shadow-[0_10px_26px_rgba(235,160,166,0.45)] active:scale-[0.97] transition"
             >
-              Ver nossos bolos <ChevronRight className="w-4 h-4" />
+              Ver nossos bolos <IconChevronRight className="w-4 h-4" />
             </Link>
             <LinkButton
               variant="ghost"
@@ -152,11 +155,12 @@ const Hero = () => {
             className="mt-6 flex items-center gap-4 text-[11.5px] text-ink/60"
           >
             <span className="inline-flex items-center gap-1.5">
-              <Star className="w-3.5 h-3.5 text-dourado" fill="#D1B071" />
+              <IconStar filled className="w-3.5 h-3.5 text-dourado" />
               <CountUp to={1300} suffix="+ clientes" />
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-salvia-deep" /> {BRAND.hours}
+              <IconClock className="w-3.5 h-3.5 text-salvia-deep" />{" "}
+              {BRAND.hours}
             </span>
           </motion.div>
         </motion.div>
@@ -168,31 +172,32 @@ const Hero = () => {
           transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-sm md:max-w-md"
         >
-          <div
-            className="absolute -inset-4 rounded-[40px] bg-rosa/25 blur-2xl"
-            aria-hidden
-          />
+          <div className="absolute -inset-8 halo-rosa blur-2xl" aria-hidden />
           <Img
             src={HERO_IMAGE}
             alt="Bolo de Oreo da Doceria Dalpizzol"
-            wrapperClassName="relative rounded-[36px] shadow-[0_24px_60px_rgba(139,107,79,0.25)] ring-4 ring-white/70"
+            wrapperClassName="relative rounded-[36px] shadow-[0_30px_70px_-20px_rgba(139,107,79,0.45)] ring-1 ring-dourado/40 outline outline-[6px] outline-white/80"
             className="w-full aspect-[4/4.2] object-cover"
           />
-          <motion.span
+          <motion.div
             aria-hidden
-            animate={{ y: [0, -6, 0], rotate: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="absolute -top-3 -left-2 sm:-left-4 w-12 h-12 rounded-full bg-white shadow-[0_8px_20px_rgba(139,107,79,0.18)] grid place-items-center text-2xl"
+            animate={{ y: [0, -7, 0] }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            className="absolute -top-8 -left-4 sm:-left-9 w-[86px] h-[86px] rounded-full glass-warm grid place-items-center text-marrom"
           >
-            🍰
-          </motion.span>
+            <Seal className="w-[74px] h-[74px]" />
+          </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20, x: 10 }}
             animate={{ opacity: 1, y: 0, x: 0 }}
             transition={{ delay: 1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute -bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:w-64 card-soft px-4 py-3 flex items-center gap-3"
+            className="absolute -bottom-5 left-4 right-4 sm:left-auto sm:right-6 sm:w-64 card-lux edge-gold px-4 py-3 flex items-center gap-3"
           >
-            <img src={BRAND.logo} alt="" className="w-10 h-10 rounded-full" />
+            <img
+              src={BRAND.logo}
+              alt=""
+              className="w-11 h-11 rounded-full ring-1 ring-dourado/30"
+            />
             <div className="leading-tight">
               <p className="text-[12px] font-semibold text-ink">
                 Feito com ingredientes selecionados
@@ -216,7 +221,7 @@ const Hero = () => {
           className="inline-flex flex-col items-center gap-0.5 text-[10px] tracking-[0.2em] uppercase"
         >
           role
-          <ChevronDown className="w-4 h-4" />
+          <IconChevronDown className="w-4 h-4" />
         </motion.span>
       </motion.div>
     </section>
@@ -231,12 +236,12 @@ const Categories = () => (
         <FanIn key={c.id} index={i} total={CATEGORIES.length}>
           <Link
             to={`/bolos?cat=${c.id}`}
-            className="card-soft flex flex-col items-center gap-1.5 py-3.5 active:scale-95 transition"
+            className="group card-lux flex flex-col items-center gap-2 py-4 active:scale-95 transition"
           >
-            <span className="w-11 h-11 rounded-2xl bg-creme grid place-items-center text-[22px]">
-              {c.emoji}
+            <span className="medallion w-12 h-12 text-marrom-deep transition group-hover:text-rosa-deep">
+              <Icon name={c.icon} duotone className="w-[26px] h-[26px]" />
             </span>
-            <span className="text-[11px] font-semibold text-marrom-deep">
+            <span className="text-[11px] font-semibold text-marrom-deep tracking-wide">
               {c.label}
             </span>
           </Link>
@@ -251,8 +256,12 @@ const InfoCards = () => (
   <section className="px-5 pt-4 overflow-hidden">
     <div className="max-w-5xl mx-auto grid grid-cols-2 gap-2.5 sm:gap-3">
       <SplitIn from="left">
-        <div className="h-full rounded-3xl bg-rosa/15 border border-rosa/30 p-4">
-          <Truck className="w-5 h-5 text-rosa-deep" />
+        <div className="relative h-full rounded-3xl bg-gradient-to-br from-rosa/25 to-rosa/10 border border-rosa/30 p-4 overflow-hidden">
+          <div
+            className="absolute -right-8 -bottom-8 w-28 h-28 halo-rosa"
+            aria-hidden
+          />
+          <IconTruck className="relative w-6 h-6 text-rosa-deep" />
           <p className="mt-2 text-[13px] font-semibold text-ink">
             Entrega ou retirada
           </p>
@@ -266,9 +275,13 @@ const InfoCards = () => (
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="block h-full rounded-3xl bg-salvia/20 border border-salvia/40 p-4 active:scale-[0.98] transition"
+          className="relative block h-full rounded-3xl bg-gradient-to-br from-salvia/30 to-salvia/12 border border-salvia/40 p-4 active:scale-[0.98] transition overflow-hidden"
         >
-          <WhatsAppIcon className="w-5 h-5 text-salvia-deep" />
+          <div
+            className="absolute -right-8 -bottom-8 w-28 h-28 halo-salvia"
+            aria-hidden
+          />
+          <WhatsAppIcon className="relative w-6 h-6 text-salvia-deep" />
           <p className="mt-2 text-[13px] font-semibold text-ink">
             Atendimento pelo WhatsApp
           </p>
@@ -294,7 +307,7 @@ const Featured = ({ onOpen }: { onOpen: (p: Product) => void }) => {
           to="/bolos"
           className="text-[12px] font-semibold text-rosa-deep inline-flex items-center gap-1 shrink-0"
         >
-          Ver todos <ChevronRight className="w-3.5 h-3.5" />
+          Ver todos <IconChevronRight className="w-3.5 h-3.5" />
         </Link>
       </div>
       <div className="mt-5 overflow-x-auto no-scrollbar snap-x snap-mandatory md:overflow-visible [perspective:1000px]">
@@ -321,12 +334,16 @@ const OrderBanner = () => (
     <ScrubScale>
       <Link
         to="/encomendar"
-        className="max-w-5xl mx-auto block rounded-[28px] bg-creme border border-dourado/40 p-5 sm:p-6 relative overflow-hidden active:scale-[0.99] transition"
+        className="max-w-5xl mx-auto block rounded-[28px] card-lux edge-gold grain p-5 sm:p-6 relative overflow-hidden active:scale-[0.99] transition"
       >
-        <DrawPath
-          d={LEAF_PATHS}
-          className="absolute -right-2 -top-2 w-28 text-dourado/60"
-          delay={0.3}
+        <CornerFlourish
+          className="-right-3 -top-3 text-dourado/50"
+          flip
+          delay={0.25}
+        />
+        <CornerFlourish
+          className="-left-3 -bottom-3 text-dourado/30 rotate-180"
+          delay={0.4}
         />
         <div className="flex items-start gap-4">
           <motion.span
@@ -339,9 +356,9 @@ const OrderBanner = () => (
               damping: 14,
               delay: 0.2,
             }}
-            className="w-12 h-12 rounded-2xl bg-white grid place-items-center shrink-0"
+            className="medallion w-14 h-14 shrink-0"
           >
-            <CalendarHeart className="w-6 h-6 text-rosa-deep" />
+            <IconCalendarHeart className="w-7 h-7 text-rosa-deep" />
           </motion.span>
           <div className="flex-1">
             <p className="font-serif text-lg text-ink leading-snug">
@@ -352,7 +369,7 @@ const OrderBanner = () => (
               antecedência.
             </p>
             <span className="mt-3 inline-flex items-center gap-1 text-[12px] font-semibold text-rosa-deep">
-              Montar meu pedido <ChevronRight className="w-3.5 h-3.5" />
+              Montar meu pedido <IconChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
         </div>
@@ -363,38 +380,49 @@ const OrderBanner = () => (
 
 /* ============ 6 · OCASIÕES — cartas viradas na mesa + fundo em parallax inverso ============ */
 const Occasions = () => (
-  <section className="relative mt-10 py-10 px-5 bg-salvia/15 overflow-hidden">
-    <Parallax
-      speed={-0.35}
-      className="absolute -inset-y-24 inset-x-0 pointer-events-none"
-    >
-      <FloralPattern color="#8A9A76" opacity={0.14} />
-    </Parallax>
-    <div className="relative max-w-5xl mx-auto">
-      <SectionTitle
-        eyebrow="Encomendas"
-        title={
-          <Words text="Feito sob medida para o seu momento" stagger={0.05} />
-        }
-      />
-      <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-2.5 [perspective:900px]">
-        {OCCASIONS.map((o, i) => (
-          <FlipIn key={o.id} index={i}>
-            <Link
-              to={`/encomendar?ocasiao=${encodeURIComponent(o.title)}`}
-              className="block h-full rounded-3xl bg-white/90 border border-white p-4 shadow-[0_8px_24px_rgba(139,107,79,0.08)] active:scale-[0.98] transition"
-            >
-              <span className="text-[22px]">{o.emoji}</span>
-              <p className="mt-2 font-serif text-[15px] text-ink">{o.title}</p>
-              <p className="text-[11.5px] text-ink/60 leading-snug mt-0.5">
-                {o.desc}
-              </p>
-            </Link>
-          </FlipIn>
-        ))}
+  <>
+    <EdgeWave fill="#8A9A76" flip className="mt-10 -mb-px text-salvia-deep" />
+    <section className="relative py-10 px-5 band-salvia grain overflow-hidden">
+      <Parallax
+        speed={-0.35}
+        className="absolute -inset-y-24 inset-x-0 pointer-events-none"
+      >
+        <FloralPattern color="#FFFFFF" opacity={0.22} />
+      </Parallax>
+      <div className="relative max-w-5xl mx-auto">
+        <div className="text-center">
+          <p className="font-script text-3xl text-creme leading-none">
+            Encomendas
+          </p>
+          <h2 className="mt-1 font-serif text-[26px] sm:text-3xl text-white max-w-lg mx-auto">
+            <Words text="Feito sob medida para o seu momento" stagger={0.05} />
+          </h2>
+          <GoldRule className="mx-auto mt-3 text-creme/70" width={130} />
+        </div>
+        <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-2.5 [perspective:900px]">
+          {OCCASIONS.map((o, i) => (
+            <FlipIn key={o.id} index={i}>
+              <Link
+                to={`/encomendar?ocasiao=${encodeURIComponent(o.title)}`}
+                className="group block h-full rounded-3xl card-lux p-4 active:scale-[0.98] transition"
+              >
+                <span className="medallion w-11 h-11 text-salvia-deep transition group-hover:text-rosa-deep">
+                  <Icon name={o.icon} className="w-[22px] h-[22px]" />
+                </span>
+                <p className="mt-2.5 font-serif text-[15px] text-ink">
+                  {o.title}
+                </p>
+                <p className="text-[11.5px] text-ink/60 leading-snug mt-0.5">
+                  {o.desc}
+                </p>
+              </Link>
+            </FlipIn>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <EdgeWave fill="#8A9A76" className="-mt-px rotate-180" />
+  </>
 );
 
 /* ============ 7 · DEPOIMENTOS — do desfoque ao nítido + estrelas acendendo ============ */
@@ -402,7 +430,14 @@ const Testimonials = () => (
   <section className="pt-12">
     <div className="px-5 max-w-5xl mx-auto">
       <BlurIn>
-        <SectionTitle eyebrow="Quem prova, volta" title="Palavras que adoçam" />
+        <div className="text-center">
+          <SectionTitle
+            center
+            eyebrow="Quem prova, volta"
+            title="Palavras que adoçam"
+          />
+          <GoldRule className="mx-auto mt-3 text-dourado" width={130} />
+        </div>
       </BlurIn>
     </div>
     <div className="mt-5 overflow-x-auto no-scrollbar snap-x snap-mandatory md:overflow-visible">
@@ -413,12 +448,18 @@ const Testimonials = () => (
             index={i}
             className="snap-start shrink-0 w-[78vw] max-w-[320px] md:w-auto md:max-w-none"
           >
-            <div className="card-soft p-5 h-full">
-              <div className="mb-2">
+            <div className="card-lux p-5 h-full relative overflow-hidden">
+              <span
+                className="absolute -top-3 right-4 font-serif text-[64px] leading-none text-rosa/25 select-none"
+                aria-hidden
+              >
+                &rdquo;
+              </span>
+              <div className="mb-2 relative">
                 <StarBurst
                   delay={0.2 + i * 0.12}
                   render={() => (
-                    <Star className="w-3.5 h-3.5 text-dourado" fill="#D1B071" />
+                    <IconStar filled className="w-3.5 h-3.5 text-dourado" />
                   )}
                 />
               </div>
@@ -439,7 +480,7 @@ const Testimonials = () => (
 
 /* ============ 8 · RODAPÉ — slogan palavra a palavra e ramos desenhados ============ */
 export const FooterBand = () => (
-  <footer className="relative mt-14 bg-salvia-deep text-white overflow-hidden">
+  <footer className="relative mt-14 band-salvia grain text-white overflow-hidden">
     <Parallax
       speed={0.25}
       className="absolute -inset-y-20 inset-x-0 pointer-events-none"
@@ -447,6 +488,7 @@ export const FooterBand = () => (
       <FloralPattern color="#FFFFFF" opacity={0.12} />
     </Parallax>
     <div className="relative max-w-5xl mx-auto px-5 py-8 text-center">
+      <Seal className="w-24 h-24 mx-auto mb-3 text-creme/90" />
       <div className="flex items-center justify-center gap-3 text-white/70">
         <DrawPath d={LEAF_PATHS} className="w-10 shrink-0" duration={1.2} />
         <p className="font-script text-2xl text-white">
@@ -465,7 +507,7 @@ export const FooterBand = () => (
         transition={{ delay: 0.8, duration: 0.6 }}
       >
         <p className="mt-4 text-[12px] text-white/80 inline-flex items-center gap-1.5">
-          <MapPin className="w-3.5 h-3.5" /> {BRAND.city}
+          <IconPin className="w-3.5 h-3.5" /> {BRAND.city}
         </p>
         <p className="mt-1 text-[12px] text-white/80">
           {BRAND.hours} · {BRAND.phoneDisplay}
@@ -477,7 +519,7 @@ export const FooterBand = () => (
             rel="noopener noreferrer"
             className="h-9 px-4 rounded-full bg-white/15 text-[12px] font-semibold inline-flex items-center"
           >
-            Instagram {BRAND.instagramHandle}
+            <IconInstagram className="w-4 h-4 mr-1.5" /> {BRAND.instagramHandle}
           </a>
           <a
             href={WHATSAPP_URL}

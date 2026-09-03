@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { MapPin, Clock, Instagram } from "lucide-react";
+import { Icon, IconClock, IconInstagram, IconPin } from "../icons";
+import { CornerFlourish, GoldRule, Seal } from "../ornaments";
 import { BRAND, STORY, WHATSAPP_URL } from "../data";
 import { LinkButton, SectionTitle, WhatsAppIcon } from "../ui";
 import { FooterBand } from "./Home";
@@ -26,7 +27,7 @@ const LEAF_PATHS = [
 const About = () => (
   <>
     {/* 1 · Capa — foto revelada por um círculo que cresce com o scroll */}
-    <section className="pattern-creme pt-24 pb-8 px-5 overflow-hidden">
+    <section className="pattern-creme grain pt-24 pb-8 px-5 overflow-hidden relative">
       <div className="max-w-5xl mx-auto text-center">
         <motion.p
           initial={{ opacity: 0, scale: 0.8 }}
@@ -36,16 +37,10 @@ const About = () => (
         >
           Sobre nós
         </motion.p>
-        <motion.span
-          animate={{ scale: [1, 1.25, 1] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-          className="inline-block text-rosa text-xl"
-        >
-          ♡
-        </motion.span>
+        <GoldRule className="mx-auto mt-2 text-dourado" width={130} />
       </div>
       <MaskReveal className="max-w-5xl mx-auto mt-4">
-        <div className="relative rounded-[32px] overflow-hidden shadow-[0_24px_60px_rgba(139,107,79,0.22)] max-w-md mx-auto md:max-w-2xl">
+        <div className="relative rounded-[32px] overflow-hidden shadow-[0_30px_70px_-20px_rgba(139,107,79,0.45)] ring-1 ring-dourado/40 outline outline-[6px] outline-white/70 max-w-md mx-auto md:max-w-2xl">
           <Img
             src={STORY.photos.duoBalcao}
             alt="As confeiteiras da Doceria Dalpizzol no balcão da loja"
@@ -101,7 +96,7 @@ const About = () => (
       <div className="max-w-3xl mx-auto grid grid-cols-3 gap-2.5 [perspective:900px]">
         {STORY.values.map((v, i) => (
           <TiltIn key={v.title} index={i}>
-            <div className="h-full text-center rounded-3xl bg-white/80 border border-marrom/10 p-3.5">
+            <div className="h-full text-center card-lux p-3.5">
               <motion.span
                 initial={{ rotate: -30, scale: 0 }}
                 whileInView={{ rotate: 0, scale: 1 }}
@@ -112,9 +107,9 @@ const About = () => (
                   damping: 12,
                   delay: 0.3 + i * 0.1,
                 }}
-                className="w-11 h-11 mx-auto rounded-2xl bg-creme grid place-items-center text-[22px]"
+                className="medallion w-12 h-12 mx-auto text-salvia-deep"
               >
-                {v.emoji}
+                <Icon name={v.icon} duotone className="w-6 h-6" />
               </motion.span>
               <p className="mt-2 text-[12px] font-semibold text-ink leading-tight">
                 {v.title}
@@ -182,19 +177,24 @@ const About = () => (
     {/* 6 · Visite — cresce com o scroll e o ramo se desenha */}
     <section className="px-5 pt-10">
       <ScrubScale>
-        <div className="max-w-3xl mx-auto rounded-[28px] bg-creme border border-dourado/40 p-5 relative overflow-hidden">
-          <DrawPath
-            d={LEAF_PATHS}
-            className="absolute -right-3 -top-3 w-28 text-dourado/60"
+        <div className="max-w-3xl mx-auto rounded-[28px] card-lux edge-gold grain p-5 relative overflow-hidden">
+          <CornerFlourish
+            className="-right-3 -top-3 text-dourado/50"
+            flip
             delay={0.2}
           />
+          <CornerFlourish
+            className="-left-3 -bottom-3 text-dourado/30 rotate-180"
+            delay={0.35}
+          />
+          <Seal className="absolute right-5 bottom-4 w-16 h-16 text-dourado/35" />
           <h3 className="font-serif text-lg text-ink">Visite a gente</h3>
           <p className="mt-2 text-[13px] text-ink/70 inline-flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-rosa-deep" /> {BRAND.city}
+            <IconPin className="w-4 h-4 text-rosa-deep" /> {BRAND.city}
           </p>
           <br />
           <p className="mt-1 text-[13px] text-ink/70 inline-flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-salvia-deep" /> {BRAND.hours}
+            <IconClock className="w-4 h-4 text-salvia-deep" /> {BRAND.hours}
           </p>
           <div className="mt-4 grid sm:grid-cols-2 gap-2.5">
             <LinkButton
@@ -213,7 +213,7 @@ const About = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Instagram className="w-4 h-4" /> {BRAND.instagramHandle}
+              <IconInstagram className="w-4 h-4" /> {BRAND.instagramHandle}
             </LinkButton>
           </div>
         </div>
