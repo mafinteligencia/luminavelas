@@ -274,11 +274,6 @@ export const TESTIMONIALS: { name: string; text: string; source: string }[] = [
     text: "O melhor bolo de pote!!!!",
     source: "Google",
   },
-  {
-    name: "Cliente no Google",
-    text: "Não conheço outra, mas acredito que deva ser a melhor.",
-    source: "Google",
-  },
 ];
 
 export const HERO_IMAGE = heroOreo;
