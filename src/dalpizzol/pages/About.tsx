@@ -107,9 +107,15 @@ const About = () => (
                   damping: 12,
                   delay: 0.3 + i * 0.1,
                 }}
-                className="medallion w-12 h-12 mx-auto text-salvia-deep"
+                className="block w-16 h-16 mx-auto rounded-full p-[3px] bg-gradient-to-br from-dourado/70 via-white to-salvia/50 shadow-[0_6px_16px_-6px_rgba(139,107,79,0.5)]"
               >
-                <Icon name={v.icon} duotone className="w-6 h-6" />
+                <Img
+                  src={v.photo}
+                  alt={v.title}
+                  loading="lazy"
+                  wrapperClassName="block w-full h-full rounded-full"
+                  className="w-full h-full object-cover"
+                />
               </motion.span>
               <p className="mt-2 text-[12px] font-semibold text-ink leading-tight">
                 {v.title}
@@ -135,13 +141,29 @@ const About = () => (
           {STORY.makers.map((m, i) => (
             <SplitIn key={i} from={i === 0 ? "left" : "right"}>
               <Parallax speed={i === 0 ? 0.12 : -0.12}>
-                <Img
-                  src={m.img}
-                  alt={`${m.role} da Doceria Dalpizzol`}
-                  loading="lazy"
-                  wrapperClassName="rounded-3xl shadow-[0_12px_32px_rgba(139,107,79,0.12)]"
-                  className="w-full aspect-[4/5] object-cover"
-                />
+                <div className="relative rounded-3xl overflow-hidden shadow-[0_16px_36px_-14px_rgba(139,107,79,0.5)] ring-1 ring-dourado/30">
+                  <Img
+                    src={m.img}
+                    alt={`${m.name}, confeiteira da Doceria Dalpizzol`}
+                    loading="lazy"
+                    className="w-full aspect-[4/5] object-cover"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(38,33,26,0.9) 0%, rgba(38,33,26,0.35) 34%, transparent 62%)",
+                    }}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-3.5">
+                    <p className="font-script text-[26px] text-white leading-none drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
+                      {m.name}
+                    </p>
+                    <p className="text-[10.5px] tracking-[0.22em] uppercase text-white/80 mt-1">
+                      {m.role}
+                    </p>
+                  </div>
+                </div>
               </Parallax>
             </SplitIn>
           ))}

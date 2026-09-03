@@ -25,6 +25,8 @@ import {
   OCCASIONS,
   PRODUCTS,
   TESTIMONIALS,
+  GOOGLE_RATING,
+  GOOGLE_REVIEWS_URL,
   WHATSAPP_URL,
   type Product,
 } from "../data";
@@ -238,8 +240,14 @@ const Categories = () => (
             to={`/bolos?cat=${c.id}`}
             className="group card-lux flex flex-col items-center gap-2 py-4 active:scale-95 transition"
           >
-            <span className="medallion w-12 h-12 text-marrom-deep transition group-hover:text-rosa-deep">
-              <Icon name={c.icon} duotone className="w-[26px] h-[26px]" />
+            <span className="block w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-dourado/70 via-white to-rosa/50 shadow-[0_6px_16px_-6px_rgba(139,107,79,0.5)]">
+              <Img
+                src={c.photo}
+                alt={c.label}
+                loading="lazy"
+                wrapperClassName="block w-full h-full rounded-full"
+                className="w-full h-full object-cover"
+              />
             </span>
             <span className="text-[11px] font-semibold text-marrom-deep tracking-wide">
               {c.label}
@@ -404,17 +412,33 @@ const Occasions = () => (
             <FlipIn key={o.id} index={i}>
               <Link
                 to={`/encomendar?ocasiao=${encodeURIComponent(o.title)}`}
-                className="group block h-full rounded-3xl card-lux p-4 active:scale-[0.98] transition"
+                className="group relative block h-full rounded-3xl overflow-hidden ring-1 ring-white/60 shadow-[0_16px_36px_-14px_rgba(43,38,30,0.6)] active:scale-[0.98] transition"
               >
-                <span className="medallion w-11 h-11 text-salvia-deep transition group-hover:text-rosa-deep">
-                  <Icon name={o.icon} className="w-[22px] h-[22px]" />
+                <Img
+                  src={o.photo}
+                  alt={o.title}
+                  loading="lazy"
+                  wrapperClassName="w-full"
+                  className="w-full h-48 sm:h-52 object-cover transition duration-700 group-hover:scale-[1.06]"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(38,33,26,0.94) 0%, rgba(38,33,26,0.78) 30%, rgba(38,33,26,0.34) 58%, rgba(38,33,26,0.06) 82%, transparent 100%)",
+                  }}
+                />
+                <span className="absolute top-3 left-3 inline-grid place-items-center w-9 h-9 rounded-full bg-white/95 text-marrom-deep shadow-[0_4px_12px_-4px_rgba(0,0,0,0.5)]">
+                  <Icon name={o.icon} className="w-[19px] h-[19px]" />
                 </span>
-                <p className="mt-2.5 font-serif text-[15px] text-ink">
-                  {o.title}
-                </p>
-                <p className="text-[11.5px] text-ink/60 leading-snug mt-0.5">
-                  {o.desc}
-                </p>
+                <div className="absolute inset-x-0 bottom-0 p-3.5">
+                  <p className="font-serif text-[16px] text-white leading-tight drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
+                    {o.title}
+                  </p>
+                  <p className="text-[11.5px] text-white/85 leading-snug mt-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+                    {o.desc}
+                  </p>
+                </div>
               </Link>
             </FlipIn>
           ))}
@@ -436,7 +460,20 @@ const Testimonials = () => (
             eyebrow="Quem prova, volta"
             title="Palavras que adoçam"
           />
-          <GoldRule className="mx-auto mt-3 text-dourado" width={130} />
+          <p className="mt-3 inline-flex items-center gap-2 text-[12.5px] text-ink/70">
+            <span className="font-serif text-xl text-ink">
+              {GOOGLE_RATING.score}
+            </span>
+            <StarBurst
+              render={() => (
+                <IconStar filled className="w-3.5 h-3.5 text-dourado" />
+              )}
+            />
+            <span className="text-ink/55">
+              · {GOOGLE_RATING.count} avaliações no Google
+            </span>
+          </p>
+          <GoldRule className="mx-auto mt-2 text-dourado" width={130} />
         </div>
       </BlurIn>
     </div>
@@ -444,7 +481,7 @@ const Testimonials = () => (
       <div className="flex gap-3 px-5 md:grid md:grid-cols-3 md:max-w-5xl md:mx-auto">
         {TESTIMONIALS.map((t, i) => (
           <BlurIn
-            key={t.name}
+            key={t.text}
             index={i}
             className="snap-start shrink-0 w-[78vw] max-w-[320px] md:w-auto md:max-w-none"
           >
@@ -463,15 +500,32 @@ const Testimonials = () => (
                   )}
                 />
               </div>
-              <p className="text-[13.5px] text-ink/75 leading-relaxed">
+              <p className="relative text-[13.5px] text-ink/80 leading-relaxed">
                 “{t.text}”
               </p>
-              <p className="mt-3 text-[11.5px] font-semibold text-marrom-deep">
-                {t.name}
+              <p className="mt-3 text-[11px] font-semibold text-marrom-deep inline-flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-salvia-deep" />
+                {t.name} · avaliação verificada no {t.source}
               </p>
             </div>
           </BlurIn>
         ))}
+        <a
+          href={GOOGLE_REVIEWS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="snap-start shrink-0 w-[62vw] max-w-[240px] md:w-auto md:max-w-none card-lux edge-gold p-5 grid place-items-center text-center active:scale-[0.98] transition"
+        >
+          <span className="medallion w-12 h-12 text-dourado-deep">
+            <IconStar className="w-6 h-6" />
+          </span>
+          <p className="mt-2.5 font-serif text-[15px] text-ink leading-snug">
+            Ver todas no Google
+          </p>
+          <p className="text-[11.5px] text-ink/55 mt-0.5">
+            Já é cliente? Conte como foi ♡
+          </p>
+        </a>
         <div className="w-2 shrink-0 md:hidden" />
       </div>
     </div>

@@ -94,7 +94,12 @@ const Catalog = () => {
                 onClick={() => setCat(c.id)}
                 className="inline-flex items-center gap-1.5"
               >
-                <Icon name={c.icon} className="w-4 h-4" /> {c.label}
+                <img
+                  src={c.photo}
+                  alt=""
+                  className="w-5 h-5 rounded-full object-cover ring-1 ring-white/70"
+                />{" "}
+                {c.label}
               </Chip>
             ))}
             <Chip
