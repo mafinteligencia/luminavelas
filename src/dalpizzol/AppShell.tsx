@@ -14,6 +14,7 @@ import { BRAND, WHATSAPP_URL } from "./data";
 import { useCart } from "./cart";
 import { WhatsAppIcon } from "./ui";
 import { cn } from "@/lib/utils";
+import { ScrollProgressBar } from "./motion";
 
 const TABS = [
   { to: "/", label: "Início", icon: Home, end: true },
@@ -279,6 +280,7 @@ const PageTransition = () => {
 
 export const AppShell = () => (
   <div className="min-h-[100svh] bg-offwhite font-sans text-ink">
+    <ScrollProgressBar />
     <TopBar />
     <main className="pb-32 md:pb-16">
       <PageTransition />
