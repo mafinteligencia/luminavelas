@@ -63,13 +63,18 @@ export const CAKE_SIZES: Size[] = [
 
 import type { IconKey } from "./icons";
 
-export type Category = { id: string; label: string; icon: IconKey };
+export type Category = {
+  id: string;
+  label: string;
+  icon: IconKey;
+  photo: string;
+};
 
 export const CATEGORIES: Category[] = [
-  { id: "bolos", label: "Bolos", icon: "cake" },
-  { id: "doces", label: "Doces finos", icon: "bonbon" },
-  { id: "potes", label: "No pote", icon: "jar" },
-  { id: "presentes", label: "Presentes", icon: "gift" },
+  { id: "bolos", label: "Bolos", icon: "cake", photo: boloCamadas },
+  { id: "doces", label: "Doces finos", icon: "bonbon", photo: brigadeiros },
+  { id: "potes", label: "No pote", icon: "jar", photo: sobremesaTaca },
+  { id: "presentes", label: "Presentes", icon: "gift", photo: boloRedVelvet },
 ];
 
 export type Product = {
@@ -165,30 +170,35 @@ export const OCCASIONS: {
   title: string;
   desc: string;
   icon: IconKey;
+  photo: string;
 }[] = [
   {
     id: "aniversario",
     title: "Aniversários",
     desc: "Bolos personalizados do seu jeito.",
     icon: "balloon",
+    photo: boloOreo,
   },
   {
     id: "datas",
     title: "Datas especiais",
     desc: "Dia das Mães, Namorados e Natal.",
     icon: "bouquet",
+    photo: boloRedVelvet,
   },
   {
     id: "presentes",
     title: "Presentes",
     desc: "Caixas e kits prontos para entregar.",
     icon: "gift",
+    photo: brigadeiros,
   },
   {
     id: "festas",
     title: "Festas",
     desc: "Mesas de doces e bem-casados.",
     icon: "sparkle",
+    photo: boloCamadas,
   },
 ];
 
@@ -210,25 +220,28 @@ export const STORY = {
       title: "Ingredientes de qualidade",
       desc: "Selecionados um a um.",
       icon: "sprig" as IconKey,
+      photo: boloCamadas,
     },
     {
       title: "Feito com amor",
       desc: "Do forno para a sua mesa.",
       icon: "heart" as IconKey,
+      photo: duoCafe,
     },
     {
       title: "Tradição de família",
       desc: "Receitas que atravessam gerações.",
       icon: "family" as IconKey,
+      photo: lojaDuo,
     },
   ],
-  // Donas conforme o brand board (Juliana e Sandra). Ordem das fotos a confirmar com o cliente.
-  makersNames: "Juliana e Sandra",
+  // Confirmado pelo Maicon em 03/09/2026: as donas são Glaucia e Dani (irmãs).
+  makersNames: "Glaucia e Dani",
   makersIntro:
-    "Somos Juliana e Sandra, e a Doceria Dalpizzol nasceu do amor pela confeitaria e pelo cuidado com cada detalhe.",
+    "Somos Glaucia e Dani, duas irmãs. A Doceria Dalpizzol nasceu do amor pela confeitaria e pelo cuidado com cada detalhe.",
   makers: [
-    { role: "Confeiteira", img: glaucia },
-    { role: "Confeiteira", img: dani },
+    { name: "Glaucia", role: "Confeiteira", img: glaucia },
+    { name: "Dani", role: "Confeiteira", img: dani },
   ],
   photos: {
     duoPlaca,
@@ -242,18 +255,29 @@ export const STORY = {
   },
 };
 
-export const TESTIMONIALS = [
+/* Avaliações reais publicadas no Google (perfil da Doceria Dalpizzol, 4,9★).
+   NÃO adicionar depoimentos inventados aqui — só texto realmente escrito por clientes. */
+export const GOOGLE_RATING = { score: "4,9", count: 9 };
+
+export const GOOGLE_REVIEWS_URL =
+  "https://www.google.com/search?q=" +
+  encodeURIComponent("Doceria Dalpizzol Barra da Lagoa avaliações");
+
+export const TESTIMONIALS: { name: string; text: string; source: string }[] = [
   {
-    name: "Marina S.",
-    text: "O bolo de Oreo é simplesmente o melhor de Floripa. Chegou lindo e fresquinho!",
+    name: "Cliente no Google",
+    text: "Doces e sobremesas deliciosas, uma experiência única.",
+    source: "Google",
   },
   {
-    name: "Rafael T.",
-    text: "Encomendei os doces do aniversário da minha filha. Todo mundo elogiou.",
+    name: "Cliente no Google",
+    text: "O melhor bolo de pote!!!!",
+    source: "Google",
   },
   {
-    name: "Camila P.",
-    text: "Atendimento carinhoso e sabor de casa. Virei cliente fiel.",
+    name: "Cliente no Google",
+    text: "Não conheço outra, mas acredito que deva ser a melhor.",
+    source: "Google",
   },
 ];
 
