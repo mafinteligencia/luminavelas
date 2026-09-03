@@ -9,6 +9,7 @@ import Home from "./dalpizzol/pages/Home";
 import Catalog from "./dalpizzol/pages/Catalog";
 import Order from "./dalpizzol/pages/Order";
 import About from "./dalpizzol/pages/About";
+import Proposta from "./dalpizzol/pages/Proposta";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,8 @@ const App = () => (
                 <Route path="/encomendar" element={<Order />} />
                 <Route path="/sobre" element={<About />} />
               </Route>
+              {/* proposta comercial — rota privada, fora da navegação */}
+              <Route path="/proposta2026" element={<Proposta />} />
               {/* rota antiga do site */}
               <Route path="/dalpizzol" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />

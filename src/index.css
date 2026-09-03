@@ -246,3 +246,23 @@
       );
   }
 }
+
+@layer utilities {
+  /* Plinto sob as peças 3D da proposta — dá assentamento e profundidade. */
+  .piece-3d::after {
+    content: "";
+    position: absolute;
+    left: 7%;
+    right: 7%;
+    bottom: -16px;
+    height: 26px;
+    border-radius: 9999px;
+    background: radial-gradient(
+      ellipse at 50% 50%,
+      rgba(139, 107, 79, 0.32) 0%,
+      rgba(139, 107, 79, 0) 72%
+    );
+    filter: blur(7px);
+    pointer-events: none;
+  }
+}
