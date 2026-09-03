@@ -146,10 +146,12 @@ const Hero = ({ onEnter }: { onEnter: () => void }) => {
           <IconChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </motion.button>
 
-        <p className="mt-6 inline-flex items-center gap-1.5 text-[12px] text-ink/55">
-          <IconPin className="w-4 h-4 text-salvia-deep" />
-          Doceria · {BRAND.district} · Florianópolis, SC
-        </p>
+        <div className="mt-6">
+          <p className="inline-flex items-center gap-1.5 text-[12px] text-ink/55">
+            <IconPin className="w-4 h-4 text-salvia-deep" />
+            Doceria · {BRAND.district} · Florianópolis, SC
+          </p>
+        </div>
       </motion.div>
     </section>
   );
