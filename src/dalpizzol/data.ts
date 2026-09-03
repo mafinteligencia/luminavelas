@@ -29,6 +29,17 @@ export const BRAND = {
   instagram: "https://instagram.com/doceriadalpizzol",
   instagramHandle: "@doceriadalpizzol",
   city: "Barra da Lagoa · Florianópolis/SC",
+  street: "R. Altamiro Barcelos Dutra, 1334",
+  district: "Barra da Lagoa",
+  cityState: "Florianópolis · SC",
+  zip: "88061-300",
+  addressFull:
+    "R. Altamiro Barcelos Dutra, 1334 — Barra da Lagoa, Florianópolis/SC, 88061-300",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(
+      "Doceria Dalpizzol, R. Altamiro Barcelos Dutra, 1334, Barra da Lagoa, Florianópolis - SC, 88061-300",
+    ),
   hours: "Seg a Sáb · 9h às 19h",
   leadTimeHours: 48,
   logo,

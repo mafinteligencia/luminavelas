@@ -141,7 +141,7 @@ export const buildOrderMessage = (lines: CartLine[], d: OrderDetails) => {
   const where =
     d.mode === "entrega"
       ? `📍 Endereço: ${d.address || "(a combinar)"}`
-      : "📍 Retirada na loja";
+      : `📍 Retirada na loja — ${BRAND.street}, ${BRAND.district}`;
   const parts = [
     `Olá, ${BRAND.name}! 🍰 Quero fazer uma encomenda:`,
     "",
