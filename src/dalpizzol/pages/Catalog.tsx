@@ -9,6 +9,8 @@ import { FooterBand } from "./Home";
 import { useFavorites } from "../favorites";
 import { FloralPattern } from "../Pattern";
 import { Heart } from "lucide-react";
+import { motion } from "framer-motion";
+import { ClipReveal } from "../motion";
 
 const normalize = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -46,11 +48,13 @@ const Catalog = () => {
           <FloralPattern color="#8B6B4F" opacity={0.08} />
         </div>
         <div className="relative max-w-5xl mx-auto">
-          <SectionTitle
-            eyebrow="Cardápio"
-            title="Escolha o seu doce"
-            subtitle="Toque em um item para ver tamanhos e montar o seu pedido."
-          />
+          <ClipReveal>
+            <SectionTitle
+              eyebrow="Cardápio"
+              title="Escolha o seu doce"
+              subtitle="Toque em um item para ver tamanhos e montar o seu pedido."
+            />
+          </ClipReveal>
           <label className="mt-5 flex items-center gap-2.5 h-12 rounded-2xl bg-white border border-marrom/10 px-4 shadow-sm">
             <Search className="w-4 h-4 text-marrom" />
             <input

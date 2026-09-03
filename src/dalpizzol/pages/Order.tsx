@@ -26,6 +26,7 @@ import {
 import { LinkButton, SectionTitle, Stepper, WhatsAppIcon } from "../ui";
 import { FooterBand } from "./Home";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 const TIMES = [
   "9:00",
@@ -50,7 +51,11 @@ const minDateISO = (hours: number) =>
 const addDays = (n: number) => toISO(new Date(Date.now() + n * 86400 * 1000));
 const weekdayLabel = (iso: string) =>
   new Date(iso + "T12:00:00")
-    .toLocaleDateString("pt-BR", { weekday: "short", day: "2-digit", month: "short" })
+    .toLocaleDateString("pt-BR", {
+      weekday: "short",
+      day: "2-digit",
+      month: "short",
+    })
     .replace(/\./g, "")
     .replace(/^\w/, (c) => c.toUpperCase());
 
@@ -157,7 +162,12 @@ const Order = () => {
       <section className="px-5 pt-5">
         <div className="max-w-3xl mx-auto grid gap-4">
           {/* Itens */}
-          <div className="card-soft p-4">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="card-soft p-4"
+          >
             <div className="flex items-center justify-between">
               <h3 className="font-serif text-lg text-ink">Seu pedido</h3>
               {hasItems && (
@@ -234,172 +244,198 @@ const Order = () => {
                 + Adicionar mais itens
               </Link>
             )}
-          </div>
+          </motion.div>
 
           {/* Detalhes */}
-          <div
-            className={cn(
-              "card-soft p-4 grid gap-4 transition",
-              !hasItems && "opacity-60 pointer-events-none",
-            )}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.12,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="block"
           >
-            <h3 className="font-serif text-lg text-ink">Detalhes</h3>
+            <div
+              className={cn(
+                "card-soft p-4 grid gap-4 transition",
+                !hasItems && "opacity-60 pointer-events-none",
+              )}
+            >
+              <h3 className="font-serif text-lg text-ink">Detalhes</h3>
 
-            <Field label="Retirada ou entrega?">
-              <div className="grid grid-cols-2 gap-2">
-                {(
-                  [
-                    { id: "retirada", label: "Retirada na loja", icon: Store },
-                    { id: "entrega", label: "Entrega", icon: Truck },
-                  ] as const
-                ).map((m) => (
+              <Field label="Retirada ou entrega?">
+                <div className="grid grid-cols-2 gap-2">
+                  {(
+                    [
+                      {
+                        id: "retirada",
+                        label: "Retirada na loja",
+                        icon: Store,
+                      },
+                      { id: "entrega", label: "Entrega", icon: Truck },
+                    ] as const
+                  ).map((m) => (
+                    <button
+                      key={m.id}
+                      type="button"
+                      onClick={() => up({ mode: m.id })}
+                      className={cn(
+                        "h-12 rounded-2xl border text-[13px] font-semibold inline-flex items-center justify-center gap-2 transition active:scale-95",
+                        d.mode === m.id
+                          ? "border-rosa bg-rosa/15 text-ink"
+                          : "border-marrom/15 bg-white text-marrom-deep",
+                      )}
+                    >
+                      <m.icon className="w-4 h-4" /> {m.label}
+                    </button>
+                  ))}
+                </div>
+              </Field>
+
+              {d.mode === "entrega" && (
+                <Field
+                  label="Endereço de entrega"
+                  hint="Taxa e área de entrega confirmadas no WhatsApp."
+                >
+                  <input
+                    className={inputCls}
+                    value={d.address}
+                    onChange={(e) => up({ address: e.target.value })}
+                    placeholder="Rua, número, bairro"
+                  />
+                </Field>
+              )}
+
+              <div className="grid grid-cols-2 gap-3">
+                <Field
+                  label="Data"
+                  hint={`Mínimo ${BRAND.leadTimeHours}h de antecedência.`}
+                >
+                  <div className="relative">
+                    <CalendarDays className="w-4 h-4 text-marrom absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="date"
+                      min={minDate}
+                      value={d.date}
+                      onChange={(e) => up({ date: e.target.value })}
+                      className={cn(inputCls, "pl-10")}
+                    />
+                  </div>
+                </Field>
+                <Field label="Horário">
+                  <select
+                    value={d.time}
+                    onChange={(e) => up({ time: e.target.value })}
+                    className={inputCls}
+                  >
+                    <option value="">Escolher</option>
+                    {TIMES.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+              </div>
+
+              <div className="flex gap-2 overflow-x-auto no-scrollbar -mt-1">
+                {shortcuts.map((iso) => (
                   <button
-                    key={m.id}
+                    key={iso}
                     type="button"
-                    onClick={() => up({ mode: m.id })}
+                    onClick={() => up({ date: iso })}
                     className={cn(
-                      "h-12 rounded-2xl border text-[13px] font-semibold inline-flex items-center justify-center gap-2 transition active:scale-95",
-                      d.mode === m.id
-                        ? "border-rosa bg-rosa/15 text-ink"
-                        : "border-marrom/15 bg-white text-marrom-deep",
+                      "shrink-0 h-8 px-3 rounded-full text-[11.5px] font-semibold border transition active:scale-95",
+                      d.date === iso
+                        ? "bg-rosa border-rosa text-white"
+                        : "bg-white border-marrom/15 text-marrom-deep",
                     )}
                   >
-                    <m.icon className="w-4 h-4" /> {m.label}
+                    {weekdayLabel(iso)}
                   </button>
                 ))}
               </div>
-            </Field>
 
-            {d.mode === "entrega" && (
-              <Field
-                label="Endereço de entrega"
-                hint="Taxa e área de entrega confirmadas no WhatsApp."
-              >
+              <Field label="Seu nome">
                 <input
                   className={inputCls}
-                  value={d.address}
-                  onChange={(e) => up({ address: e.target.value })}
-                  placeholder="Rua, número, bairro"
+                  value={d.name}
+                  onChange={(e) => up({ name: e.target.value })}
+                  placeholder="Como podemos te chamar?"
+                  autoComplete="name"
                 />
               </Field>
-            )}
 
-            <div className="grid grid-cols-2 gap-3">
-              <Field
-                label="Data"
-                hint={`Mínimo ${BRAND.leadTimeHours}h de antecedência.`}
-              >
-                <div className="relative">
-                  <CalendarDays className="w-4 h-4 text-marrom absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    type="date"
-                    min={minDate}
-                    value={d.date}
-                    onChange={(e) => up({ date: e.target.value })}
-                    className={cn(inputCls, "pl-10")}
-                  />
-                </div>
-              </Field>
-              <Field label="Horário">
-                <select
-                  value={d.time}
-                  onChange={(e) => up({ time: e.target.value })}
-                  className={inputCls}
-                >
-                  <option value="">Escolher</option>
-                  {TIMES.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
-                  ))}
-                </select>
+              <Field label="Observações (opcional)">
+                <textarea
+                  className={cn(inputCls, "h-24 py-3 resize-none")}
+                  value={d.notes}
+                  onChange={(e) => up({ notes: e.target.value })}
+                  placeholder="Ocasião, frase no bolo, alergias, cores…"
+                />
               </Field>
             </div>
-
-            <div className="flex gap-2 overflow-x-auto no-scrollbar -mt-1">
-              {shortcuts.map((iso) => (
-                <button
-                  key={iso}
-                  type="button"
-                  onClick={() => up({ date: iso })}
-                  className={cn(
-                    "shrink-0 h-8 px-3 rounded-full text-[11.5px] font-semibold border transition active:scale-95",
-                    d.date === iso
-                      ? "bg-rosa border-rosa text-white"
-                      : "bg-white border-marrom/15 text-marrom-deep",
-                  )}
-                >
-                  {weekdayLabel(iso)}
-                </button>
-              ))}
-            </div>
-
-            <Field label="Seu nome">
-              <input
-                className={inputCls}
-                value={d.name}
-                onChange={(e) => up({ name: e.target.value })}
-                placeholder="Como podemos te chamar?"
-                autoComplete="name"
-              />
-            </Field>
-
-            <Field label="Observações (opcional)">
-              <textarea
-                className={cn(inputCls, "h-24 py-3 resize-none")}
-                value={d.notes}
-                onChange={(e) => up({ notes: e.target.value })}
-                placeholder="Ocasião, frase no bolo, alergias, cores…"
-              />
-            </Field>
-          </div>
+          </motion.div>
 
           {/* Resumo + envio */}
-          <div
-            className={cn(
-              "card-soft p-4",
-              !hasItems && "opacity-60 pointer-events-none",
-            )}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.24,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="block"
           >
-            <h3 className="font-serif text-lg text-ink">Resumo</h3>
-            <ul className="mt-2 text-[12.5px] text-ink/70 grid gap-1">
-              {lines.map((l) => (
-                <li key={l.key}>• {describeLine(l)}</li>
-              ))}
-            </ul>
-            {d.date && (
-              <p className="mt-2 text-[12px] text-ink/60">
-                {d.mode === "entrega" ? "Entrega" : "Retirada"} ·{" "}
-                {weekdayLabel(d.date)}
-                {d.time ? ` às ${d.time}` : ""}
-              </p>
-            )}
-            {hasItems && missing.length > 0 && (
-              <p className="mt-3 text-[11.5px] text-rosa-deep font-semibold">
-                Falta preencher{" "}
-                {missing.join(", ").replace(/, ([^,]*)$/, " e $1")}.
-              </p>
-            )}
-            <p className="mt-3 text-[11.5px] text-ink/50 leading-relaxed">
-              Ao continuar, abrimos o WhatsApp com o seu pedido pronto. Valores
-              e disponibilidade são confirmados pela {BRAND.name}.
-            </p>
-            <LinkButton
-              full
-              variant="whatsapp"
+            <div
               className={cn(
-                "mt-4 h-[52px] text-[14px]",
-                !ready && "opacity-50 pointer-events-none",
+                "card-soft p-4",
+                !hasItems && "opacity-60 pointer-events-none",
               )}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={!ready}
-              onClick={() => setSent(true)}
             >
-              <WhatsAppIcon /> Enviar pedido pelo WhatsApp
-            </LinkButton>
-          </div>
+              <h3 className="font-serif text-lg text-ink">Resumo</h3>
+              <ul className="mt-2 text-[12.5px] text-ink/70 grid gap-1">
+                {lines.map((l) => (
+                  <li key={l.key}>• {describeLine(l)}</li>
+                ))}
+              </ul>
+              {d.date && (
+                <p className="mt-2 text-[12px] text-ink/60">
+                  {d.mode === "entrega" ? "Entrega" : "Retirada"} ·{" "}
+                  {weekdayLabel(d.date)}
+                  {d.time ? ` às ${d.time}` : ""}
+                </p>
+              )}
+              {hasItems && missing.length > 0 && (
+                <p className="mt-3 text-[11.5px] text-rosa-deep font-semibold">
+                  Falta preencher{" "}
+                  {missing.join(", ").replace(/, ([^,]*)$/, " e $1")}.
+                </p>
+              )}
+              <p className="mt-3 text-[11.5px] text-ink/50 leading-relaxed">
+                Ao continuar, abrimos o WhatsApp com o seu pedido pronto.
+                Valores e disponibilidade são confirmados pela {BRAND.name}.
+              </p>
+              <LinkButton
+                full
+                variant="whatsapp"
+                className={cn(
+                  "mt-4 h-[52px] text-[14px]",
+                  !ready && "opacity-50 pointer-events-none",
+                )}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled={!ready}
+                onClick={() => setSent(true)}
+              >
+                <WhatsAppIcon /> Enviar pedido pelo WhatsApp
+              </LinkButton>
+            </div>
+          </motion.div>
         </div>
       </section>
 
