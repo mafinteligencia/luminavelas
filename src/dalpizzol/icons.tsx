@@ -393,6 +393,12 @@ export const ICONS = {
   truck: IconTruck,
   store: IconStore,
   calendarHeart: IconCalendarHeart,
+  clock: IconClock,
+  pin: IconPin,
+  star: IconStar,
+  search: IconSearch,
+  bag: IconBag,
+  instagram: IconInstagram,
 } as const;
 
 export type IconKey = keyof typeof ICONS;
