@@ -67,7 +67,7 @@ const Hero = () => {
     offset: ["start start", "end start"],
   });
   const imgY = useTransform(scrollYProgress, [0, 1], [0, 140]);
-  const imgRotate = useTransform(scrollYProgress, [0, 1], [0, 6]);
+  
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
@@ -168,7 +168,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div
-          style={{ y: s(imgY), rotate: s(imgRotate), scale: s(imgScale) }}
+          style={{ y: s(imgY), scale: s(imgScale) }}
           initial={{ opacity: 0, scale: 0.94, rotate: -2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
