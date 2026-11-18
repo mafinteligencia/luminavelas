@@ -57,6 +57,7 @@ type BIPEvent = Event & {
 };
 
 const InstallBanner = () => {
+  const { pathname } = useLocation();
   const [evt, setEvt] = useState<BIPEvent | null>(null);
   const [hidden, setHidden] = useState(() => {
     try {
@@ -86,7 +87,7 @@ const InstallBanner = () => {
 
   return (
     <AnimatePresence>
-      {evt && !hidden && (
+      {evt && !hidden && pathname === "/" && (
         <motion.div
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
