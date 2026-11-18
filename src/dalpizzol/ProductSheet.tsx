@@ -126,8 +126,8 @@ export const ProductSheet = ({
               </div>
 
               <p className="mt-4 text-[11.5px] text-ink/50 leading-relaxed">
-                Os valores são confirmados no WhatsApp conforme tamanho, sabores
-                e data.
+                Valores por tamanho conforme catálogo. Confirme disponibilidade
+                e prazo pelo WhatsApp.
               </p>
 
               <div className="mt-4 grid gap-2.5">

@@ -1,12 +1,10 @@
 /* =====================================================
-   Doceria Dalpizzol — conteúdo do app
-   Textos preservados do site anterior; sem valores em R$ (decisão 02/09/2026).
+   Doceria Dalpizzol — conteúdo do app e catálogo do PDF 26.11.
    ===================================================== */
 import boloCamadas from "@/assets/dalpizzol/bolo-camadas.jpg";
 import boloRedVelvet from "@/assets/dalpizzol/bolo-redvelvet.jpg";
 import boloOreo from "@/assets/dalpizzol/bolo-oreo.jpg";
 import brigadeiros from "@/assets/dalpizzol/brigadeiros.jpg";
-import sobremesaTaca from "@/assets/dalpizzol/sobremesa-taca.jpg";
 import heroOreo from "@/assets/dalpizzol/hero-oreo.jpg";
 import duoPlaca from "@/assets/dalpizzol/duo-placa.jpg";
 import duoSentadas from "@/assets/dalpizzol/duo-sentadas.jpg";
@@ -55,12 +53,6 @@ export const waMessage = (text: string) =>
 /* ---------- Catálogo ---------- */
 export type Size = { id: string; label: string; hint: string };
 
-export const CAKE_SIZES: Size[] = [
-  { id: "P", label: "Pequeno", hint: "10 fatias" },
-  { id: "M", label: "Médio", hint: "15 fatias" },
-  { id: "G", label: "Grande", hint: "20 fatias" },
-];
-
 import type { IconKey } from "./icons";
 
 export type Category = {
@@ -71,10 +63,13 @@ export type Category = {
 };
 
 export const CATEGORIES: Category[] = [
-  { id: "bolos", label: "Bolos", icon: "cake", photo: boloCamadas },
-  { id: "doces", label: "Doces finos", icon: "bonbon", photo: brigadeiros },
-  { id: "potes", label: "No pote", icon: "jar", photo: sobremesaTaca },
-  { id: "presentes", label: "Presentes", icon: "gift", photo: boloRedVelvet },
+  { id: "bolos-tradicionais", label: "Bolos tradicionais", icon: "cake", photo: "/catalog/bolo-brigadeiro-gourmet-preto.jpg" },
+  { id: "bolos-refinados", label: "Bolos refinados", icon: "cake", photo: "/catalog/torta-mineira.jpg" },
+  { id: "bolos-especiais", label: "Bolos especiais", icon: "cake", photo: "/catalog/bolo-marta-rocha.jpg" },
+  { id: "bento-cake", label: "Bento Cake", icon: "cake", photo: "/catalog/bento-brigadeiro-gourmet-preto.jpg" },
+  { id: "brigadeiros-tradicionais", label: "Brigadeiros tradicionais", icon: "bonbon", photo: "/catalog/brigadeiro-beijinho.jpg" },
+  { id: "brigadeiros-especiais", label: "Brigadeiros especiais", icon: "bonbon", photo: "/catalog/brigadeiro-cafe.jpg" },
+  { id: "brigadeiros-gourmet", label: "Brigadeiros gourmet", icon: "bonbon", photo: "/catalog/brigadeiro-amendoas.jpg" },
 ];
 
 export type Product = {
@@ -88,79 +83,118 @@ export type Product = {
   featured?: boolean;
 };
 
-export const PRODUCTS: Product[] = [
-  {
-    id: "bolo-oreo",
-    name: "Bolo de Oreo",
-    desc: "Massa de chocolate úmida, creme de baunilha com cookies triturados.",
-    img: boloOreo,
-    category: "bolos",
-    tags: ["Chocolate", "Mais pedido"],
-    sizes: CAKE_SIZES,
-    featured: true,
-  },
-  {
-    id: "red-velvet",
-    name: "Red Velvet",
-    desc: "Clássico aveludado, cream cheese e morangos frescos.",
-    img: boloRedVelvet,
-    category: "bolos",
-    tags: ["Clássico"],
-    sizes: CAKE_SIZES,
-    featured: true,
-  },
-  {
-    id: "bolo-camadas",
-    name: "Bolo de Camadas",
-    desc: "Camadas fofinhas, creme sedoso e amêndoas crocantes.",
-    img: boloCamadas,
-    category: "bolos",
-    tags: ["Tradicional"],
-    sizes: CAKE_SIZES,
-  },
-  {
-    id: "brigadeiros",
-    name: "Brigadeiros Gourmet",
-    desc: "Belga, nozes, ninho, beijinho e mais sabores da casa.",
-    img: brigadeiros,
-    category: "doces",
-    tags: ["Festas"],
-    featured: true,
-  },
-  {
-    id: "bem-casados",
-    name: "Bem-casados & mimos",
-    desc: "Doces finos para lembranças, festas e casamentos.",
-    img: brigadeiros,
-    category: "doces",
-    tags: ["Casamentos"],
-  },
-  {
-    id: "taca-morango",
-    name: "Taça de Morango",
-    desc: "Camadas de creme, morango fresco e chocolate.",
-    img: sobremesaTaca,
-    category: "potes",
-    tags: ["Sobremesa"],
-    featured: true,
-  },
-  {
-    id: "bolo-pote",
-    name: "Bolo no Pote",
-    desc: "A sobremesa perfeita para levar — pronta para presentear.",
-    img: boloCamadas,
-    category: "potes",
-    tags: ["Para levar"],
-  },
-  {
-    id: "caixa-presente",
-    name: "Caixa Presente",
-    desc: "Caixas e kits prontos para entregar em datas especiais.",
-    img: brigadeiros,
-    category: "presentes",
-    tags: ["Datas especiais"],
-  },
+type CatalogEntry = {
+  id: string;
+  name: string;
+  desc: string;
+  category: Category["id"];
+  kind: "cake-traditional" | "cake-refined" | "cake-special" | "bento" | "brigadeiro-traditional" | "brigadeiro-special" | "brigadeiro-gourmet";
+  price?: number;
+  featured?: boolean;
+};
+
+const CATALOG_ENTRIES: CatalogEntry[] = [
+  {"id":"bolo-brigadeiro-gourmet-preto","name":"Brigadeiro Gourmet Preto","desc":"Massa à sua escolha com brigadeiro de chocolate.","category":"bolos-tradicionais","kind":"cake-traditional","featured":true},
+  {"id":"bolo-dois-amores","name":"Dois Amores","desc":"Massa à sua escolha com brigadeiro branco e brigadeiro gourmet.","category":"bolos-tradicionais","kind":"cake-traditional"},
+  {"id":"bolo-quatro-leites","name":"4 Leites","desc":"Massa à sua escolha com brigadeiro de quatro leites.","category":"bolos-tradicionais","kind":"cake-traditional"},
+  {"id":"torta-mineira","name":"Torta Mineira","desc":"Nata com abacaxi e brigadeiro de coco.","category":"bolos-refinados","kind":"cake-refined","featured":true},
+  {"id":"bolo-prestigio","name":"Prestígio","desc":"Brigadeiro de coco com ganache de chocolate.","category":"bolos-refinados","kind":"cake-refined"},
+  {"id":"bolo-arraia","name":"Arraiá","desc":"Mousse de paçoca com mousse de chocolate.","category":"bolos-refinados","kind":"cake-refined"},
+  {"id":"bolo-chocotorta","name":"Chocotorta","desc":"Brigadeiro de chocolate e doce de leite.","category":"bolos-refinados","kind":"cake-refined"},
+  {"id":"bolo-maracuja","name":"Maracujá","desc":"Maracujá e chocolate meio amargo.","category":"bolos-refinados","kind":"cake-refined"},
+  {"id":"bolo-tres-amores","name":"Três Amores","desc":"Doce de leite, brigadeiro branco e brigadeiro de chocolate.","category":"bolos-refinados","kind":"cake-refined"},
+  {"id":"bolo-cocada-doce-leite","name":"Cocada com Doce de Leite","desc":"Cocada com doce de leite.","category":"bolos-refinados","kind":"cake-refined"},
+  {"id":"bolo-pessego-coco","name":"Pêssego com Coco","desc":"Brigadeiro de quatro leites com pêssego em calda e brigadeiro de coco.","category":"bolos-refinados","kind":"cake-refined"},
+  {"id":"bolo-marta-rocha","name":"Marta Rocha","desc":"Creme belga com nozes crocantes, nata com suspiro e doce de leite com ameixa.","category":"bolos-especiais","kind":"cake-special","featured":true},
+  {"id":"bolo-gaya","name":"Gaya","desc":"Strogonoff de nozes, brigadeiro gourmet e creme belga com damasco.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-raio-de-sol","name":"Raio de Sol","desc":"Brigadeiro gourmet, doce de leite e caramelo salgado com nozes crocantes.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-suculentas","name":"Suculentas","desc":"Nata, morango, suspiros e brigadeiro de quatro leites.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-red-velvet","name":"Red Velvet","desc":"Massa amanteigada e brigadeiro de requeijão.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-quatro-leites-morango","name":"Quatro Leites com Morango","desc":"Quatro leites com morango.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-chocolate-morango","name":"Chocolate com Morango","desc":"Chocolate com morango.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-matilda","name":"Matilda","desc":"Bolo de chocolate intenso.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-ninho-frutas-vermelhas","name":"Ninho com Geleia de Frutas Vermelhas","desc":"Creme de leite Ninho com geleia de frutas vermelhas.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-kinder","name":"Kinder","desc":"Chocolate e creme de avelã.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bolo-delicia-uva","name":"Delícia de Uva","desc":"Uvas frescas com creme suave.","category":"bolos-especiais","kind":"cake-special"},
+  {"id":"bento-brigadeiro-gourmet-preto","name":"Bento Cake · Brigadeiro Gourmet Preto","desc":"Bolo de 12 cm com uma camada de recheio.","category":"bento-cake","kind":"bento","price":70,"featured":true},
+  {"id":"bento-brigadeiro-gourmet-branco","name":"Bento Cake · Brigadeiro Gourmet Branco","desc":"Bolo de 12 cm com uma camada de recheio.","category":"bento-cake","kind":"bento","price":70},
+  {"id":"bento-ninho-nutella","name":"Bento Cake · Ninho com Nutella","desc":"Bolo de 12 cm com uma camada de recheio.","category":"bento-cake","kind":"bento","price":85},
+  {"id":"bento-leite-ninho","name":"Bento Cake · Leite Ninho","desc":"Bolo de 12 cm com uma camada de recheio.","category":"bento-cake","kind":"bento","price":70},
+  {"id":"bento-quatro-leites","name":"Bento Cake · 4 Leites","desc":"Bolo de 12 cm com uma camada de recheio.","category":"bento-cake","kind":"bento","price":70},
+  {"id":"brigadeiro-beijinho","name":"Beijinho","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175,"featured":true},
+  {"id":"brigadeiro-bicho-de-pe","name":"Bicho de Pé","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-branco-tradicional","name":"Brigadeiro Branco","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-preto-tradicional","name":"Brigadeiro Preto","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-cajuzinho","name":"Cajuzinho","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-casadinho","name":"Casadinho","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-casadinho-moranguinho","name":"Casadinho Moranguinho","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-farinha-lactea","name":"Farinha Láctea","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-leite-ninho","name":"Leite Ninho","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-prestigio","name":"Prestígio","desc":"Sabor da linha de brigadeiros tradicionais. Vendido por cento.","category":"brigadeiros-tradicionais","kind":"brigadeiro-traditional","price":175},
+  {"id":"brigadeiro-cafe","name":"Café","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215,"featured":true},
+  {"id":"brigadeiro-crocante","name":"Brigadeiro Crocante","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-caramelo-amendoim","name":"Caramelo Salgado com Amendoim","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-charge","name":"Charge","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-chocoball","name":"Chocoball","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-churros","name":"Churros","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-coco-queimado","name":"Coco Queimado","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-ferrero-rocher","name":"Ferrero Rocher","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-mini-confeti","name":"Mini Confeti","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-ninho-nutella","name":"Ninho com Nutella","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-olho-de-sogra","name":"Olho de Sogra","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-pacoca","name":"Paçoca","desc":"Sabor da linha de brigadeiros especiais. Vendido por cento.","category":"brigadeiros-especiais","kind":"brigadeiro-special","price":215},
+  {"id":"brigadeiro-amendoas","name":"Amêndoas","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260,"featured":true},
+  {"id":"brigadeiro-banana-passa","name":"Banana Passa","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-ao-leite","name":"Brigadeiro ao Leite","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-branco-gourmet","name":"Brigadeiro Branco","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-meio-amargo","name":"Brigadeiro Meio Amargo","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-caipirinha","name":"Caipirinha","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-creme-brulee","name":"Crème Brûlée","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-damasco","name":"Damasco","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-delicia-uva","name":"Delícia de Uva","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-maracuja","name":"Maracujá","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-nozes","name":"Nozes","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-raphaello","name":"Raphaello","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260},
+  {"id":"brigadeiro-romeu-julieta","name":"Romeu e Julieta","desc":"Sabor da linha de brigadeiros gourmet. Vendido por cento.","category":"brigadeiros-gourmet","kind":"brigadeiro-gourmet","price":260}
 ];
+
+const money = (value: number) => `R$ ${value.toFixed(2).replace(".", ",")}`;
+const cakeSizes = (values: number[]): Size[] => [
+  { id: "fatias-10", label: "10 fatias", hint: money(values[0]) },
+  { id: "fatias-20", label: "20 fatias", hint: money(values[1]) },
+  { id: "fatias-24", label: "24 fatias", hint: money(values[2]) },
+  { id: "fatias-30", label: "30 fatias", hint: money(values[3]) },
+  { id: "fatias-45", label: "45 fatias", hint: money(values[4]) },
+  { id: "fatias-40-q", label: "40 fatias Q", hint: money(values[5]) },
+  { id: "fatias-70-q", label: "70 fatias Q", hint: money(values[6]) },
+];
+
+const CAKE_SIZES_BY_CATEGORY: Partial<Record<Category["id"], Size[]>> = {
+  "bolos-tradicionais": cakeSizes([128, 190, 208, 245, 370, 298, 420]),
+  "bolos-refinados": cakeSizes([135, 215, 248, 298, 398, 325, 445]),
+  "bolos-especiais": cakeSizes([150, 238, 272, 315, 420, 365, 480]),
+};
+
+const CATEGORY_LABELS = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label])) as Record<Category["id"], string>;
+
+export const PRODUCTS: Product[] = CATALOG_ENTRIES.map((entry) => {
+  const sizes =
+    entry.kind.startsWith("cake")
+      ? CAKE_SIZES_BY_CATEGORY[entry.category]
+      : entry.kind === "bento"
+        ? [{ id: "12-cm", label: "12 cm", hint: `1 camada · ${money(entry.price ?? 70)}` }]
+        : [{ id: "cento", label: "Cento", hint: `100 unidades · ${money(entry.price ?? 0)}` }];
+  return {
+    id: entry.id,
+    name: entry.name,
+    desc: entry.desc,
+    img: `/catalog/${entry.id}.jpg`,
+    category: entry.category,
+    tags: [CATEGORY_LABELS[entry.category]],
+    sizes,
+    featured: entry.featured,
+  };
+});
 
 export const productById = (id: string) => PRODUCTS.find((p) => p.id === id);
 

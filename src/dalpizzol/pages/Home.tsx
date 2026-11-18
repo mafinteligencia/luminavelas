@@ -84,7 +84,7 @@ const Hero = () => {
         style={{ y: s(patternY) }}
         className="absolute -inset-y-16 inset-x-0 pointer-events-none"
       >
-        <FloralPattern color="#8B6B4F" opacity={0.09} />
+        <FloralPattern color="#A78D6D" opacity={0.09} />
       </motion.div>
 
       <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
@@ -136,7 +136,7 @@ const Hero = () => {
           >
             <Link
               to="/bolos"
-              className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 h-12 text-[13px] font-semibold bg-rosa text-white shadow-[0_10px_26px_rgba(235,160,166,0.45)] active:scale-[0.97] transition"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 h-12 text-[13px] font-semibold bg-rosa text-white shadow-[0_10px_26px_rgba(160,118,77,0.45)] active:scale-[0.97] transition"
             >
               Ver nossos bolos <IconChevronRight className="w-4 h-4" />
             </Link>
@@ -178,7 +178,7 @@ const Hero = () => {
           <Img
             src={HERO_IMAGE}
             alt="Bolo de Oreo da Doceria Dalpizzol"
-            wrapperClassName="relative rounded-[36px] shadow-[0_30px_70px_-20px_rgba(139,107,79,0.45)] ring-1 ring-dourado/40 outline outline-[6px] outline-white/80"
+            wrapperClassName="relative rounded-[36px] shadow-[0_30px_70px_-20px_rgba(167,141,109,0.45)] ring-1 ring-dourado/40 outline outline-[6px] outline-white/80"
             className="w-full aspect-[4/4.2] object-cover"
           />
           <motion.div
@@ -233,14 +233,14 @@ const Hero = () => {
 /* ============ 2 · CATEGORIAS — leque que abre a partir do centro ============ */
 const Categories = () => (
   <section className="px-5 pt-8">
-    <div className="max-w-5xl mx-auto grid grid-cols-4 gap-2 sm:gap-3">
+    <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-3">
       {CATEGORIES.map((c, i) => (
         <FanIn key={c.id} index={i} total={CATEGORIES.length}>
           <Link
             to={`/bolos?cat=${c.id}`}
             className="group card-lux flex flex-col items-center gap-2 py-4 active:scale-95 transition"
           >
-            <span className="block w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-dourado/70 via-white to-rosa/50 shadow-[0_6px_16px_-6px_rgba(139,107,79,0.5)]">
+            <span className="block w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-dourado/70 via-white to-rosa/50 shadow-[0_6px_16px_-6px_rgba(167,141,109,0.5)]">
               <Img
                 src={c.photo}
                 alt={c.label}
@@ -389,7 +389,7 @@ const OrderBanner = () => (
 /* ============ 6 · OCASIÕES — cartas viradas na mesa + fundo em parallax inverso ============ */
 const Occasions = () => (
   <>
-    <EdgeWave fill="#8A9A76" flip className="mt-10 -mb-px text-salvia-deep" />
+    <EdgeWave fill="#807B61" flip className="mt-10 -mb-px text-salvia-deep" />
     <section className="relative py-10 px-5 band-salvia grain overflow-hidden">
       <Parallax
         speed={-0.35}
@@ -445,7 +445,7 @@ const Occasions = () => (
         </div>
       </div>
     </section>
-    <EdgeWave fill="#8A9A76" className="-mt-px rotate-180" />
+    <EdgeWave fill="#807B61" className="-mt-px rotate-180" />
   </>
 );
 

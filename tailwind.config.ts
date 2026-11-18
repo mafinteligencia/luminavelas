@@ -19,13 +19,13 @@ export default {
         script: ["Dancing Script", "cursive"],
       },
       colors: {
-        /* Identidade visual Doceria Dalpizzol (brand board 2026) */
-        rosa: { DEFAULT: "#EBA0A6", deep: "#D9868D", soft: "#F5CDD0" },
-        salvia: { DEFAULT: "#A6B693", deep: "#8A9A76", soft: "#D9E0CF" },
-        creme: { DEFAULT: "#F7F2EA", deep: "#EFE6D8" },
-        dourado: { DEFAULT: "#D1B071", deep: "#B8965A" },
-        marrom: { DEFAULT: "#8B6B4F", deep: "#6B5038" },
-        offwhite: "#FAFAF6",
+        /* Identidade visual extraída do logotipo da Doceria Dalpizzol */
+        rosa: { DEFAULT: "#A0764D", deep: "#785F45", soft: "#ECBB96" },
+        salvia: { DEFAULT: "#B7AD8F", deep: "#807B61", soft: "#E8E1CF" },
+        creme: { DEFAULT: "#FEF3E1", deep: "#E8CAAB" },
+        dourado: { DEFAULT: "#D18A5A", deep: "#A0764D" },
+        marrom: { DEFAULT: "#A78D6D", deep: "#785F45" },
+        offwhite: "#FFFCF6",
         ink: "#4A3728",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

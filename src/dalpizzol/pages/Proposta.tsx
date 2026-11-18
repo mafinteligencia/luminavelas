@@ -140,7 +140,7 @@ const Hero = ({ onEnter }: { onEnter: () => void }) => {
           className="w-full h-full object-cover opacity-30 blur-[26px] scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-creme/70 via-creme/55 to-offwhite" />
-        <FloralPattern color="#8B6B4F" opacity={0.06} />
+        <FloralPattern color="#A78D6D" opacity={0.06} />
       </div>
 
       <motion.div
@@ -153,7 +153,7 @@ const Hero = ({ onEnter }: { onEnter: () => void }) => {
           initial={reduce ? false : { opacity: 0, y: 14, scale: 0.94 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="w-20 h-20 object-contain drop-shadow-[0_10px_22px_rgba(139,107,79,0.28)]"
+          className="w-20 h-20 object-contain drop-shadow-[0_10px_22px_rgba(167,141,109,0.28)]"
         />
 
         <p className="mt-6 inline-flex items-center gap-2 text-[10.5px] font-semibold tracking-[0.22em] uppercase text-marrom-deep glass-warm rounded-full px-4 py-2">
@@ -178,7 +178,7 @@ const Hero = ({ onEnter }: { onEnter: () => void }) => {
           type="button"
           onClick={onEnter}
           whileTap={{ scale: 0.97 }}
-          className="mt-8 group inline-flex items-center gap-3 rounded-full bg-gradient-to-br from-rosa to-rosa-deep text-white pl-7 pr-6 py-4 text-[12px] font-semibold tracking-[0.16em] uppercase shadow-[0_18px_36px_-14px_rgba(217,134,141,0.9)]"
+          className="mt-8 group inline-flex items-center gap-3 rounded-full bg-gradient-to-br from-rosa to-rosa-deep text-white pl-7 pr-6 py-4 text-[12px] font-semibold tracking-[0.16em] uppercase shadow-[0_18px_36px_-14px_rgba(120,95,69,0.9)]"
         >
           Entrar no mapa
           <IconChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -269,7 +269,7 @@ const Mapa = ({
       className="relative pattern-creme grain px-4 sm:px-6 pt-8 pb-14 sm:pt-10 sm:pb-16 overflow-hidden scroll-mt-2 min-h-screen flex flex-col justify-center"
     >
       <div className="absolute inset-0 pointer-events-none">
-        <FloralPattern color="#8B6B4F" opacity={0.05} />
+        <FloralPattern color="#A78D6D" opacity={0.05} />
       </div>
 
       <div className="relative max-w-6xl w-full mx-auto">
@@ -451,7 +451,7 @@ const Deck = ({
       {/* a peça, em tela cheia — a que entra é "cortada" sobre a que sai */}
       <div className="relative flex-1 min-h-0 pattern-creme grain overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <FloralPattern color="#8B6B4F" opacity={0.045} />
+          <FloralPattern color="#A78D6D" opacity={0.045} />
         </div>
         <div className="relative h-full grid place-items-center px-3 sm:px-16 py-3 sm:py-5">
           <div className="grid w-full h-full place-items-center">

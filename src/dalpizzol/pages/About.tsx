@@ -40,7 +40,7 @@ const About = () => (
         <GoldRule className="mx-auto mt-2 text-dourado" width={130} />
       </div>
       <MaskReveal className="max-w-5xl mx-auto mt-4">
-        <div className="relative rounded-[32px] overflow-hidden shadow-[0_30px_70px_-20px_rgba(139,107,79,0.45)] ring-1 ring-dourado/40 outline outline-[6px] outline-white/70 max-w-md mx-auto md:max-w-2xl">
+        <div className="relative rounded-[32px] overflow-hidden shadow-[0_30px_70px_-20px_rgba(167,141,109,0.45)] ring-1 ring-dourado/40 outline outline-[6px] outline-white/70 max-w-md mx-auto md:max-w-2xl">
           <Img
             src={STORY.photos.duoBalcao}
             alt="As confeiteiras da Doceria Dalpizzol no balcão da loja"
@@ -107,7 +107,7 @@ const About = () => (
                   damping: 12,
                   delay: 0.3 + i * 0.1,
                 }}
-                className="block w-16 h-16 mx-auto rounded-full p-[3px] bg-gradient-to-br from-dourado/70 via-white to-salvia/50 shadow-[0_6px_16px_-6px_rgba(139,107,79,0.5)]"
+                className="block w-16 h-16 mx-auto rounded-full p-[3px] bg-gradient-to-br from-dourado/70 via-white to-salvia/50 shadow-[0_6px_16px_-6px_rgba(167,141,109,0.5)]"
               >
                 <Img
                   src={v.photo}
@@ -141,7 +141,7 @@ const About = () => (
           {STORY.makers.map((m, i) => (
             <SplitIn key={i} from={i === 0 ? "left" : "right"}>
               <Parallax speed={i === 0 ? 0.12 : -0.12}>
-                <div className="relative rounded-3xl overflow-hidden shadow-[0_16px_36px_-14px_rgba(139,107,79,0.5)] ring-1 ring-dourado/30">
+                <div className="relative rounded-3xl overflow-hidden shadow-[0_16px_36px_-14px_rgba(167,141,109,0.5)] ring-1 ring-dourado/30">
                   <Img
                     src={m.img}
                     alt={`${m.name}, confeiteira da Doceria Dalpizzol`}

@@ -95,12 +95,12 @@ export const Button = ({
     className={cn(
       "inline-flex items-center justify-center gap-2 rounded-2xl px-5 h-12 text-[13px] font-semibold tracking-wide transition active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100",
       variant === "primary" &&
-        "bg-gradient-to-br from-rosa to-rosa-deep text-white shadow-[0_10px_26px_-6px_rgba(217,134,141,0.7)] ring-1 ring-white/25",
+        "bg-gradient-to-br from-rosa to-rosa-deep text-white shadow-[0_10px_26px_-6px_rgba(120,95,69,0.7)] ring-1 ring-white/25",
       variant === "secondary" && "bg-creme-deep text-marrom-deep",
       variant === "ghost" &&
         "bg-transparent text-marrom border border-marrom/20",
       variant === "whatsapp" &&
-        "bg-gradient-to-br from-salvia to-salvia-deep text-white shadow-[0_10px_26px_-6px_rgba(138,154,118,0.65)] ring-1 ring-white/25",
+        "bg-gradient-to-br from-salvia to-salvia-deep text-white shadow-[0_10px_26px_-6px_rgba(127,123,97,0.65)] ring-1 ring-white/25",
       full && "w-full",
       className,
     )}
@@ -121,12 +121,12 @@ export const LinkButton = ({
     className={cn(
       "inline-flex items-center justify-center gap-2 rounded-2xl px-5 h-12 text-[13px] font-semibold tracking-wide transition active:scale-[0.97]",
       variant === "primary" &&
-        "bg-gradient-to-br from-rosa to-rosa-deep text-white shadow-[0_10px_26px_-6px_rgba(217,134,141,0.7)] ring-1 ring-white/25",
+        "bg-gradient-to-br from-rosa to-rosa-deep text-white shadow-[0_10px_26px_-6px_rgba(120,95,69,0.7)] ring-1 ring-white/25",
       variant === "secondary" && "bg-creme-deep text-marrom-deep",
       variant === "ghost" &&
         "bg-transparent text-marrom border border-marrom/20",
       variant === "whatsapp" &&
-        "bg-gradient-to-br from-salvia to-salvia-deep text-white shadow-[0_10px_26px_-6px_rgba(138,154,118,0.65)] ring-1 ring-white/25",
+        "bg-gradient-to-br from-salvia to-salvia-deep text-white shadow-[0_10px_26px_-6px_rgba(127,123,97,0.65)] ring-1 ring-white/25",
       full && "w-full",
       className,
     )}
@@ -143,7 +143,7 @@ export const Chip = ({
     className={cn(
       "shrink-0 px-4 h-9 rounded-full text-[12px] font-semibold whitespace-nowrap transition active:scale-95 border",
       active
-        ? "bg-gradient-to-br from-rosa to-rosa-deep border-rosa-deep text-white shadow-[0_6px_14px_-4px_rgba(217,134,141,0.7)]"
+        ? "bg-gradient-to-br from-rosa to-rosa-deep border-rosa-deep text-white shadow-[0_6px_14px_-4px_rgba(120,95,69,0.7)]"
         : "bg-white/85 border-marrom/15 text-marrom-deep",
       className,
     )}

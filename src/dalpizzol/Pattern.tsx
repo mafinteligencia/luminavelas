@@ -6,7 +6,7 @@
    ===================================================== */
 export const FloralPattern = ({
   className = "",
-  color = "#8B6B4F",
+  color = "#A78D6D",
   opacity = 0.08,
   scale = 1,
 }: {

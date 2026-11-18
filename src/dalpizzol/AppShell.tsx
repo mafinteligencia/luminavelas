@@ -40,7 +40,7 @@ const Badge = ({
         exit={{ scale: 0.4, opacity: 0 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
         className={cn(
-          "absolute min-w-[18px] h-[18px] px-1 rounded-full bg-rosa-deep text-white text-[10px] font-bold grid place-items-center shadow-[0_2px_8px_rgba(217,134,141,0.6)]",
+          "absolute min-w-[18px] h-[18px] px-1 rounded-full bg-rosa-deep text-white text-[10px] font-bold grid place-items-center shadow-[0_2px_8px_rgba(120,95,69,0.6)]",
           className,
         )}
       >
@@ -152,7 +152,7 @@ const TopBar = () => {
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="w-11 h-11 rounded-full ring-1 ring-dourado/40 shadow-[0_4px_12px_-4px_rgba(139,107,79,0.4)]"
+            className="w-11 h-11 rounded-full ring-1 ring-dourado/40 shadow-[0_4px_12px_-4px_rgba(167,141,109,0.4)]"
           />
           <span className="leading-none">
             <span className="block text-[9px] tracking-[0.28em] uppercase text-marrom">
@@ -233,7 +233,7 @@ const BottomNav = () => {
                 {isActive && (
                   <motion.span
                     layoutId="tab-pill"
-                    className="absolute inset-0 rounded-[22px] bg-white shadow-[0_4px_14px_rgba(139,107,79,0.12)]"
+                    className="absolute inset-0 rounded-[22px] bg-white shadow-[0_4px_14px_rgba(167,141,109,0.12)]"
                     transition={{ type: "spring", stiffness: 420, damping: 34 }}
                   />
                 )}
