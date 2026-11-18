@@ -15,6 +15,189 @@ import { ClipReveal } from "../motion";
 const normalize = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
+type MenuFlavor = { name: string; description?: string; price?: string };
+type MenuPrice = { size: string; value: string };
+type MenuGroup = {
+  title: string;
+  subtitle?: string;
+  flavors: MenuFlavor[];
+  prices?: MenuPrice[];
+  unitLabel?: string;
+  unitPrice?: string;
+};
+
+const MENU_GROUPS: MenuGroup[] = [
+  {
+    title: "Bolos tradicionais",
+    flavors: [
+      { name: "Brigadeiro gourmet preto", description: "Massa à escolha com brigadeiro de chocolate." },
+      { name: "Dois Amores", description: "Massa à escolha com brigadeiro branco e brigadeiro gourmet." },
+      { name: "4 Leites", description: "Massa à escolha com brigadeiro de quatro leites." },
+    ],
+    prices: [
+      { size: "10 fatias", value: "128,00" },
+      { size: "20 fatias", value: "190,00" },
+      { size: "24 fatias", value: "208,00" },
+      { size: "30 fatias", value: "245,00" },
+      { size: "45 fatias", value: "370,00" },
+      { size: "40 fatias Q", value: "298,00" },
+      { size: "70 fatias Q", value: "420,00" },
+    ],
+  },
+  {
+    title: "Bolos refinados",
+    flavors: [
+      { name: "Torta Mineira", description: "Nata com abacaxi e brigadeiro de coco." },
+      { name: "Prestígio", description: "Brigadeiro de coco com ganache de chocolate." },
+      { name: "Arraiá", description: "Mousse de paçoca com mousse de chocolate." },
+      { name: "Chocotorta", description: "Brigadeiro de chocolate e doce de leite." },
+      { name: "Maracujá", description: "Maracujá e chocolate meio amargo." },
+      { name: "Três Amores", description: "Doce de leite, brigadeiro branco e brigadeiro de chocolate." },
+      { name: "Cocada com Doce de Leite", description: "Cocada com doce de leite." },
+      { name: "Pêssego com Coco", description: "Brigadeiro de quatro leites com pêssego em calda e brigadeiro de coco." },
+    ],
+    prices: [
+      { size: "10 fatias", value: "135,00" },
+      { size: "20 fatias", value: "215,00" },
+      { size: "24 fatias", value: "248,00" },
+      { size: "30 fatias", value: "298,00" },
+      { size: "45 fatias", value: "398,00" },
+      { size: "40 fatias Q", value: "325,00" },
+      { size: "70 fatias Q", value: "445,00" },
+    ],
+  },
+  {
+    title: "Bolos especiais",
+    flavors: [
+      { name: "Marta Rocha", description: "Creme belga com nozes crocantes, nata com suspiro e doce de leite com ameixa." },
+      { name: "Gaya", description: "Strogonoff de nozes, brigadeiro gourmet e creme belga com damasco." },
+      { name: "Raio de Sol", description: "Brigadeiro gourmet, doce de leite e caramelo salgado com nozes crocantes." },
+      { name: "Suculentas", description: "Nata, morango, suspiros e brigadeiro de quatro leites." },
+      { name: "Red Velvet", description: "Massa amanteigada e brigadeiro de requeijão." },
+      { name: "Quatro Leites com Morango" },
+      { name: "Chocolate com Morango" },
+      { name: "Matilda" },
+      { name: "Ninho com Geleia de Frutas Vermelhas" },
+      { name: "Kinder" },
+      { name: "Delícia de Uva" },
+    ],
+    prices: [
+      { size: "10 fatias", value: "150,00" },
+      { size: "20 fatias", value: "238,00" },
+      { size: "24 fatias", value: "272,00" },
+      { size: "30 fatias", value: "315,00" },
+      { size: "45 fatias", value: "420,00" },
+      { size: "40 fatias Q", value: "365,00" },
+      { size: "70 fatias Q", value: "480,00" },
+    ],
+  },
+  {
+    title: "Bento Cake",
+    subtitle: "Bolo de 12 cm com uma camada de recheio.",
+    flavors: [
+      { name: "Brigadeiro gourmet preto", price: "70,00" },
+      { name: "Brigadeiro gourmet branco", price: "70,00" },
+      { name: "Ninho com Nutella", price: "85,00" },
+      { name: "Leite Ninho", price: "70,00" },
+      { name: "4 Leites", price: "70,00" },
+    ],
+  },
+  {
+    title: "Brigadeiros tradicionais",
+    unitLabel: "Cento · 100 unidades",
+    unitPrice: "175,00",
+    flavors: [
+      { name: "Beijinho" }, { name: "Bicho de Pé" }, { name: "Brigadeiro Branco" },
+      { name: "Brigadeiro Preto" }, { name: "Cajuzinho" }, { name: "Casadinho" },
+      { name: "Casadinho Moranguinho" }, { name: "Farinha Láctea" },
+      { name: "Leite Ninho" }, { name: "Prestígio" },
+    ],
+  },
+  {
+    title: "Brigadeiros especiais",
+    unitLabel: "Cento · 100 unidades",
+    unitPrice: "215,00",
+    flavors: [
+      { name: "Café" }, { name: "Brigadeiro Crocante" },
+      { name: "Caramelo Salgado com Amendoim" }, { name: "Charge" },
+      { name: "Chocoball" }, { name: "Churros" }, { name: "Coco Queimado" },
+      { name: "Ferrero Rocher" }, { name: "Mini Confeti" },
+      { name: "Ninho com Nutella" }, { name: "Olho de Sogra" }, { name: "Paçoca" },
+    ],
+  },
+  {
+    title: "Brigadeiros gourmet",
+    unitLabel: "Cento · 100 unidades",
+    unitPrice: "260,00",
+    flavors: [
+      { name: "Amêndoas" }, { name: "Banana Passa" }, { name: "Brigadeiro ao Leite" },
+      { name: "Brigadeiro Branco" }, { name: "Brigadeiro Meio Amargo" },
+      { name: "Caipirinha" }, { name: "Crème Brûlée" }, { name: "Damasco" },
+      { name: "Delícia de Uva" }, { name: "Maracujá" }, { name: "Nozes" },
+      { name: "Raphaello" }, { name: "Romeu e Julieta" },
+    ],
+  },
+];
+
+const FullMenu = () => (
+  <section className="px-5 py-10">
+    <div className="max-w-5xl mx-auto">
+      <div className="text-center mb-6">
+        <SectionTitle
+          center
+          eyebrow="Cardápio completo"
+          title="Sabores para cada momento"
+          subtitle="Confira as opções e os valores. Para encomendar, fale com a gente pelo WhatsApp."
+        />
+        <GoldRule className="mx-auto mt-3 text-dourado" width={130} />
+      </div>
+      <div className="grid gap-3 md:grid-cols-2">
+        {MENU_GROUPS.map((group) => (
+          <details key={group.title} className="card-lux rounded-3xl overflow-hidden">
+            <summary className="cursor-pointer list-none px-5 py-4 flex items-center gap-3">
+              <span className="font-serif text-lg text-ink">{group.title}</span>
+              <span aria-hidden="true" className="ml-auto text-xl text-rosa-deep">+</span>
+            </summary>
+            <div className="px-5 pb-5">
+              {group.subtitle && <p className="text-[12px] text-ink/60 mb-3">{group.subtitle}</p>}
+              <ul className="space-y-2">
+                {group.flavors.map((flavor) => (
+                  <li key={flavor.name} className="flex items-start justify-between gap-3 border-b border-marrom/10 pb-2 last:border-0">
+                    <span>
+                      <span className="text-[13px] font-medium text-ink">{flavor.name}</span>
+                      {flavor.description && <span className="block text-[11.5px] leading-relaxed text-ink/55">{flavor.description}</span>}
+                    </span>
+                    {flavor.price && <span className="shrink-0 text-[12px] font-semibold text-marrom-deep">R$ {flavor.price}</span>}
+                  </li>
+                ))}
+              </ul>
+              {group.prices && (
+                <div className="mt-4">
+                  <p className="text-[11px] font-semibold text-marrom-deep mb-2">Tamanhos e valores</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {group.prices.map((price) => (
+                      <div key={price.size} className="rounded-xl bg-rosa/10 px-2 py-2.5 text-center">
+                        <p className="text-[10.5px] text-ink/60">{price.size}</p>
+                        <p className="text-[12px] font-semibold text-ink">R$ {price.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {group.unitPrice && (
+                <div className="mt-4 flex items-center justify-between rounded-2xl bg-rosa/10 px-4 py-3">
+                  <span className="text-[12px] text-ink/65">{group.unitLabel}</span>
+                  <strong className="text-[13px] text-ink">R$ {group.unitPrice}</strong>
+                </div>
+              )}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 const Catalog = () => {
   const [params, setParams] = useSearchParams();
   const cat = params.get("cat") ?? "todos";
@@ -54,7 +237,7 @@ const Catalog = () => {
                 center
                 eyebrow="Cardápio"
                 title="Escolha o seu doce"
-                subtitle="Toque em um item para ver tamanhos e montar o seu pedido."
+                subtitle="Veja os destaques, confira o cardápio completo e monte o seu pedido."
               />
               <GoldRule className="mx-auto mt-3 text-dourado" width={130} />
             </div>
@@ -157,6 +340,7 @@ const Catalog = () => {
         </div>
       </section>
 
+      {cat === "todos" && !q.trim() && <FullMenu />}
       <FooterBand />
       <ProductSheet product={open} onClose={() => setOpen(null)} />
     </>
