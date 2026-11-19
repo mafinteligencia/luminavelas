@@ -1,21 +1,22 @@
 /* =====================================================
    Doceria Dalpizzol — conteúdo do app e catálogo do PDF 26.11.
    ===================================================== */
-import boloCamadas from "@/assets/dalpizzol/bolo-camadas.jpg";
-import boloRedVelvet from "@/assets/dalpizzol/bolo-redvelvet.jpg";
-import boloOreo from "@/assets/dalpizzol/bolo-oreo.jpg";
-import brigadeiros from "@/assets/dalpizzol/brigadeiros.jpg";
-import heroOreo from "@/assets/dalpizzol/hero-oreo.jpg";
-import duoPlaca from "@/assets/dalpizzol/duo-placa.jpg";
-import duoSentadas from "@/assets/dalpizzol/duo-sentadas.jpg";
-import duoBanco from "@/assets/dalpizzol/duo-banco.jpg";
-import duoCafe from "@/assets/dalpizzol/duo-cafe.jpg";
-import duoBalcao from "@/assets/dalpizzol/duo-balcao.jpg";
-import lojaDuo from "@/assets/dalpizzol/loja-duo.jpg";
-import duo from "@/assets/dalpizzol/duo.jpg";
-import glaucia from "@/assets/dalpizzol/glaucia.jpg";
-import dani from "@/assets/dalpizzol/dani.jpg";
-import logo from "@/assets/dalpizzol/logo.png";
+import boloCamadas from "@/assets/dalpizzol/bolo-camadas.webp";
+import boloRedVelvet from "@/assets/dalpizzol/bolo-redvelvet.webp";
+import boloOreo from "@/assets/dalpizzol/bolo-oreo.webp";
+import brigadeiros from "@/assets/dalpizzol/brigadeiros.webp";
+import duoPlaca from "@/assets/dalpizzol/duo-placa.webp";
+import duoSentadas from "@/assets/dalpizzol/duo-sentadas.webp";
+import duoBanco from "@/assets/dalpizzol/duo-banco.webp";
+import duoCafe from "@/assets/dalpizzol/duo-cafe.webp";
+import duoBalcao from "@/assets/dalpizzol/duo-balcao.webp";
+import lojaDuo from "@/assets/dalpizzol/loja-duo.webp";
+import duo from "@/assets/dalpizzol/duo.webp";
+import glaucia from "@/assets/dalpizzol/glaucia.webp";
+import dani from "@/assets/dalpizzol/dani.webp";
+import logo from "@/assets/dalpizzol/logo.webp";
+
+const heroOreo = "/hero-oreo.webp";
 
 export const BRAND = {
   name: "Doceria Dalpizzol",
@@ -63,13 +64,13 @@ export type Category = {
 };
 
 export const CATEGORIES: Category[] = [
-  { id: "bolos-tradicionais", label: "Bolos tradicionais", icon: "cake", photo: "/catalog/bolo-brigadeiro-gourmet-preto.jpg" },
-  { id: "bolos-refinados", label: "Bolos refinados", icon: "cake", photo: "/catalog/torta-mineira.jpg" },
-  { id: "bolos-especiais", label: "Bolos especiais", icon: "cake", photo: "/catalog/bolo-marta-rocha.jpg" },
-  { id: "bento-cake", label: "Bento Cake", icon: "cake", photo: "/catalog/bento-brigadeiro-gourmet-preto.jpg" },
-  { id: "brigadeiros-tradicionais", label: "Brigadeiros tradicionais", icon: "bonbon", photo: "/catalog/brigadeiro-beijinho.jpg" },
-  { id: "brigadeiros-especiais", label: "Brigadeiros especiais", icon: "bonbon", photo: "/catalog/brigadeiro-cafe.jpg" },
-  { id: "brigadeiros-gourmet", label: "Brigadeiros gourmet", icon: "bonbon", photo: "/catalog/brigadeiro-amendoas.jpg" },
+  { id: "bolos-tradicionais", label: "Bolos tradicionais", icon: "cake", photo: "/catalog/thumbs/bolo-brigadeiro-gourmet-preto.webp" },
+  { id: "bolos-refinados", label: "Bolos refinados", icon: "cake", photo: "/catalog/thumbs/torta-mineira.webp" },
+  { id: "bolos-especiais", label: "Bolos especiais", icon: "cake", photo: "/catalog/thumbs/bolo-marta-rocha.webp" },
+  { id: "bento-cake", label: "Bento Cake", icon: "cake", photo: "/catalog/thumbs/bento-brigadeiro-gourmet-preto.webp" },
+  { id: "brigadeiros-tradicionais", label: "Brigadeiros tradicionais", icon: "bonbon", photo: "/catalog/thumbs/brigadeiro-beijinho.webp" },
+  { id: "brigadeiros-especiais", label: "Brigadeiros especiais", icon: "bonbon", photo: "/catalog/thumbs/brigadeiro-cafe.webp" },
+  { id: "brigadeiros-gourmet", label: "Brigadeiros gourmet", icon: "bonbon", photo: "/catalog/thumbs/brigadeiro-amendoas.webp" },
 ];
 
 export type Product = {

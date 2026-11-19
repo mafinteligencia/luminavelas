@@ -1,16 +1,20 @@
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Icon, IconClose, IconHeart, IconSearch } from "../icons";
 import { GoldRule } from "../ornaments";
 import { CATEGORIES, PRODUCTS, type Product } from "../data";
 import { Chip, SectionTitle } from "../ui";
 import { ProductCard } from "../ProductCard";
-import { ProductSheet } from "../ProductSheet";
+import { Img } from "../Img";
 import { FooterBand } from "./Home";
 import { useFavorites } from "../favorites";
 import { FloralPattern } from "../Pattern";
 import { motion } from "framer-motion";
 import { ClipReveal } from "../motion";
+
+const ProductSheet = lazy(() =>
+  import("../ProductSheet").then(({ ProductSheet }) => ({ default: ProductSheet })),
+);
 
 const normalize = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -277,10 +281,12 @@ const Catalog = () => {
                 onClick={() => setCat(c.id)}
                 className="inline-flex items-center gap-1.5"
               >
-                <img
+                <Img
                   src={c.photo}
                   alt=""
-                  className="w-5 h-5 rounded-full object-cover ring-1 ring-white/70"
+                  loading="lazy"
+                  wrapperClassName="w-5 h-5 rounded-full"
+                  className="w-full h-full rounded-full object-cover ring-1 ring-white/70"
                 />{" "}
                 {c.label}
               </Chip>
@@ -342,7 +348,11 @@ const Catalog = () => {
 
       {cat === "todos" && !q.trim() && <FullMenu />}
       <FooterBand />
-      <ProductSheet product={open} onClose={() => setOpen(null)} />
+      {open && (
+        <Suspense fallback={null}>
+          <ProductSheet product={open} onClose={() => setOpen(null)} />
+        </Suspense>
+      )}
     </>
   );
 };

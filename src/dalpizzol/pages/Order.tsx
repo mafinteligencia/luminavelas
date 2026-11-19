@@ -205,11 +205,18 @@ const Order = () => {
                   const size = p.sizes?.find((s) => s.id === l.sizeId);
                   return (
                     <li key={l.key} className="py-3 flex items-center gap-3">
-                      <img
-                        src={p.img}
-                        alt=""
-                        className="w-14 h-14 rounded-2xl object-cover"
-                      />
+                      <picture className="block shrink-0">
+                        {p.img.startsWith("/catalog/") && p.img.endsWith(".jpg") && (
+                          <source srcSet={p.img.replace(/\.jpg$/i, ".webp")} type="image/webp" />
+                        )}
+                        <img
+                          src={p.img}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          className="w-14 h-14 rounded-2xl object-cover"
+                        />
+                      </picture>
                       <div className="flex-1 min-w-0">
                         <p className="text-[13.5px] font-semibold text-ink leading-tight">
                           {p.name}

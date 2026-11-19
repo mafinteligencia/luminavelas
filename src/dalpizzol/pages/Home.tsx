@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
@@ -32,9 +32,12 @@ import {
 } from "../data";
 import { LinkButton, SectionTitle, WhatsAppIcon } from "../ui";
 import { ProductCard } from "../ProductCard";
-import { ProductSheet } from "../ProductSheet";
 import { FloralPattern } from "../Pattern";
 import { Img } from "../Img";
+
+const ProductSheet = lazy(() =>
+  import("../ProductSheet").then(({ ProductSheet }) => ({ default: ProductSheet })),
+);
 import {
   BlurIn,
   ClipReveal,
@@ -178,6 +181,9 @@ const Hero = () => {
           <Img
             src={HERO_IMAGE}
             alt="Bolo de Oreo da Doceria Dalpizzol"
+            loading="eager"
+            fetchPriority="high"
+            sizes="(min-width: 768px) 42vw, 100vw"
             wrapperClassName="relative rounded-[36px] shadow-[0_30px_70px_-20px_rgba(167,141,109,0.45)] ring-1 ring-dourado/40 outline outline-[6px] outline-white/80"
             className="w-full aspect-[4/4.2] object-cover"
           />
@@ -614,7 +620,11 @@ const Home = () => {
       <Occasions />
       <Testimonials />
       <FooterBand />
-      <ProductSheet product={open} onClose={() => setOpen(null)} />
+      {open && (
+        <Suspense fallback={null}>
+          <ProductSheet product={open} onClose={() => setOpen(null)} />
+        </Suspense>
+      )}
     </>
   );
 };

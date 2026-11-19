@@ -44,11 +44,17 @@ export const ProductSheet = ({
         {product && (
           <div className="overflow-y-auto pb-[calc(env(safe-area-inset-bottom)+16px)]">
             <div className="px-5 pt-3">
-              <img
-                src={product.img}
-                alt={product.name}
-                className="w-full h-56 sm:h-72 object-cover rounded-3xl ring-1 ring-dourado/30 outline outline-[5px] outline-white/70"
-              />
+              <picture className="block">
+                {product.img.startsWith("/catalog/") && product.img.endsWith(".jpg") && (
+                  <source srcSet={product.img.replace(/\.jpg$/i, ".webp")} type="image/webp" />
+                )}
+                <img
+                  src={product.img}
+                  alt={product.name}
+                  decoding="async"
+                  className="w-full h-56 sm:h-72 object-cover rounded-3xl ring-1 ring-dourado/30 outline outline-[5px] outline-white/70"
+                />
+              </picture>
             </div>
             <div className="px-5 pt-5">
               <div className="flex flex-wrap gap-1.5 mb-2">
