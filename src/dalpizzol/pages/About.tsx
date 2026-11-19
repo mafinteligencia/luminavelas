@@ -27,7 +27,7 @@ const LEAF_PATHS = [
 const About = () => (
   <>
     {/* 1 · Capa — foto revelada por um círculo que cresce com o scroll */}
-    <section className="pattern-creme grain pt-24 pb-8 px-5 overflow-hidden relative">
+    <section className="pattern-creme grain pt-28 pb-8 px-5 overflow-hidden relative">
       <div className="max-w-5xl mx-auto text-center">
         <motion.p
           initial={{ opacity: 0, scale: 0.8 }}

@@ -148,7 +148,7 @@ const Order = () => {
 
   return (
     <>
-      <section className="pattern-creme grain pt-24 pb-5 px-5 relative overflow-hidden">
+      <section className="pattern-creme grain pt-28 pb-5 px-5 relative overflow-hidden">
         <div className="max-w-3xl mx-auto">
           <SectionTitle
             eyebrow="Encomendar"

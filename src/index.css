@@ -194,6 +194,26 @@
   .safe-top {
     padding-top: env(safe-area-inset-top);
   }
+  .topbar-framed {
+    padding-top: calc(env(safe-area-inset-top) + 10px);
+  }
+  .topbar-framed::before {
+    content: "";
+    position: absolute;
+    top: calc(env(safe-area-inset-top) + 4px);
+    left: max(20px, calc((100vw - 64rem) / 2 + 16px));
+    right: max(20px, calc((100vw - 64rem) / 2 + 16px));
+    height: 1px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(166, 109, 60, 0.58) 12%,
+      rgba(166, 109, 60, 0.58) 88%,
+      transparent
+    );
+    pointer-events: none;
+  }
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }

@@ -230,7 +230,7 @@ const Catalog = () => {
 
   return (
     <>
-      <section className="relative pattern-creme pt-24 pb-5 px-5 overflow-hidden">
+      <section className="relative pattern-creme pt-28 pb-5 px-5 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <FloralPattern color="#A66D3C" opacity={0.07} />
         </div>

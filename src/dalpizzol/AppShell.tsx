@@ -123,18 +123,18 @@ const TopBar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-all duration-300 safe-top",
+        "fixed top-0 inset-x-0 z-50 transition-all duration-300 topbar-framed",
         solid
           ? "glass-warm border-x-0 border-t-0 rounded-none"
           : "bg-transparent border-transparent shadow-none",
       )}
     >
-      <div className="max-w-5xl mx-auto px-4 h-[76px] md:h-20 flex items-center justify-between gap-3">
+      <div className="max-w-5xl mx-auto px-4 h-[90px] md:h-[98px] flex items-center justify-between gap-3">
         <NavLink to="/" aria-label={BRAND.name} className="flex items-center min-w-0">
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="w-[112px] h-[72px] md:w-[132px] md:h-[76px] object-contain shrink-0"
+            className="w-[96px] h-[90px] md:w-[104px] md:h-[98px] object-contain shrink-0"
           />
         </NavLink>
 

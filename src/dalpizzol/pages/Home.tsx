@@ -81,7 +81,7 @@ const Hero = () => {
   return (
     <section
       ref={ref}
-      className="relative pattern-creme pt-24 pb-14 px-5 overflow-hidden"
+      className="relative pattern-creme pt-28 pb-14 px-5 overflow-hidden"
     >
       <motion.div
         style={{ y: s(patternY) }}
