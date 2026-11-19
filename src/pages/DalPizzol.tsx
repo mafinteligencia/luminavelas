@@ -14,7 +14,7 @@ import {
   Clock,
   ChevronRight,
 } from "lucide-react";
-import logo from "@/assets/dalpizzol/logo.png";
+import logo from "@/assets/dalpizzol/logo-oficial.webp";
 import boloCamadas from "@/assets/dalpizzol/bolo-camadas.jpg";
 import boloRedVelvet from "@/assets/dalpizzol/bolo-redvelvet.jpg";
 import boloOreo from "@/assets/dalpizzol/bolo-oreo.jpg";
@@ -26,14 +26,14 @@ import lojaDuo from "@/assets/dalpizzol/loja-duo.jpg";
 
 /* ===================== IDENTIDADE VISUAL ===================== */
 const C = {
-  cream: "#FAF4E9", // fundo do logotipo
-  creamDeep: "#F2E7D5",
-  terracotta: "#D9784A",
-  terracottaSoft: "#E9A07A",
-  cocoa: "#5A3A2A",
-  sage: "#9BA98B",
-  blush: "#EDA9A2",
-  ink: "#3B2A22",
+  cream: "#F2EDDC",
+  creamDeep: "#F2B591",
+  terracotta: "#D96A29",
+  terracottaSoft: "#F2B591",
+  cocoa: "#A66D3C",
+  sage: "#A66D3C",
+  blush: "#F2B591",
+  ink: "#3E2D21",
 };
 
 const WHATSAPP_URL =
@@ -131,7 +131,7 @@ const AppBar = () => {
     >
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         <a href="#inicio" className="flex items-center gap-2.5">
-          <img src={logo} alt="Doceria Dalpizzol" className="w-10 h-10 rounded-full" />
+          <img src={logo} alt="Doceria Dalpizzol" className="w-10 h-10 object-contain" />
           <span
             className="font-serif text-base leading-none"
             style={{ color: C.cocoa, opacity: solid ? 1 : 0.95 }}
@@ -183,7 +183,7 @@ const Hero = () => (
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="w-32 sm:w-40 rounded-full mb-8"
+        className="w-32 sm:w-40 object-contain mb-8"
         style={{ filter: "drop-shadow(0 18px 40px rgba(90,58,42,0.18))" }}
       />
 
@@ -657,7 +657,7 @@ const CTA = () => (
 /* ===================== FOOTER ===================== */
 const Footer = () => (
   <footer className="px-5 pt-14 pb-32 md:pb-14 text-center" style={{ background: C.cream }}>
-    <img src={logo} alt="Doceria Dalpizzol" className="w-20 h-20 rounded-full mx-auto mb-5" />
+    <img src={logo} alt="Doceria Dalpizzol" className="w-20 h-20 object-contain mx-auto mb-5" />
     <p className="font-serif text-xl mb-2" style={{ color: C.cocoa }}>
       Doceria Dalpizzol
     </p>

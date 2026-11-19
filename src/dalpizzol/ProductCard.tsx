@@ -27,7 +27,7 @@ export const FavButton = ({
       className={cn(
         "w-8 h-8 rounded-full grid place-items-center backdrop-blur-md transition",
         on
-          ? "bg-rosa text-white shadow-[0_4px_12px_-2px_rgba(160,118,77,0.8)]"
+          ? "bg-rosa text-white shadow-[0_4px_12px_-2px_rgba(166,109,60,0.8)]"
           : "glass-warm text-marrom-deep",
         className,
       )}
@@ -84,7 +84,7 @@ export const ProductCard = ({
             {product.tags[0]}
           </span>
         )}
-        <span className="absolute -bottom-3.5 right-3 w-9 h-9 rounded-full bg-gradient-to-br from-rosa to-rosa-deep text-white grid place-items-center shadow-[0_8px_18px_-4px_rgba(120,95,69,0.75)] ring-2 ring-white">
+        <span className="absolute -bottom-3.5 right-3 w-9 h-9 rounded-full bg-gradient-to-br from-rosa to-rosa-deep text-white grid place-items-center shadow-[0_8px_18px_-4px_rgba(91,58,38,0.75)] ring-2 ring-white">
           <IconPlus className="w-4 h-4" strokeWidth={2} />
         </span>
       </div>

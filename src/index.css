@@ -3,39 +3,39 @@
 @tailwind utilities;
 
 /* =====================================================
-   Doceria Dalpizzol — paleta extraída do logotipo
-   Taupe #A0764D · Sálvia #B7AD8F · Creme #FEF3E1
-   Terracota #D18A5A · Areia #A78D6D · Marfim #FFFCF6
+   Doceria Dalpizzol — paleta oficial
+   Creme #F2EDDC · Caramelo #A66D3C · Laranja #D96A29
+   Pêssego #F2B591 · Terracota #D94625
    ===================================================== */
 @layer base {
   :root {
-    --background: 40 100% 98%; /* marfim */
-    --foreground: 26 30% 22%; /* ink */
+    --background: 46.4 45.8% 90.6%; /* #F2EDDC */
+    --foreground: 24.8 30.5% 18.6%; /* #3E2D21 */
 
-    --card: 40 100% 99%;
-    --card-foreground: 26 30% 22%;
+    --card: 46.4 45.8% 90.6%;
+    --card-foreground: 24.8 30.5% 18.6%;
 
-    --popover: 40 100% 99%;
-    --popover-foreground: 26 30% 22%;
+    --popover: 46.4 45.8% 90.6%;
+    --popover-foreground: 24.8 30.5% 18.6%;
 
-    --primary: 30 35% 47%; /* taupe do logotipo */
-    --primary-foreground: 40 100% 99%;
+    --primary: 27.7 46.9% 44.3%; /* #A66D3C */
+    --primary-foreground: 46.4 45.8% 90.6%;
 
-    --secondary: 43 22% 64%; /* sálvia do logotipo */
-    --secondary-foreground: 26 30% 18%;
+    --secondary: 22.3 78.9% 75.9%; /* #F2B591 */
+    --secondary-foreground: 24.8 30.5% 18.6%;
 
-    --muted: 38 65% 94%; /* creme */
-    --muted-foreground: 26 20% 45%;
+    --muted: 46.4 45.8% 90.6%; /* creme */
+    --muted-foreground: 24 21% 35%;
 
-    --accent: 24 56% 59%; /* terracota do logotipo */
-    --accent-foreground: 26 30% 18%;
+    --accent: 22.2 69.8% 50.6%; /* #D96A29 */
+    --accent-foreground: 46.4 45.8% 90.6%;
 
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 30% 88%;
-    --input: 35 30% 88%;
-    --ring: 30 35% 47%;
+    --border: 30 25% 80%;
+    --input: 30 25% 80%;
+    --ring: 27.7 46.9% 44.3%;
 
     --radius: 1.25rem;
 
@@ -104,12 +104,12 @@
       rgba(255, 255, 255, 0.96) 0%,
       rgba(252, 249, 244, 0.92) 100%
     );
-    border: 1px solid rgba(167, 141, 109, 0.09);
+    border: 1px solid rgba(166, 109, 60, 0.09);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.9) inset,
-      0 2px 4px rgba(167, 141, 109, 0.05),
-      0 10px 24px -8px rgba(167, 141, 109, 0.14),
-      0 28px 56px -28px rgba(167, 141, 109, 0.2);
+      0 2px 4px rgba(166, 109, 60, 0.05),
+      0 10px 24px -8px rgba(166, 109, 60, 0.14),
+      0 28px 56px -28px rgba(166, 109, 60, 0.2);
   }
 
   /* Filete dourado sutil na borda (usa ::before para não brigar com o fundo). */
@@ -121,9 +121,9 @@
     padding: 1px;
     background: linear-gradient(
       135deg,
-      rgba(209, 138, 90, 0.7),
-      rgba(209, 138, 90, 0) 45%,
-      rgba(209, 138, 90, 0.45)
+      rgba(217, 106, 41, 0.7),
+      rgba(217, 106, 41, 0) 45%,
+      rgba(217, 106, 41, 0.45)
     );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
@@ -141,22 +141,22 @@
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.7) inset,
-      0 12px 36px -12px rgba(167, 141, 109, 0.28);
+      0 12px 36px -12px rgba(166, 109, 60, 0.28);
   }
 
   /* Halo pastel atrás de imagens/ícones. */
   .halo-rosa {
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(236, 187, 150, 0.55) 0%,
-      rgba(236, 187, 150, 0) 68%
+      rgba(242, 181, 145, 0.55) 0%,
+      rgba(242, 181, 145, 0) 68%
     );
   }
   .halo-salvia {
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(183, 173, 143, 0.5) 0%,
-      rgba(183, 173, 143, 0) 68%
+      rgba(166, 109, 60, 0.18) 0%,
+      rgba(166, 109, 60, 0) 68%
     );
   }
 
@@ -166,16 +166,16 @@
     display: grid;
     place-items: center;
     border-radius: 9999px;
-    background: linear-gradient(160deg, #ffffff 0%, #FEF3E1 100%);
+    background: linear-gradient(160deg, #ffffff 0%, #F2EDDC 100%);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.95) inset,
-      0 0 0 1px rgba(209, 138, 90, 0.28),
-      0 6px 16px -6px rgba(167, 141, 109, 0.28);
+      0 0 0 1px rgba(217, 106, 41, 0.28),
+      0 6px 16px -6px rgba(166, 109, 60, 0.28);
   }
 
   /* Texto com leve gradiente quente — títulos de destaque. */
   .ink-gradient {
-    background: linear-gradient(120deg, #4A3728 0%, #785F45 55%, #A78D6D 100%);
+    background: linear-gradient(120deg, #3E2D21 0%, #A66D3C 55%, #D96A29 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -199,38 +199,38 @@
   }
   .card-soft {
     @apply bg-white/85 border border-marrom/10 rounded-3xl;
-    box-shadow: 0 12px 32px rgba(167, 141, 109, 0.1);
+    box-shadow: 0 12px 32px rgba(166, 109, 60, 0.1);
   }
   /* Fundo creme com malha de luz em várias camadas (mesh gradient). */
   .pattern-creme {
-    background-color: #FEF3E1;
+    background-color: #F2EDDC;
     background-image:
       radial-gradient(
         ellipse 70% 55% at 12% 8%,
-        rgba(236, 187, 150, 0.3) 0%,
+        rgba(242, 181, 145, 0.3) 0%,
         transparent 62%
       ),
       radial-gradient(
         ellipse 60% 50% at 92% 4%,
-        rgba(183, 173, 143, 0.26) 0%,
+        rgba(166, 109, 60, 0.12) 0%,
         transparent 60%
       ),
       radial-gradient(
         ellipse 80% 60% at 78% 92%,
-        rgba(209, 138, 90, 0.22) 0%,
+        rgba(217, 106, 41, 0.18) 0%,
         transparent 64%
       ),
       radial-gradient(
         ellipse 55% 45% at 30% 100%,
-        rgba(236, 187, 150, 0.16) 0%,
+        rgba(242, 181, 145, 0.16) 0%,
         transparent 60%
       ),
-      linear-gradient(180deg, #FFFAF3 0%, #FEF3E1 55%, #F4EBDD 100%);
+      linear-gradient(180deg, #F2EDDC 0%, #F2EDDC 55%, #F2B591 100%);
   }
 
-  /* Faixa oliva inspirada nos detalhes do logotipo. */
+  /* Faixa caramelo inspirada nos detalhes do logotipo. */
   .band-salvia {
-    background-color: #807B61;
+    background-color: #A66D3C;
     background-image:
       radial-gradient(
         ellipse 70% 60% at 10% 0%,
@@ -257,8 +257,8 @@
     border-radius: 9999px;
     background: radial-gradient(
       ellipse at 50% 50%,
-      rgba(167, 141, 109, 0.32) 0%,
-      rgba(167, 141, 109, 0) 72%
+      rgba(166, 109, 60, 0.32) 0%,
+      rgba(166, 109, 60, 0) 72%
     );
     filter: blur(7px);
     pointer-events: none;

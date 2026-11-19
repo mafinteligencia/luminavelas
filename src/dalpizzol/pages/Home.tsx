@@ -87,7 +87,7 @@ const Hero = () => {
         style={{ y: s(patternY) }}
         className="absolute -inset-y-16 inset-x-0 pointer-events-none"
       >
-        <FloralPattern color="#A78D6D" opacity={0.09} />
+        <FloralPattern color="#A66D3C" opacity={0.09} />
       </motion.div>
 
       <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
@@ -139,7 +139,7 @@ const Hero = () => {
           >
             <Link
               to="/bolos"
-              className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 h-12 text-[13px] font-semibold bg-rosa text-white shadow-[0_10px_26px_rgba(160,118,77,0.45)] active:scale-[0.97] transition"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 h-12 text-[13px] font-semibold bg-rosa text-white shadow-[0_10px_26px_rgba(166,109,60,0.45)] active:scale-[0.97] transition"
             >
               Ver nossos bolos <IconChevronRight className="w-4 h-4" />
             </Link>
@@ -202,7 +202,7 @@ const Hero = () => {
             <img
               src={BRAND.logo}
               alt=""
-              className="w-11 h-11 rounded-full ring-1 ring-dourado/30"
+              className="w-11 h-11 object-contain shrink-0"
             />
             <div className="leading-tight">
               <p className="text-[12px] font-semibold text-ink">
@@ -393,7 +393,7 @@ const OrderBanner = () => (
 /* ============ 6 · OCASIÕES — cartas viradas na mesa + fundo em parallax inverso ============ */
 const Occasions = () => (
   <>
-    <EdgeWave fill="#807B61" flip className="mt-10 -mb-px text-salvia-deep" />
+    <EdgeWave fill="#A66D3C" flip className="mt-10 -mb-px text-salvia-deep" />
     <section className="relative py-10 px-5 band-salvia grain overflow-hidden">
       <Parallax
         speed={-0.35}
@@ -449,7 +449,7 @@ const Occasions = () => (
         </div>
       </div>
     </section>
-    <EdgeWave fill="#807B61" className="-mt-px rotate-180" />
+    <EdgeWave fill="#A66D3C" className="-mt-px rotate-180" />
   </>
 );
 

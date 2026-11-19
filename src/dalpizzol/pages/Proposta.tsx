@@ -140,7 +140,7 @@ const Hero = ({ onEnter }: { onEnter: () => void }) => {
           className="w-full h-full object-cover opacity-30 blur-[26px] scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-creme/70 via-creme/55 to-offwhite" />
-        <FloralPattern color="#A78D6D" opacity={0.06} />
+        <FloralPattern color="#A66D3C" opacity={0.06} />
       </div>
 
       <motion.div
@@ -269,7 +269,7 @@ const Mapa = ({
       className="relative pattern-creme grain px-4 sm:px-6 pt-8 pb-14 sm:pt-10 sm:pb-16 overflow-hidden scroll-mt-2 min-h-screen flex flex-col justify-center"
     >
       <div className="absolute inset-0 pointer-events-none">
-        <FloralPattern color="#A78D6D" opacity={0.05} />
+        <FloralPattern color="#A66D3C" opacity={0.05} />
       </div>
 
       <div className="relative max-w-6xl w-full mx-auto">
@@ -451,7 +451,7 @@ const Deck = ({
       {/* a peça, em tela cheia — a que entra é "cortada" sobre a que sai */}
       <div className="relative flex-1 min-h-0 pattern-creme grain overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <FloralPattern color="#A78D6D" opacity={0.045} />
+          <FloralPattern color="#A66D3C" opacity={0.045} />
         </div>
         <div className="relative h-full grid place-items-center px-3 sm:px-16 py-3 sm:py-5">
           <div className="grid w-full h-full place-items-center">

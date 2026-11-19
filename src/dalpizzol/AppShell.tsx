@@ -32,7 +32,7 @@ const Badge = ({
   count > 0 ? (
     <span
       className={cn(
-        "absolute min-w-[18px] h-[18px] px-1 rounded-full bg-rosa-deep text-white text-[10px] font-bold grid place-items-center shadow-[0_2px_8px_rgba(120,95,69,0.6)]",
+        "absolute min-w-[18px] h-[18px] px-1 rounded-full bg-rosa-deep text-white text-[10px] font-bold grid place-items-center shadow-[0_2px_8px_rgba(91,58,38,0.6)]",
         className,
       )}
     >
@@ -79,7 +79,7 @@ const InstallBanner = () => {
   return evt && !hidden && pathname === "/" ? (
     <div className="fixed left-3 right-3 z-40 bottom-[calc(env(safe-area-inset-bottom)+92px)] md:hidden">
       <div className="card-soft flex items-center gap-3 px-4 py-3">
-        <img src={BRAND.logo} alt="" className="w-10 h-10 rounded-full" />
+        <img src={BRAND.logo} alt="" className="w-10 h-10 object-contain shrink-0" />
         <div className="flex-1 min-w-0">
           <p className="text-[13px] font-semibold text-ink leading-tight">
             Adicionar à tela inicial
@@ -134,7 +134,7 @@ const TopBar = () => {
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="w-11 h-11 rounded-full ring-1 ring-dourado/40 shadow-[0_4px_12px_-4px_rgba(167,141,109,0.4)]"
+            className="w-11 h-11 object-contain shrink-0"
           />
           <span className="leading-none">
             <span className="block text-[9px] tracking-[0.28em] uppercase text-marrom">
@@ -214,7 +214,7 @@ const BottomNav = () => {
               <>
                 {isActive && (
                   <span
-                    className="absolute inset-0 rounded-[22px] bg-white shadow-[0_4px_14px_rgba(167,141,109,0.12)]"
+                    className="absolute inset-0 rounded-[22px] bg-white shadow-[0_4px_14px_rgba(166,109,60,0.12)]"
                   />
                 )}
                 <span className="relative">

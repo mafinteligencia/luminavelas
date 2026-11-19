@@ -14,7 +14,7 @@ import lojaDuo from "@/assets/dalpizzol/loja-duo.webp";
 import duo from "@/assets/dalpizzol/duo.webp";
 import glaucia from "@/assets/dalpizzol/glaucia.webp";
 import dani from "@/assets/dalpizzol/dani.webp";
-import logo from "@/assets/dalpizzol/logo.webp";
+import logo from "@/assets/dalpizzol/logo-oficial.webp";
 
 const heroOreo = "/hero-oreo.webp";
 
