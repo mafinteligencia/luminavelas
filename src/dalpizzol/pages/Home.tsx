@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
@@ -172,9 +172,7 @@ const Hero = () => {
 
         <motion.div
           style={{ y: s(imgY), scale: s(imgScale) }}
-          initial={{ opacity: 0, scale: 0.94, rotate: -2 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          initial={false}
           className="relative mx-auto w-full max-w-sm md:max-w-md"
         >
           <div className="absolute -inset-8 halo-rosa blur-2xl" aria-hidden />
@@ -614,18 +612,56 @@ const Home = () => {
     <>
       <Hero />
       <Categories />
-      <InfoCards />
-      <Featured onOpen={setOpen} />
-      <OrderBanner />
-      <Occasions />
-      <Testimonials />
-      <FooterBand />
+      <DeferredContent minHeight={120}><InfoCards /></DeferredContent>
+      <DeferredContent minHeight={360}><Featured onOpen={setOpen} /></DeferredContent>
+      <DeferredContent minHeight={150}><OrderBanner /></DeferredContent>
+      <DeferredContent minHeight={470}><Occasions /></DeferredContent>
+      <DeferredContent minHeight={360}><Testimonials /></DeferredContent>
+      <DeferredContent minHeight={320}><FooterBand /></DeferredContent>
       {open && (
         <Suspense fallback={null}>
           <ProductSheet product={open} onClose={() => setOpen(null)} />
         </Suspense>
       )}
     </>
+  );
+};
+
+const DeferredContent = ({
+  children,
+  minHeight,
+}: {
+  children: React.ReactNode;
+  minHeight: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    if (!("IntersectionObserver" in window)) {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "180px 0px" },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={visible ? undefined : { minHeight }}>
+      {visible ? children : null}
+    </div>
   );
 };
 
