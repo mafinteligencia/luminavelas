@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
 import {
   IconBag,
   IconCake,
@@ -14,7 +13,6 @@ import { BRAND, WHATSAPP_URL } from "./data";
 import { useCart } from "./cart";
 import { WhatsAppIcon } from "./ui";
 import { cn } from "@/lib/utils";
-import { ScrollProgressBar } from "./motion";
 
 const TABS = [
   { to: "/", label: "Início", icon: IconHome, end: true },
@@ -23,7 +21,7 @@ const TABS = [
   { to: "/sobre", label: "Sobre", icon: IconHeart },
 ];
 
-/* ---- Badge do carrinho com "pulo" ao mudar ---- */
+/* ---- Badge do carrinho ---- */
 const Badge = ({
   count,
   className = "",
@@ -31,23 +29,16 @@ const Badge = ({
   count: number;
   className?: string;
 }) => (
-  <AnimatePresence>
-    {count > 0 && (
-      <motion.span
-        key={count}
-        initial={{ scale: 0.4, opacity: 0 }}
-        animate={{ scale: [1.35, 1], opacity: 1 }}
-        exit={{ scale: 0.4, opacity: 0 }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
-        className={cn(
-          "absolute min-w-[18px] h-[18px] px-1 rounded-full bg-rosa-deep text-white text-[10px] font-bold grid place-items-center shadow-[0_2px_8px_rgba(120,95,69,0.6)]",
-          className,
-        )}
-      >
-        {count}
-      </motion.span>
-    )}
-  </AnimatePresence>
+  count > 0 ? (
+    <span
+      className={cn(
+        "absolute min-w-[18px] h-[18px] px-1 rounded-full bg-rosa-deep text-white text-[10px] font-bold grid place-items-center shadow-[0_2px_8px_rgba(120,95,69,0.6)]",
+        className,
+      )}
+    >
+      {count}
+    </span>
+  ) : null
 );
 
 /* ---- Prompt de instalação (PWA) ---- */
@@ -85,46 +76,37 @@ const InstallBanner = () => {
     }
   };
 
-  return (
-    <AnimatePresence>
-      {evt && !hidden && pathname === "/" && (
-        <motion.div
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 40, opacity: 0 }}
-          className="fixed left-3 right-3 z-40 bottom-[calc(env(safe-area-inset-bottom)+92px)] md:hidden"
+  return evt && !hidden && pathname === "/" ? (
+    <div className="fixed left-3 right-3 z-40 bottom-[calc(env(safe-area-inset-bottom)+92px)] md:hidden">
+      <div className="card-soft flex items-center gap-3 px-4 py-3">
+        <img src={BRAND.logo} alt="" className="w-10 h-10 rounded-full" />
+        <div className="flex-1 min-w-0">
+          <p className="text-[13px] font-semibold text-ink leading-tight">
+            Adicionar à tela inicial
+          </p>
+          <p className="text-[11px] text-ink/60 leading-tight">
+            Peça seus doces em um toque.
+          </p>
+        </div>
+        <button
+          onClick={async () => {
+            await evt.prompt();
+            dismiss();
+          }}
+          className="h-9 px-3 rounded-full bg-rosa text-white text-[12px] font-semibold inline-flex items-center gap-1.5"
         >
-          <div className="card-soft flex items-center gap-3 px-4 py-3">
-            <img src={BRAND.logo} alt="" className="w-10 h-10 rounded-full" />
-            <div className="flex-1 min-w-0">
-              <p className="text-[13px] font-semibold text-ink leading-tight">
-                Adicionar à tela inicial
-              </p>
-              <p className="text-[11px] text-ink/60 leading-tight">
-                Peça seus doces em um toque.
-              </p>
-            </div>
-            <button
-              onClick={async () => {
-                await evt.prompt();
-                dismiss();
-              }}
-              className="h-9 px-3 rounded-full bg-rosa text-white text-[12px] font-semibold inline-flex items-center gap-1.5"
-            >
-              <IconDownload className="w-3.5 h-3.5" /> Instalar
-            </button>
-            <button
-              onClick={dismiss}
-              aria-label="Fechar"
-              className="text-ink/40"
-            >
-              <IconClose className="w-4 h-4" />
-            </button>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
+          <IconDownload className="w-3.5 h-3.5" /> Instalar
+        </button>
+        <button
+          onClick={dismiss}
+          aria-label="Fechar"
+          className="text-ink/40"
+        >
+          <IconClose className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  ) : null;
 };
 
 /* ---- Barra superior ---- */
@@ -231,10 +213,8 @@ const BottomNav = () => {
             {({ isActive }) => (
               <>
                 {isActive && (
-                  <motion.span
-                    layoutId="tab-pill"
+                  <span
                     className="absolute inset-0 rounded-[22px] bg-white shadow-[0_4px_14px_rgba(167,141,109,0.12)]"
-                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
                   />
                 )}
                 <span className="relative">
@@ -264,18 +244,35 @@ const PageTransition = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [pathname]);
+  return <div key={pathname}><Outlet /></div>;
+};
+
+const ScrollProgressBar = () => {
+  useEffect(() => {
+    const bar = document.getElementById("dalpizzol-scroll-progress");
+    if (!bar) return;
+    const update = () => {
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+      bar.style.transform = `scaleX(${progress})`;
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={pathname}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -6 }}
-        transition={{ duration: 0.22, ease: "easeOut" }}
-      >
-        <Outlet />
-      </motion.div>
-    </AnimatePresence>
+    <div
+      id="dalpizzol-scroll-progress"
+      aria-hidden="true"
+      className="fixed top-0 left-0 right-0 h-0.5 bg-rosa-deep origin-left z-[60]"
+      style={{ transform: "scaleX(0)" }}
+    />
   );
 };
 
