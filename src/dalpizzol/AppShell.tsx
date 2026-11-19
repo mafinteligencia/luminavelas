@@ -77,7 +77,7 @@ const InstallBanner = () => {
   };
 
   return evt && !hidden && pathname === "/" ? (
-    <div className="fixed left-3 right-3 z-40 bottom-[calc(env(safe-area-inset-bottom)+92px)] md:hidden">
+    <div className="mx-auto w-full max-w-md px-4 py-3 md:hidden">
       <div className="card-soft flex items-center gap-3 px-4 py-3">
         <img src={BRAND.logo} alt="" className="w-10 h-10 object-contain shrink-0" />
         <div className="flex-1 min-w-0">
@@ -129,12 +129,12 @@ const TopBar = () => {
           : "bg-transparent border-transparent shadow-none",
       )}
     >
-      <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+      <div className="max-w-5xl mx-auto px-4 h-[76px] md:h-20 flex items-center justify-between gap-3">
         <NavLink to="/" aria-label={BRAND.name} className="flex items-center min-w-0">
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="w-[88px] h-[58px] md:w-[104px] object-contain shrink-0"
+            className="w-[112px] h-[72px] md:w-[132px] md:h-[76px] object-contain shrink-0"
           />
         </NavLink>
 

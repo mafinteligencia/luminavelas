@@ -99,9 +99,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-1 text-[8px] font-semibold tracking-[0.14em] uppercase text-marrom/75 bg-white/65 px-2.5 py-1 rounded-full"
+            aria-label={`${BRAND.district}, ${BRAND.cityState}`}
+            className="inline-flex items-center gap-1 text-[7px] font-semibold tracking-[0.12em] uppercase text-marrom/70 bg-white/55 px-2 py-0.5 rounded-full"
           >
-            <IconPin className="w-3 h-3" /> {BRAND.city}
+            <IconPin className="w-2.5 h-2.5" /> {BRAND.district}
           </motion.p>
           <h1 className="mt-4 font-serif text-[38px] leading-[1.05] sm:text-5xl md:text-[56px] text-ink">
             <motion.span
