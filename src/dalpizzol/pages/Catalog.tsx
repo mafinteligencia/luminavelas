@@ -332,14 +332,18 @@ const Catalog = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="flex flex-wrap justify-center gap-3">
               {items.map((p, i) => (
-                <ProductCard
+                <div
                   key={p.id}
-                  product={p}
-                  onOpen={setOpen}
-                  index={i}
-                />
+                  className="w-[calc((100%-0.75rem)/2)] md:w-[calc((100%-1.5rem)/3)] lg:w-[calc((100%-2.25rem)/4)]"
+                >
+                  <ProductCard
+                    product={p}
+                    onOpen={setOpen}
+                    index={i}
+                  />
+                </div>
               ))}
             </div>
           )}

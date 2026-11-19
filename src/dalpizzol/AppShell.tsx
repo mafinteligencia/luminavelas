@@ -130,20 +130,12 @@ const TopBar = () => {
       )}
     >
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
-        <NavLink to="/" className="flex items-center gap-2.5 min-w-0">
+        <NavLink to="/" aria-label={BRAND.name} className="flex items-center min-w-0">
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="w-11 h-11 object-contain shrink-0"
+            className="w-[88px] h-[58px] md:w-[104px] object-contain shrink-0"
           />
-          <span className="leading-none">
-            <span className="block text-[9px] tracking-[0.28em] uppercase text-marrom">
-              Doceria
-            </span>
-            <span className="block font-script text-[22px] text-rosa-deep -mt-0.5">
-              Dalpizzol
-            </span>
-          </span>
         </NavLink>
 
         <nav className="hidden md:flex items-center gap-1">

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { IconBag } from "./icons";
+import { IconBag, IconClose } from "./icons";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerTitle,
   DrawerDescription,
@@ -40,10 +41,10 @@ export const ProductSheet = ({
       onOpenChange={(o) => !o && onClose()}
       shouldScaleBackground={false}
     >
-      <DrawerContent className="rounded-t-[32px] border-0 bg-offwhite max-h-[92svh] outline-none">
+      <DrawerContent className="rounded-t-[32px] border-0 bg-offwhite max-h-[92svh] outline-none md:bottom-6 md:mx-auto md:w-[min(1120px,calc(100vw-48px))] md:max-h-[88svh] md:rounded-[30px]">
         {product && (
-          <div className="overflow-y-auto pb-[calc(env(safe-area-inset-bottom)+16px)]">
-            <div className="px-5 pt-3">
+          <div className="min-h-0 overflow-y-auto pb-[calc(env(safe-area-inset-bottom)+16px)] md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-6 md:overflow-hidden md:p-5">
+            <div className="relative px-5 pt-3 md:min-h-0 md:p-0">
               <picture className="block">
                 {product.img.startsWith("/catalog/") && product.img.endsWith(".jpg") && (
                   <source srcSet={product.img.replace(/\.jpg$/i, ".webp")} type="image/webp" />
@@ -52,11 +53,20 @@ export const ProductSheet = ({
                   src={product.img}
                   alt={product.name}
                   decoding="async"
-                  className="w-full h-56 sm:h-72 object-cover rounded-3xl ring-1 ring-dourado/30 outline outline-[5px] outline-white/70"
+                  className="w-full h-56 sm:h-72 md:h-[min(68svh,560px)] md:min-h-[320px] md:max-h-[560px] object-cover rounded-3xl ring-1 ring-dourado/30 outline outline-[5px] outline-white/70"
                 />
               </picture>
+              <DrawerClose asChild>
+                <button
+                  type="button"
+                  aria-label="Fechar detalhes do produto"
+                  className="absolute right-8 top-6 md:right-3 md:top-3 grid h-10 w-10 place-items-center rounded-full bg-offwhite/95 text-marrom-deep shadow-md ring-1 ring-marrom/10 transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dourado"
+                >
+                  <IconClose className="h-4 w-4" />
+                </button>
+              </DrawerClose>
             </div>
-            <div className="px-5 pt-5">
+            <div className="min-w-0 px-5 pt-5 md:min-h-0 md:overflow-y-auto md:px-1 md:pt-2 md:pr-2">
               <div className="flex flex-wrap gap-1.5 mb-2">
                 {product.tags?.map((t) => (
                   <span
@@ -79,9 +89,18 @@ export const ProductSheet = ({
                   <p className="text-[12px] font-semibold text-marrom-deep mb-2">
                     Tamanho
                   </p>
-                  <div className="grid grid-cols-3 gap-2">
-                    {product.sizes.map((s) => {
+                  <div className="grid grid-cols-2 gap-2 xl:grid-cols-3">
+                    {product.sizes.map((s, index) => {
                       const active = size?.id === s.id;
+                      const lastSize = index === product.sizes.length - 1;
+                      const centerLastSize =
+                        lastSize && product.sizes.length % 2 === 1
+                          ? "col-span-2 w-1/2 justify-self-center xl:col-span-1 xl:w-full"
+                          : "";
+                      const centerLastDesktop =
+                        lastSize && product.sizes.length % 3 === 1
+                          ? "xl:col-start-2"
+                          : "";
                       return (
                         <button
                           key={s.id}
@@ -89,6 +108,8 @@ export const ProductSheet = ({
                           onClick={() => setSize(s)}
                           className={cn(
                             "rounded-2xl border px-2 py-3 text-center transition active:scale-95",
+                            centerLastSize,
+                            centerLastDesktop,
                             active
                               ? "border-rosa bg-rosa/15"
                               : "border-marrom/15 bg-white",

@@ -99,9 +99,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.25em] uppercase text-salvia-deep bg-white/70 px-3 py-1.5 rounded-full"
+            className="inline-flex items-center gap-1 text-[8px] font-semibold tracking-[0.14em] uppercase text-marrom/75 bg-white/65 px-2.5 py-1 rounded-full"
           >
-            <IconPin className="w-3.5 h-3.5" /> {BRAND.city}
+            <IconPin className="w-3 h-3" /> {BRAND.city}
           </motion.p>
           <h1 className="mt-4 font-serif text-[38px] leading-[1.05] sm:text-5xl md:text-[56px] text-ink">
             <motion.span
@@ -323,12 +323,12 @@ const Featured = ({ onOpen }: { onOpen: (p: Product) => void }) => {
         </Link>
       </div>
       <div className="mt-5 overflow-x-auto no-scrollbar snap-x snap-mandatory md:overflow-visible [perspective:1000px]">
-        <div className="flex gap-3 px-5 md:grid md:grid-cols-4 md:max-w-5xl md:mx-auto">
+        <div className="flex gap-3 px-5 md:flex-wrap md:justify-center md:gap-4 md:max-w-5xl md:mx-auto md:px-5">
           {items.map((p, i) => (
             <TiltIn
               key={p.id}
               index={i}
-              className="snap-start shrink-0 md:shrink"
+              className="snap-start shrink-0 md:w-[calc((100%-2rem)/3)] md:max-w-[250px] lg:w-[calc((100%-3rem)/4)]"
             >
               <ProductCard product={p} onOpen={onOpen} index={0} compact />
             </TiltIn>

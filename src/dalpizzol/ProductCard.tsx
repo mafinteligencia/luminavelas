@@ -59,7 +59,9 @@ export const ProductCard = ({
     transition={{ delay: index * 0.05, duration: 0.45 }}
     className={cn(
       "relative card-lux overflow-hidden flex flex-col",
-      compact ? "w-[64vw] max-w-[250px] shrink-0 snap-start" : "w-full",
+      compact
+        ? "w-[64vw] max-w-[250px] shrink-0 snap-start md:w-full"
+        : "w-full",
     )}
   >
     <button
