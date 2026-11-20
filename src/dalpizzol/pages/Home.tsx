@@ -55,7 +55,7 @@ const LEAF_PATHS = [
 
 /* ============ 1 · HERO — composição editorial da referência oficial ============ */
 const Hero = () => (
-  <section className="relative hero-cinematic border-b border-[#D96A29]/45 pt-[108px] md:pt-36 pb-10 sm:pb-16 px-5 overflow-hidden">
+  <section className="relative hero-cinematic border-b border-[#D96A29]/45 pt-[84px] md:pt-28 pb-10 sm:pb-16 px-5 overflow-hidden">
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
       <FloralPattern color="#D96A29" opacity={0.09} />
       <svg
