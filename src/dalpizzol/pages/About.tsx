@@ -152,7 +152,7 @@ const About = () => (
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(to top, rgba(38,33,26,0.9) 0%, rgba(38,33,26,0.35) 34%, transparent 62%)",
+                        "linear-gradient(to top, rgba(41,46,34,0.9) 0%, rgba(41,46,34,0.35) 34%, transparent 62%)",
                     }}
                   />
                   <div className="absolute inset-x-0 bottom-0 p-3.5">

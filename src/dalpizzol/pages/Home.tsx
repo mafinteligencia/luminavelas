@@ -55,17 +55,17 @@ const LEAF_PATHS = [
 
 /* ============ 1 · HERO — composição editorial da referência oficial ============ */
 const Hero = () => (
-  <section className="relative hero-cinematic border-b border-[#D96A29]/45 pt-[64px] md:pt-24 pb-10 sm:pb-16 px-5 overflow-hidden">
+  <section className="relative hero-brand border-b border-[#BABDA2]/50 pt-[64px] md:pt-24 pb-10 sm:pb-16 px-5 overflow-hidden">
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
-      <FloralPattern color="#D96A29" opacity={0.09} />
+      <FloralPattern color="#BABDA2" opacity={0.2} />
       <svg
         className="absolute inset-0 h-full w-full opacity-45"
         viewBox="0 0 1440 1400"
         preserveAspectRatio="none"
         fill="none"
       >
-        <path d="M-80 280C130 72 360 80 580 110" stroke="#D96A29" strokeWidth="2" />
-        <path d="M1520 1090c-180 165-450 205-690 184" stroke="#D96A29" strokeWidth="2" />
+        <path d="M-80 280C130 72 360 80 580 110" stroke="#EAC29E" strokeWidth="2" />
+        <path d="M1520 1090c-180 165-450 205-690 184" stroke="#BABDA2" strokeWidth="2" />
       </svg>
     </div>
 
@@ -76,8 +76,8 @@ const Hero = () => (
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="relative order-first mb-5 w-[calc(100%+1rem)] max-w-[54rem] sm:w-full md:mb-10"
       >
-        <div className="absolute -inset-3 rounded-[28px] bg-[#D96A29]/15 blur-2xl" aria-hidden />
-        <div className="relative overflow-hidden rounded-[18px] border border-[#D96A29]/35 bg-[#2B170F] shadow-[0_28px_80px_rgba(15,7,3,0.52)] sm:rounded-[26px]">
+        <div className="absolute -inset-3 rounded-[28px] bg-[#EAC29E]/30 blur-2xl" aria-hidden />
+        <div className="relative overflow-hidden rounded-[18px] border border-[#BABDA2]/55 bg-[#FAF5E2] shadow-[0_24px_60px_rgba(80,85,62,0.16)] sm:rounded-[26px]">
           <Img
             src={HERO_IMAGE}
             alt="Fatia de bolo de chocolate com camadas de creme e biscoito Oreo"
@@ -87,7 +87,7 @@ const Hero = () => (
             wrapperClassName="relative aspect-square overflow-hidden"
             className="h-full w-full object-contain"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2B170F]/35 via-transparent to-[#2B170F]/10" aria-hidden />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#4F5145]/8 via-transparent to-white/5" aria-hidden />
         </div>
       </motion.figure>
 
@@ -99,27 +99,27 @@ const Hero = () => (
       >
         <p
           aria-label={BRAND.city}
-          className="flex items-center justify-center gap-2.5 text-[8px] font-semibold tracking-[0.14em] text-[#F2EDDC]/90 uppercase sm:gap-3 sm:text-[10px] sm:tracking-[0.2em]"
+          className="flex items-center justify-center gap-2.5 text-[8px] font-semibold tracking-[0.14em] text-[#626553] uppercase sm:gap-3 sm:text-[10px] sm:tracking-[0.2em]"
         >
-          <span className="h-px w-5 bg-[#D96A29] sm:w-10" aria-hidden />
-          <IconPin className="h-3.5 w-3.5 shrink-0 text-[#D96A29]" />
-          <span>{BRAND.district} <span className="px-1 text-[#D96A29]">·</span> {BRAND.cityState}</span>
-          <span className="h-px w-5 bg-[#D96A29] sm:w-10" aria-hidden />
+          <span className="h-px w-5 bg-[#D08040] sm:w-10" aria-hidden />
+          <IconPin className="h-3.5 w-3.5 shrink-0 text-[#A97A4C]" />
+          <span>{BRAND.district} <span className="px-1 text-[#D08040]">·</span> {BRAND.cityState}</span>
+          <span className="h-px w-5 bg-[#D08040] sm:w-10" aria-hidden />
         </p>
 
         <h1 className="mt-6 max-w-5xl font-serif font-semibold leading-[0.98]">
-          <span className="block italic text-[#F2EDDC] text-[clamp(2.25rem,8vw,5rem)]">
+          <span className="block italic text-[#737A5D] text-[clamp(2.25rem,8vw,5rem)]">
             Bolos artesanais
           </span>
-          <span className="mt-1 block text-[#F2EDDC] text-[clamp(1.9rem,5.8vw,3.8rem)]">
+          <span className="mt-1 block text-[#4F5145] text-[clamp(1.9rem,5.8vw,3.8rem)]">
             que transformam
           </span>
-          <span className="mt-1 block italic text-[#D96A29] text-[clamp(1.75rem,5.4vw,3.5rem)]">
+          <span className="mt-1 block italic text-[#C7815C] text-[clamp(1.75rem,5.4vw,3.5rem)]">
             momentos em doces memórias.
           </span>
         </h1>
 
-        <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-[#F2EDDC]/85 sm:text-[16px] md:text-[18px]">
+        <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-[#626553] sm:text-[16px] md:text-[18px]">
           Bolos, doces finos e presentes com sabor único — feitos à mão, todos os dias,
           por duas confeiteiras apaixonadas.
         </p>
@@ -127,7 +127,7 @@ const Hero = () => (
         <div className="mt-6 grid w-full max-w-[48rem] grid-cols-2 gap-2.5 sm:mt-8 sm:gap-4">
           <Link
             to="/bolos"
-            className="inline-flex h-12 items-center justify-center gap-1 rounded-full bg-gradient-to-r from-[#F0781C] to-[#C94A0A] px-2 text-[10px] font-semibold text-white shadow-[0_10px_28px_rgba(217,106,41,0.28)] transition hover:brightness-110 active:scale-[0.97] sm:h-[58px] sm:gap-2 sm:px-6 sm:text-[15px]"
+            className="inline-flex h-12 items-center justify-center gap-1 rounded-full bg-[#666D52] px-2 text-[10px] font-semibold text-[#FAF5E2] shadow-[0_10px_24px_rgba(115,122,93,0.24)] transition hover:brightness-105 active:scale-[0.97] sm:h-[58px] sm:gap-2 sm:px-6 sm:text-[15px]"
           >
             Ver nossos bolos <IconChevronRight className="h-4 w-4 shrink-0" />
           </Link>
@@ -136,14 +136,14 @@ const Hero = () => (
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-12 gap-1 rounded-full border border-[#F2B591]/80 px-1.5 text-[10px] text-[#F2EDDC] hover:bg-[#A66D3C]/25 sm:h-[58px] sm:gap-2 sm:px-6 sm:text-[15px]"
+            className="h-12 gap-1 rounded-full border border-[#C7815C]/55 px-1.5 text-[10px] text-[#4F5145] hover:bg-[#EAC29E]/35 sm:h-[58px] sm:gap-2 sm:px-6 sm:text-[15px]"
           >
-            <WhatsAppIcon className="h-4 w-4 shrink-0 text-[#F2B591] sm:h-5 sm:w-5" />
+            <WhatsAppIcon className="h-4 w-4 shrink-0 text-[#737A5D] sm:h-5 sm:w-5" />
             Falar no WhatsApp
           </LinkButton>
         </div>
 
-        <svg className="mt-7 h-12 w-64 text-[#D96A29] sm:mt-9 sm:w-80" viewBox="0 0 320 48" fill="none" aria-hidden>
+        <svg className="mt-7 h-12 w-64 text-[#A97A4C] sm:mt-9 sm:w-80" viewBox="0 0 320 48" fill="none" aria-hidden>
           <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5">
             <path d="M8 24h74M238 24h74" />
             <path d="M160 16c-9-12-25-1-16 10l16 14 16-14c9-11-7-22-16-10Z" />
@@ -315,7 +315,7 @@ const OrderBanner = () => (
 /* ============ 6 · OCASIÕES — cartas viradas na mesa + fundo em parallax inverso ============ */
 const Occasions = () => (
   <>
-    <EdgeWave fill="#A66D3C" flip className="mt-10 -mb-px text-salvia-deep" />
+    <EdgeWave fill="#737A5D" flip className="mt-10 -mb-px text-salvia-deep" />
     <section className="relative py-10 px-5 band-salvia grain overflow-hidden">
       <Parallax
         speed={-0.35}
@@ -338,7 +338,7 @@ const Occasions = () => (
             <FlipIn key={o.id} index={i}>
               <Link
                 to={`/encomendar?ocasiao=${encodeURIComponent(o.title)}`}
-                className="group relative block h-full rounded-3xl overflow-hidden ring-1 ring-white/60 shadow-[0_16px_36px_-14px_rgba(43,38,30,0.6)] active:scale-[0.98] transition"
+                className="group relative block h-full rounded-3xl overflow-hidden ring-1 ring-white/60 shadow-[0_16px_36px_-14px_rgba(54,59,43,0.42)] active:scale-[0.98] transition"
               >
                 <Img
                   src={o.photo}
@@ -351,7 +351,7 @@ const Occasions = () => (
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(to top, rgba(38,33,26,0.94) 0%, rgba(38,33,26,0.78) 30%, rgba(38,33,26,0.34) 58%, rgba(38,33,26,0.06) 82%, transparent 100%)",
+                      "linear-gradient(to top, rgba(41,46,34,0.94) 0%, rgba(41,46,34,0.78) 30%, rgba(41,46,34,0.34) 58%, rgba(41,46,34,0.06) 82%, transparent 100%)",
                   }}
                 />
                 <span className="absolute top-3 left-3 inline-grid place-items-center w-9 h-9 rounded-full bg-white/95 text-marrom-deep shadow-[0_4px_12px_-4px_rgba(0,0,0,0.5)]">
@@ -371,7 +371,7 @@ const Occasions = () => (
         </div>
       </div>
     </section>
-    <EdgeWave fill="#A66D3C" className="-mt-px rotate-180" />
+    <EdgeWave fill="#737A5D" className="-mt-px rotate-180" />
   </>
 );
 

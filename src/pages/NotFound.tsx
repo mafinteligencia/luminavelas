@@ -8,7 +8,7 @@ const NotFound = () => (
       <p className="mt-2 text-[14px] text-ink/65">Esse doce não está no cardápio. Vamos voltar para o início?</p>
       <Link
         to="/"
-        className="mt-6 inline-flex items-center justify-center h-12 px-6 rounded-2xl bg-rosa text-white text-[13px] font-semibold"
+        className="mt-6 inline-flex items-center justify-center h-12 px-6 rounded-2xl bg-salvia-deep text-creme text-[13px] font-semibold"
       >
         Voltar ao início
       </Link>

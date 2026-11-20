@@ -140,7 +140,7 @@ const Hero = ({ onEnter }: { onEnter: () => void }) => {
           className="w-full h-full object-cover opacity-30 blur-[26px] scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-creme/70 via-creme/55 to-offwhite" />
-        <FloralPattern color="#A66D3C" opacity={0.06} />
+        <FloralPattern color="#BABDA2" opacity={0.12} />
       </div>
 
       <motion.div
@@ -178,7 +178,7 @@ const Hero = ({ onEnter }: { onEnter: () => void }) => {
           type="button"
           onClick={onEnter}
           whileTap={{ scale: 0.97 }}
-          className="mt-8 group inline-flex items-center gap-3 rounded-full bg-gradient-to-br from-rosa to-rosa-deep text-white pl-7 pr-6 py-4 text-[12px] font-semibold tracking-[0.16em] uppercase shadow-[0_18px_36px_-14px_rgba(120,95,69,0.9)]"
+          className="mt-8 group inline-flex items-center gap-3 rounded-full bg-gradient-to-br from-salvia-deep to-[#666D52] text-creme pl-7 pr-6 py-4 text-[12px] font-semibold tracking-[0.16em] uppercase shadow-[0_18px_36px_-14px_rgba(115,122,93,0.32)]"
         >
           Entrar no mapa
           <IconChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -226,9 +226,9 @@ const Hotspot = ({
         className={cn(
           "relative grid place-items-center w-9 h-9 rounded-full text-[11.5px] font-semibold tabular-nums",
           "bg-white/95 text-marrom-deep ring-1 ring-dourado/60",
-          "shadow-[0_6px_16px_-4px_rgba(43,38,30,0.55)]",
+          "shadow-[0_6px_16px_-4px_rgba(54,59,43,0.3)]",
           "transition group-hover:scale-110 group-focus-visible:scale-110",
-          active && "bg-rosa text-white ring-white/70",
+          active && "bg-salvia-deep text-creme ring-white/70",
         )}
       >
         {pad(n)}
@@ -269,7 +269,7 @@ const Mapa = ({
       className="relative pattern-creme grain px-4 sm:px-6 pt-8 pb-14 sm:pt-10 sm:pb-16 overflow-hidden scroll-mt-2 min-h-screen flex flex-col justify-center"
     >
       <div className="absolute inset-0 pointer-events-none">
-        <FloralPattern color="#A66D3C" opacity={0.05} />
+        <FloralPattern color="#BABDA2" opacity={0.1} />
       </div>
 
       <div className="relative max-w-6xl w-full mx-auto">
@@ -425,7 +425,7 @@ const Deck = ({
             Voltar ao mapa
           </button>
           <div className="flex-1 flex items-center justify-center gap-3 min-w-0">
-            <span className="grid place-items-center w-9 h-9 shrink-0 rounded-full bg-rosa text-white text-[12px] font-semibold tabular-nums">
+            <span className="grid place-items-center w-9 h-9 shrink-0 rounded-full bg-salvia-deep text-creme text-[12px] font-semibold tabular-nums">
               {pad(index + 1)}
             </span>
             <span className="min-w-0">
@@ -451,7 +451,7 @@ const Deck = ({
       {/* a peça, em tela cheia — a que entra é "cortada" sobre a que sai */}
       <div className="relative flex-1 min-h-0 pattern-creme grain overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <FloralPattern color="#A66D3C" opacity={0.045} />
+          <FloralPattern color="#BABDA2" opacity={0.09} />
         </div>
         <div className="relative h-full grid place-items-center px-3 sm:px-16 py-3 sm:py-5">
           <div className="grid w-full h-full place-items-center">

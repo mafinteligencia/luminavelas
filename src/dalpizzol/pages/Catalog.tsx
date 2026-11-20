@@ -232,7 +232,7 @@ const Catalog = () => {
     <>
       <section className="relative pattern-creme pt-28 pb-5 px-5 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <FloralPattern color="#A66D3C" opacity={0.07} />
+          <FloralPattern color="#BABDA2" opacity={0.16} />
         </div>
         <div className="relative max-w-5xl mx-auto">
           <ClipReveal>

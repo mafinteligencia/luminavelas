@@ -19,14 +19,14 @@ export default {
         script: ["Dancing Script", "cursive"],
       },
       colors: {
-        /* Paleta oficial da Doceria Dalpizzol */
-        rosa: { DEFAULT: "#D96A29", deep: "#D94625", soft: "#F2B591" },
-        salvia: { DEFAULT: "#F2B591", deep: "#A66D3C", soft: "#F2EDDC" },
-        creme: { DEFAULT: "#F2EDDC", deep: "#F2B591" },
-        dourado: { DEFAULT: "#A66D3C", deep: "#D96A29" },
-        marrom: { DEFAULT: "#A66D3C", deep: "#3E2D21" },
-        offwhite: "#F2EDDC",
-        ink: "#3E2D21",
+        /* Logo oficial: creme claro, pêssego, sálvia e terracota suave. */
+        rosa: { DEFAULT: "#EAC29E", deep: "#98654E", soft: "#F5DDC3" },
+        salvia: { DEFAULT: "#BABDA2", deep: "#666D52", soft: "#EAEBDB" },
+        creme: { DEFAULT: "#FAF5E2", deep: "#F2E5CC" },
+        dourado: { DEFAULT: "#A97A4C", deep: "#D08040" },
+        marrom: { DEFAULT: "#777465", deep: "#4F5145" },
+        offwhite: "#FCFAF3",
+        ink: "#4F5145",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

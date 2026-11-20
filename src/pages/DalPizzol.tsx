@@ -26,14 +26,14 @@ import lojaDuo from "@/assets/dalpizzol/loja-duo.jpg";
 
 /* ===================== IDENTIDADE VISUAL ===================== */
 const C = {
-  cream: "#F2EDDC",
-  creamDeep: "#F2B591",
-  terracotta: "#D96A29",
-  terracottaSoft: "#F2B591",
-  cocoa: "#A66D3C",
-  sage: "#A66D3C",
-  blush: "#F2B591",
-  ink: "#3E2D21",
+  cream: "#FAF5E2",
+  creamDeep: "#EAC29E",
+  terracotta: "#D08040",
+  terracottaSoft: "#EAC29E",
+  cocoa: "#737A5D",
+  sage: "#BABDA2",
+  blush: "#C7815C",
+  ink: "#4F5145",
 };
 
 const WHATSAPP_URL =

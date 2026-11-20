@@ -3,39 +3,39 @@
 @tailwind utilities;
 
 /* =====================================================
-   Doceria Dalpizzol — paleta oficial
-   Creme #F2EDDC · Caramelo #A66D3C · Laranja #D96A29
-   Pêssego #F2B591 · Terracota #D94625 · Cacau #3E2D21
+   Doceria Dalpizzol — logo oficial
+   Creme #FAF5E2 · Pêssego #EAC29E · Sálvia #BABDA2
+   Terracota #D08040 · Caramelo suave #A97A4C
    ===================================================== */
 @layer base {
   :root {
-    --background: 46.4 45.8% 90.6%; /* #F2EDDC */
-    --foreground: 24.8 30.5% 18.6%; /* #3E2D21 */
+    --background: 47.5 70.6% 93.3%; /* #FAF5E2 */
+    --foreground: 70 8% 29.4%; /* #4F5145 */
 
-    --card: 46.4 45.8% 90.6%;
-    --card-foreground: 24.8 30.5% 18.6%;
+    --card: 47.5 70.6% 93.3%;
+    --card-foreground: 70 8% 29.4%;
 
-    --popover: 46.4 45.8% 90.6%;
-    --popover-foreground: 24.8 30.5% 18.6%;
+    --popover: 47.5 70.6% 93.3%;
+    --popover-foreground: 70 8% 29.4%;
 
-    --primary: 22.2 69.8% 50.6%; /* #D96A29 */
-    --primary-foreground: 46.4 45.8% 90.6%;
+    --primary: 75.6 14.1% 37.5%; /* #666D52 — sálvia profunda */
+    --primary-foreground: 47.5 70.6% 93.3%;
 
-    --secondary: 22.3 78.9% 75.9%; /* #F2B591 */
-    --secondary-foreground: 24.8 30.5% 18.6%;
+    --secondary: 28.4 64.4% 76.9%; /* #EAC29E — pêssego */
+    --secondary-foreground: 70 8% 29.4%;
 
-    --muted: 46.4 45.8% 90.6%; /* creme */
-    --muted-foreground: 24 21% 35%;
+    --muted: 47.5 70.6% 93.3%;
+    --muted-foreground: 68 8% 42%;
 
-    --accent: 27.7 46.9% 44.3%; /* #A66D3C */
-    --accent-foreground: 46.4 45.8% 90.6%;
+    --accent: 26.7 60.5% 53.3%; /* #D08040 — terracota do logo */
+    --accent-foreground: 47.5 70.6% 93.3%;
 
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 25% 80%;
-    --input: 30 25% 80%;
-    --ring: 22.2 69.8% 50.6%;
+    --border: 66 18% 80%;
+    --input: 66 18% 80%;
+    --ring: 75.6 14.1% 37.5%;
 
     --radius: 1.25rem;
 
@@ -102,14 +102,14 @@
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.96) 0%,
-      rgba(242, 237, 220, 0.92) 100%
+      rgba(250, 245, 226, 0.92) 100%
     );
-    border: 1px solid rgba(166, 109, 60, 0.09);
+    border: 1px solid rgba(115, 122, 93, 0.12);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.9) inset,
-      0 2px 4px rgba(166, 109, 60, 0.05),
-      0 10px 24px -8px rgba(166, 109, 60, 0.14),
-      0 28px 56px -28px rgba(166, 109, 60, 0.2);
+      0 2px 4px rgba(115, 122, 93, 0.05),
+      0 10px 24px -8px rgba(115, 122, 93, 0.12),
+      0 28px 56px -28px rgba(115, 122, 93, 0.16);
   }
 
   /* Filete dourado sutil na borda (usa ::before para não brigar com o fundo). */
@@ -121,9 +121,9 @@
     padding: 1px;
     background: linear-gradient(
       135deg,
-      rgba(217, 106, 41, 0.7),
-      rgba(217, 106, 41, 0) 45%,
-      rgba(217, 106, 41, 0.45)
+      rgba(208, 128, 64, 0.55),
+      rgba(208, 128, 64, 0) 45%,
+      rgba(208, 128, 64, 0.32)
     );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
@@ -135,28 +135,28 @@
 
   /* Vidro quente — para as barras fixas. */
   .glass-warm {
-    background: rgba(242, 237, 220, 0.78);
+    background: rgba(250, 245, 226, 0.82);
     backdrop-filter: blur(20px) saturate(140%);
     -webkit-backdrop-filter: blur(20px) saturate(140%);
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.7) inset,
-      0 12px 36px -12px rgba(166, 109, 60, 0.28);
+      0 12px 36px -12px rgba(115, 122, 93, 0.18);
   }
 
   /* Halo pastel atrás de imagens/ícones. */
   .halo-rosa {
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(242, 181, 145, 0.55) 0%,
-      rgba(242, 181, 145, 0) 68%
+      rgba(234, 194, 158, 0.52) 0%,
+      rgba(234, 194, 158, 0) 68%
     );
   }
   .halo-salvia {
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(166, 109, 60, 0.18) 0%,
-      rgba(166, 109, 60, 0) 68%
+      rgba(186, 189, 162, 0.38) 0%,
+      rgba(186, 189, 162, 0) 68%
     );
   }
 
@@ -166,16 +166,16 @@
     display: grid;
     place-items: center;
     border-radius: 9999px;
-    background: linear-gradient(160deg, #ffffff 0%, #F2EDDC 100%);
+    background: linear-gradient(160deg, #ffffff 0%, #FAF5E2 100%);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.95) inset,
-      0 0 0 1px rgba(217, 106, 41, 0.28),
-      0 6px 16px -6px rgba(166, 109, 60, 0.28);
+      0 0 0 1px rgba(208, 128, 64, 0.22),
+      0 6px 16px -6px rgba(115, 122, 93, 0.18);
   }
 
   /* Texto com leve gradiente quente — títulos de destaque. */
   .ink-gradient {
-    background: linear-gradient(120deg, #3E2D21 0%, #A66D3C 55%, #D96A29 100%);
+    background: linear-gradient(120deg, #4F5145 0%, #737A5D 58%, #C7815C 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -208,8 +208,8 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(217, 106, 41, 0.9) 12%,
-      rgba(217, 106, 41, 0.9) 88%,
+      rgba(208, 128, 64, 0.62) 12%,
+      rgba(208, 128, 64, 0.62) 88%,
       transparent
     );
     pointer-events: none;
@@ -219,45 +219,45 @@
   }
   .card-soft {
     @apply bg-white/85 border border-marrom/10 rounded-3xl;
-    box-shadow: 0 12px 32px rgba(166, 109, 60, 0.1);
+    box-shadow: 0 12px 32px rgba(115, 122, 93, 0.1);
   }
   /* Campo de papel creme: pêssego restrito a reflexos leves. */
   .pattern-creme {
-    background-color: #F2EDDC;
+    background-color: #FAF5E2;
     background-image:
       radial-gradient(
         ellipse 58% 45% at 0% 0%,
-        rgba(242, 181, 145, 0.12) 0%,
+        rgba(234, 194, 158, 0.2) 0%,
         transparent 72%
       ),
       radial-gradient(
         ellipse 40% 38% at 100% 100%,
-        rgba(166, 109, 60, 0.055) 0%,
+        rgba(186, 189, 162, 0.2) 0%,
         transparent 74%
       );
   }
 
-  /* Hero de cacau escuro inspirado no topo cinematográfico da arte A4. */
-  .hero-cinematic {
-    color: #F2EDDC;
-    background-color: #2B170F;
+  /* Fundo leve com creme, pêssego e sálvia do logotipo. */
+  .hero-brand {
+    color: #4F5145;
+    background-color: #FAF5E2;
     background-image:
       radial-gradient(
         ellipse 58% 44% at 50% 2%,
-        rgba(217, 106, 41, 0.2) 0%,
+        rgba(234, 194, 158, 0.32) 0%,
         transparent 74%
       ),
       radial-gradient(
         ellipse 48% 42% at 50% 100%,
-        rgba(166, 109, 60, 0.18) 0%,
+        rgba(186, 189, 162, 0.26) 0%,
         transparent 76%
       ),
-      linear-gradient(145deg, #2B170F 0%, #351B10 48%, #24120B 100%);
+      linear-gradient(145deg, #FCFAF3 0%, #FAF5E2 52%, #F3EBDD 100%);
   }
 
-  /* Faixa caramelo inspirada nos detalhes do logotipo. */
+  /* Faixa sálvia inspirada nas folhas do logotipo. */
   .band-salvia {
-    background-color: #A66D3C;
+    background-color: #737A5D;
     background-image:
       radial-gradient(
         ellipse 70% 60% at 10% 0%,
@@ -266,7 +266,7 @@
       ),
       radial-gradient(
         ellipse 60% 50% at 95% 100%,
-        rgba(0, 0, 0, 0.12) 0%,
+        rgba(33, 40, 25, 0.1) 0%,
         transparent 58%
       );
   }
@@ -284,8 +284,8 @@
     border-radius: 9999px;
     background: radial-gradient(
       ellipse at 50% 50%,
-      rgba(166, 109, 60, 0.32) 0%,
-      rgba(166, 109, 60, 0) 72%
+      rgba(115, 122, 93, 0.25) 0%,
+      rgba(115, 122, 93, 0) 72%
     );
     filter: blur(7px);
     pointer-events: none;

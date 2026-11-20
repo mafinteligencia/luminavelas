@@ -94,7 +94,7 @@ const Steps = ({ current }: { current: 1 | 2 | 3 }) => (
             className={cn(
               "inline-flex items-center gap-1.5 h-7 px-2.5 rounded-full",
               active
-                ? "bg-rosa text-white"
+                ? "bg-salvia-deep text-creme"
                 : done
                   ? "bg-salvia/30 text-salvia-deep"
                   : "bg-creme text-ink/50",
@@ -192,7 +192,7 @@ const Order = () => {
                 </p>
                 <Link
                   to="/bolos"
-                  className="mt-3 inline-flex items-center gap-1 h-10 px-4 rounded-full bg-rosa text-white text-[12.5px] font-semibold"
+                  className="mt-3 inline-flex items-center gap-1 h-10 px-4 rounded-full bg-salvia-deep text-creme text-[12.5px] font-semibold"
                 >
                   Escolher doces <IconChevronRight className="w-4 h-4" />
                 </Link>
@@ -382,7 +382,7 @@ const Order = () => {
                     className={cn(
                       "shrink-0 h-8 px-3 rounded-full text-[11.5px] font-semibold border transition active:scale-95",
                       d.date === iso
-                        ? "bg-rosa border-rosa text-white"
+                        ? "bg-salvia-deep border-salvia-deep text-creme"
                         : "bg-white border-marrom/15 text-marrom-deep",
                     )}
                   >

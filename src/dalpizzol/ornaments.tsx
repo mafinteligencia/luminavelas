@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 /** Moldura de rótulo (a forma do logotipo): cantos arredondados + filete duplo. */
 export const LabelFrame = ({
   className = "",
-  color = "#D96A29",
+  color = "#D08040",
   animate = false,
 }: {
   className?: string;
@@ -161,7 +161,7 @@ export const CornerFlourish = ({
 /** Onda de borda entre seções — troca de fundo sem corte reto. */
 export const EdgeWave = ({
   className = "",
-  fill = "#F2EDDC",
+  fill = "#FAF5E2",
   flip = false,
 }: {
   className?: string;
