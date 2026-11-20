@@ -57,6 +57,7 @@ const HERO_SLIDES = [...PRODUCTS]
   .map((product) => {
     const category = CATEGORIES.find((item) => item.id === product.category)?.label ?? "Doces artesanais";
     return {
+      product,
       src: product.img.replace(/\.jpg$/i, ".webp"),
       category,
       title: product.name,
@@ -74,18 +75,28 @@ const HERO_HEADLINE_LINES = [
 const HERO_HEADLINE_TEXT = HERO_HEADLINE_LINES.join("\n");
 
 /* ============ 1 · HERO — carrossel editorial da vitrine ============ */
-const Hero = () => {
+const Hero = ({ onOpen }: { onOpen: (product: Product) => void }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [typedHeadlineChars, setTypedHeadlineChars] = useState(0);
+  const [isDesktopLayout, setIsDesktopLayout] = useState(false);
   const reduceMotion = useReducedMotion();
   const slide = HERO_SLIDES[slideIndex];
 
   useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const updateLayout = () => setIsDesktopLayout(media.matches);
+    updateLayout();
+    media.addEventListener("change", updateLayout);
+    return () => media.removeEventListener("change", updateLayout);
+  }, []);
+
+  useEffect(() => {
+    if (isDesktopLayout) return;
     const timer = window.setInterval(() => {
       setSlideIndex((current) => (current + 1) % HERO_SLIDES.length);
     }, HERO_ROTATION_MS);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [isDesktopLayout]);
 
   useEffect(() => {
     if (reduceMotion) {
@@ -109,11 +120,12 @@ const Hero = () => {
   }, [reduceMotion]);
 
   useEffect(() => {
+    if (isDesktopLayout) return;
     const nextSlide = HERO_SLIDES[(slideIndex + 1) % HERO_SLIDES.length];
     const image = new window.Image();
     image.decoding = "async";
     image.src = nextSlide.src;
-  }, [slideIndex]);
+  }, [slideIndex, isDesktopLayout]);
 
   const renderHeadlineLine = (lineIndex: number, className: string) => {
     const text = HERO_HEADLINE_LINES[lineIndex];
@@ -140,7 +152,7 @@ const Hero = () => {
   };
 
   return (
-  <section className="relative hero-brand border-b border-[#BABDA2]/50 pt-[60px] md:pt-24 pb-10 sm:pb-16 px-5 overflow-hidden">
+  <section className="relative hero-brand border-b border-[#BABDA2]/50 pt-[60px] md:pt-24 pb-10 sm:pb-16 px-5 overflow-hidden lg:flex lg:min-h-[100svh] lg:items-center lg:py-24">
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
       <FloralPattern color="#BABDA2" opacity={0.2} />
       <svg
@@ -154,19 +166,24 @@ const Hero = () => {
       </svg>
     </div>
 
-    <div className="relative mx-auto flex max-w-6xl flex-col items-center text-center">
+    <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center text-center lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-10 lg:text-left xl:gap-14">
       <motion.figure
         role="group"
         aria-roledescription="carrossel"
-        aria-label="Destaques de bolos e doces da Doceria Dalpizzol"
+        aria-label="Carrossel contínuo de bolos e doces da Doceria Dalpizzol"
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="group relative order-first mb-4 w-[calc(100%+1rem)] max-w-[54rem] sm:w-full md:mb-10"
+        className="group relative order-first mb-4 w-[calc(100%+1rem)] max-w-[54rem] sm:w-full md:mb-10 lg:order-none lg:col-start-2 lg:row-start-1 lg:mb-0 lg:w-full lg:max-w-none"
       >
-        <div className="absolute -inset-3 rounded-[28px] bg-[#EAC29E]/30 blur-2xl" aria-hidden />
-        <div className="relative overflow-hidden rounded-[18px] border border-[#BABDA2]/55 bg-[#FAF5E2] shadow-[0_24px_60px_rgba(80,85,62,0.16)] sm:rounded-[26px]">
-          <div className="relative aspect-[1.2] w-full overflow-hidden sm:aspect-square">
+        <div className="absolute -inset-6 rounded-[32px] bg-[#EAC29E]/25 blur-3xl" aria-hidden />
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => onOpen(slide.product)}
+            aria-label={`Ver ${slide.title}`}
+            className="relative block aspect-square w-full bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#737A5D] lg:hidden"
+          >
             <AnimatePresence initial={false} mode="sync">
               <motion.img
                 key={slide.src}
@@ -183,11 +200,51 @@ const Hero = () => {
                 className="absolute inset-0 h-full w-full object-contain"
               />
             </AnimatePresence>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#30372A]/10 via-transparent to-white/5" aria-hidden />
+          </button>
 
+          <div className="hero-marquee-mask hidden w-full overflow-hidden lg:block" aria-live="off">
+            <div
+              className="hero-marquee-track flex w-max"
+              style={{ animationDuration: `${Math.max(1, HERO_SLIDES.length) * 2.5}s` }}
+            >
+              {[false, true].map((duplicate) => (
+                <div
+                  key={duplicate ? "loop-copy" : "loop-start"}
+                  aria-hidden={duplicate || undefined}
+                  className="flex shrink-0 gap-3 xl:gap-4"
+                >
+                  {HERO_SLIDES.map((item, index) => (
+                    <button
+                      key={`${item.product.id}-${index}`}
+                      type="button"
+                      onClick={() => onOpen(item.product)}
+                      tabIndex={duplicate ? -1 : undefined}
+                      aria-label={`Ver ${item.title}`}
+                      className="group/hero-slide flex w-[clamp(7rem,12.6vw,11.75rem)] shrink-0 flex-col text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#737A5D]"
+                    >
+                      <span className="relative block aspect-square w-full">
+                        <img
+                          src={item.src}
+                          alt={duplicate ? "" : item.alt}
+                          loading={index < 3 ? "eager" : "lazy"}
+                          decoding="async"
+                          className="h-full w-full object-contain transition-transform duration-700 group-hover/hero-slide:scale-[1.025]"
+                        />
+                      </span>
+                      <span className="mt-2 block truncate text-[9px] font-semibold uppercase tracking-[0.14em] text-[#737A5D]">
+                        {item.category}
+                      </span>
+                      <span className="mt-0.5 block min-h-[2.5em] text-[13px] font-medium leading-tight text-[#4F5145] xl:text-[14px]">
+                        {item.title}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <figcaption className="mt-1 min-h-[34px] px-1 text-center" aria-live="off" aria-atomic="true">
+        <figcaption className="mt-1 min-h-[34px] px-1 text-center lg:hidden" aria-live="off" aria-atomic="true">
           <p className="text-[8px] font-semibold uppercase tracking-[0.18em] text-[#737A5D]">
             {slide.category}
           </p>
@@ -210,11 +267,11 @@ const Hero = () => {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, delay: 0.12 }}
-        className="relative z-10 flex w-full flex-col items-center"
+        className="relative z-10 flex w-full flex-col items-center lg:col-start-1 lg:row-start-1 lg:items-start lg:text-left"
       >
         <p
           aria-label={BRAND.city}
-          className="flex items-center justify-center gap-2.5 text-[8px] font-semibold tracking-[0.14em] text-[#626553] uppercase sm:gap-3 sm:text-[10px] sm:tracking-[0.2em]"
+          className="flex items-center justify-center gap-2.5 text-[8px] font-semibold tracking-[0.14em] text-[#626553] uppercase sm:gap-3 sm:text-[10px] sm:tracking-[0.2em] lg:justify-start"
         >
           <span className="h-px w-5 bg-[#D08040] sm:w-10" aria-hidden />
           <IconPin className="h-3.5 w-3.5 shrink-0 text-[#A97A4C]" />
@@ -222,19 +279,19 @@ const Hero = () => {
           <span className="h-px w-5 bg-[#D08040] sm:w-10" aria-hidden />
         </p>
 
-        <h1 aria-label="Bolos artesanais que transformam momentos em doces memórias" className="mt-3 max-w-5xl font-serif font-semibold leading-[0.98] sm:mt-6">
-          {renderHeadlineLine(0, "whitespace-nowrap italic text-[#737A5D] text-[clamp(2rem,8.5vw,5.25rem)]")}
-          {renderHeadlineLine(1, "mt-1 text-[#4F5145] text-[clamp(1.4rem,5.8vw,3.1rem)] sm:mt-2")}
-          {renderHeadlineLine(2, "mt-1 italic leading-[1.02] text-[#C7815C] text-[clamp(1.5rem,6.4vw,3.65rem)] sm:mt-2")}
-          {renderHeadlineLine(3, "mt-0.5 italic leading-[1.02] text-[#C7815C] text-[clamp(1.8rem,7.2vw,4.2rem)]")}
+        <h1 aria-label="Bolos artesanais que transformam momentos em doces memórias" className="mt-3 max-w-5xl font-serif font-semibold leading-[0.98] sm:mt-6 lg:mt-4 lg:max-w-none">
+          {renderHeadlineLine(0, "whitespace-nowrap italic text-[#737A5D] text-[clamp(2rem,8.5vw,5.25rem)] lg:place-items-start lg:text-[clamp(2.6rem,3.75vw,3.6rem)]")}
+          {renderHeadlineLine(1, "mt-1 text-[#4F5145] text-[clamp(1.4rem,5.8vw,3.1rem)] sm:mt-2 lg:place-items-start lg:text-[clamp(1.5rem,2.75vw,2.5rem)]")}
+          {renderHeadlineLine(2, "mt-1 italic leading-[1.02] text-[#C7815C] text-[clamp(1.5rem,6.4vw,3.65rem)] sm:mt-2 lg:place-items-start lg:text-[clamp(1.7rem,2.9vw,2.55rem)]")}
+          {renderHeadlineLine(3, "mt-0.5 italic leading-[1.02] text-[#C7815C] text-[clamp(1.8rem,7.2vw,4.2rem)] lg:place-items-start lg:text-[clamp(1.9rem,3.2vw,2.8rem)]")}
         </h1>
 
-        <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-[#626553] sm:text-[16px] md:text-[18px]">
+        <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-[#626553] sm:text-[16px] md:text-[18px] lg:mt-4">
           Bolos, doces finos e presentes com sabor único — feitos à mão, todos os dias,
           por duas confeiteiras apaixonadas.
         </p>
 
-        <div className="mt-6 grid w-full max-w-[48rem] grid-cols-2 gap-2.5 sm:mt-8 sm:gap-4">
+        <div className="mt-6 grid w-full max-w-[48rem] grid-cols-2 gap-2.5 sm:mt-8 sm:gap-4 lg:mt-6">
           <Link
             to="/bolos"
             className="inline-flex h-12 items-center justify-center gap-1 rounded-full bg-[#666D52] px-2 text-[10px] font-semibold text-[#FAF5E2] shadow-[0_10px_24px_rgba(115,122,93,0.24)] transition hover:brightness-105 active:scale-[0.97] sm:h-[58px] sm:gap-2 sm:px-6 sm:text-[15px]"
@@ -253,7 +310,7 @@ const Hero = () => {
           </LinkButton>
         </div>
 
-        <svg className="mt-7 h-12 w-64 text-[#A97A4C] sm:mt-9 sm:w-80" viewBox="0 0 320 48" fill="none" aria-hidden>
+        <svg className="mt-7 h-12 w-64 text-[#A97A4C] sm:mt-9 sm:w-80 lg:mt-6 lg:h-10 lg:w-64" viewBox="0 0 320 48" fill="none" aria-hidden>
           <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5">
             <path d="M8 24h74M238 24h74" />
             <path d="M160 16c-9-12-25-1-16 10l16 14 16-14c9-11-7-22-16-10Z" />
@@ -648,7 +705,7 @@ const Home = () => {
   const [open, setOpen] = useState<Product | null>(null);
   return (
     <>
-      <Hero />
+      <Hero onOpen={setOpen} />
       <Categories />
       <DeferredContent minHeight={120}><InfoCards /></DeferredContent>
       <DeferredContent minHeight={360}><Featured onOpen={setOpen} /></DeferredContent>

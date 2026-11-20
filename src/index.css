@@ -255,6 +255,30 @@
       linear-gradient(145deg, #FCFAF3 0%, #FAF5E2 52%, #F3EBDD 100%);
   }
 
+  @keyframes dalpizzol-hero-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .hero-marquee-track {
+    animation-name: dalpizzol-hero-marquee;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-marquee-track {
+      animation: none;
+      transform: none;
+      will-change: auto;
+    }
+  }
+
   /* Faixa sálvia inspirada nas folhas do logotipo. */
   .band-salvia {
     background-color: #737A5D;
