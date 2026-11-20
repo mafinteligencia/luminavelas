@@ -77,24 +77,14 @@ const Hero = () => (
           {BRAND.district} <span className="text-[#D96A29]">·</span> {BRAND.cityState}
         </p>
 
-        <h1 className="mt-3 md:mt-5 font-serif font-semibold uppercase tracking-[0.025em] text-[clamp(2.2rem,10vw,3.2rem)] md:text-[clamp(2.7rem,6.4vw,4.6rem)] leading-[0.88]">
-          <span className="block text-[#F2EDDC]">Taste the</span>
-          <span className="block mt-1 text-[#D96A29]">Island</span>
+        <h1 className="mt-3 md:mt-5 font-serif font-semibold tracking-normal text-[clamp(2.2rem,10vw,3.2rem)] md:text-[clamp(2.7rem,6.4vw,4.6rem)] leading-[0.94]">
+          <span className="block font-script font-normal normal-case text-[#D96A29] text-[clamp(2.6rem,12vw,4.2rem)] md:text-[clamp(3.4rem,6.4vw,5rem)] leading-[0.98]">Feito com amor,</span>
+          <span className="block mt-1 normal-case text-[#F2EDDC] text-[clamp(2.1rem,9.5vw,3.6rem)] md:text-[clamp(2.7rem,5.6vw,4.2rem)] leading-[0.96]">para momentos inesquecíveis.</span>
         </h1>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 md:mt-5 md:block md:space-y-1">
-          <p className="text-[9px] md:text-[12px] font-bold tracking-[0.12em] md:tracking-[0.2em] uppercase text-[#F2EDDC]">
-            Um doce da ilha
-          </p>
-          <span aria-hidden="true" className="text-[9px] text-[#D96A29] md:hidden">·</span>
-          <p className="text-[9px] md:text-[11px] font-medium tracking-[0.12em] md:tracking-[0.2em] uppercase text-[#F2B591]">
-            Un dulce de la isla
-          </p>
-        </div>
-
         <p className="mt-3 md:mt-5 max-w-md text-[12px] md:text-[15px] text-[#F2EDDC]/78 leading-relaxed">
-          Feito com amor, na Barra da Lagoa. Bolos e doces artesanais para levar
-          um sabor da ilha com você.
+          Bolos, doces finos e presentes com sabor — feitos à mão, todos os dias,
+          por duas confeiteiras apaixonadas.
         </p>
 
         <div className="mt-4 md:mt-6 grid grid-cols-2 gap-2 md:flex md:flex-row md:gap-2.5">
