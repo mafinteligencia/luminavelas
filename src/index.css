@@ -271,6 +271,55 @@
     will-change: transform;
   }
 
+  .hero-carousel-shell {
+    border-top: 1px solid rgba(169, 122, 76, 0.38);
+    border-bottom: 1px solid rgba(169, 122, 76, 0.2);
+    background:
+      radial-gradient(ellipse 48% 120% at 15% 0%, rgba(255, 255, 255, 0.92), transparent 74%),
+      radial-gradient(ellipse 42% 110% at 85% 100%, rgba(234, 194, 158, 0.3), transparent 75%),
+      linear-gradient(110deg, #F8F3E7 0%, #EFE5D2 48%, #F8F2E5 100%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.92) inset,
+      0 -14px 34px rgba(115, 122, 93, 0.1);
+  }
+
+  .hero-carousel-shell::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(208, 128, 64, 0.66) 18%, rgba(208, 128, 64, 0.66) 82%, transparent);
+    pointer-events: none;
+  }
+
+  .hero-marquee-mask {
+    --hero-visible-count: 5;
+    width: min(100vw, 1440px);
+  }
+
+  .hero-marquee-item {
+    width: calc(min(100vw, 1440px) / var(--hero-visible-count));
+  }
+
+  .hero-marquee-image-frame {
+    width: min(78px, calc(100% - 8px));
+    aspect-ratio: 1;
+  }
+
+  @media (min-width: 768px) {
+    .hero-marquee-mask {
+      --hero-visible-count: 9;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-marquee-mask {
+      --hero-visible-count: 15;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-marquee-track {
       animation: none;

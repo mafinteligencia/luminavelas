@@ -117,7 +117,7 @@ const TopBar = () => {
     <header
       className="fixed top-0 inset-x-0 z-50 isolate topbar-framed border-b border-[#BABDA2]/55 bg-[#FCFAF3]/92 text-[#4F5145] shadow-[0_8px_24px_rgba(86,91,67,0.12)] backdrop-blur-xl"
     >
-      <div className="relative z-10 max-w-5xl mx-auto px-5 md:px-0 h-[56px] md:h-[72px] flex items-center justify-between gap-3">
+      <div className="relative z-10 mx-auto grid h-[56px] w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-3 px-5 md:h-[72px] md:px-0">
         <NavLink to="/" aria-label={BRAND.name} className="flex items-center min-w-0">
           <img
             src={BRAND.logo}
@@ -126,7 +126,7 @@ const TopBar = () => {
           />
         </NavLink>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center justify-self-center gap-1">
           {TABS.map((t) => (
             <NavLink
               key={t.to}
@@ -146,7 +146,7 @@ const TopBar = () => {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2">
+        <div className="flex items-center justify-self-end gap-2">
           <NavLink
             to="/encomendar"
             aria-label="Meu pedido"
