@@ -283,8 +283,8 @@ const Hero = ({ onOpen }: { onOpen: (product: Product) => void }) => {
               Vitrine da casa
             </p>
             <p className="text-right text-[9px] font-medium tracking-[0.04em] text-[#737A5D] sm:text-[11px]">
-              <span className="xl:hidden">Clique em um doce para ver detalhes</span>
-              <span className="hidden xl:inline">15 produtos à vista · clique para ver detalhes</span>
+              <span className="lg:hidden">Clique em um doce para ver detalhes</span>
+              <span className="hidden lg:inline">15 produtos à vista · clique para ver detalhes</span>
             </p>
           </div>
           <div className="hero-marquee-mask overflow-hidden" aria-live="off">
