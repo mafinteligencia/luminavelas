@@ -57,64 +57,65 @@ const LEAF_PATHS = [
 
 /* ============ 1 · HERO — fotografia cinematográfica inspirada na arte A4 ============ */
 const Hero = () => (
-  <section className="relative hero-cinematic border-b border-[#A66D3C]/55 pt-32 sm:pt-36 pb-12 sm:pb-16 px-5 overflow-hidden">
+  <section className="relative hero-cinematic border-b border-[#A66D3C]/55 pt-[112px] md:pt-36 pb-8 sm:pb-16 px-5 overflow-hidden">
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
       <FloralPattern color="#F2EDDC" opacity={0.035} />
     </div>
 
-    <div className="relative max-w-5xl mx-auto grid md:grid-cols-[0.9fr_1.1fr] gap-8 md:gap-12 items-center">
+    <div className="relative max-w-5xl mx-auto grid md:grid-cols-[0.9fr_1.1fr] gap-5 md:gap-12 items-center">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55 }}
-        className="relative z-10 max-w-xl"
+        className="relative z-10 order-2 md:order-1 max-w-xl"
       >
         <p
           aria-label={BRAND.city}
-          className="inline-flex items-center gap-2 text-[9px] sm:text-[10px] font-semibold tracking-[0.24em] uppercase text-[#F2B591]"
+          className="inline-flex items-center gap-1.5 text-[8.5px] md:text-[10px] font-semibold tracking-[0.16em] md:tracking-[0.24em] uppercase text-[#F2B591]"
         >
           <IconPin className="w-3 h-3 text-[#D96A29]" />
           {BRAND.district} <span className="text-[#D96A29]">·</span> {BRAND.cityState}
         </p>
 
-        <h1 className="mt-5 font-serif font-semibold uppercase tracking-[0.025em] text-[clamp(2.7rem,6.4vw,4.6rem)] leading-[0.88]">
+        <h1 className="mt-3 md:mt-5 font-serif font-semibold uppercase tracking-[0.025em] text-[clamp(2.2rem,10vw,3.2rem)] md:text-[clamp(2.7rem,6.4vw,4.6rem)] leading-[0.88]">
           <span className="block text-[#F2EDDC]">Taste the</span>
           <span className="block mt-1 text-[#D96A29]">Island</span>
         </h1>
 
-        <div className="mt-5 space-y-1">
-          <p className="text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase text-[#F2EDDC]">
+        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 md:mt-5 md:block md:space-y-1">
+          <p className="text-[9px] md:text-[12px] font-bold tracking-[0.12em] md:tracking-[0.2em] uppercase text-[#F2EDDC]">
             Um doce da ilha
           </p>
-          <p className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F2B591]">
+          <span aria-hidden="true" className="text-[9px] text-[#D96A29] md:hidden">·</span>
+          <p className="text-[9px] md:text-[11px] font-medium tracking-[0.12em] md:tracking-[0.2em] uppercase text-[#F2B591]">
             Un dulce de la isla
           </p>
         </div>
 
-        <p className="mt-5 max-w-md text-[13.5px] sm:text-[15px] text-[#F2EDDC]/78 leading-relaxed">
+        <p className="mt-3 md:mt-5 max-w-md text-[12px] md:text-[15px] text-[#F2EDDC]/78 leading-relaxed">
           Feito com amor, na Barra da Lagoa. Bolos e doces artesanais para levar
           um sabor da ilha com você.
         </p>
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
+        <div className="mt-4 md:mt-6 grid grid-cols-2 gap-2 md:flex md:flex-row md:gap-2.5">
           <Link
             to="/bolos"
-            className="inline-flex items-center justify-center gap-2 rounded-xl px-6 h-12 text-[13px] font-semibold bg-[#D96A29] text-white shadow-[0_10px_28px_rgba(217,106,41,0.25)] hover:bg-[#D94625] active:scale-[0.97] transition"
+            className="inline-flex items-center justify-center gap-1 md:gap-2 rounded-lg md:rounded-xl px-2 md:px-6 h-11 md:h-12 text-[11px] md:text-[13px] font-semibold whitespace-nowrap bg-[#D96A29] text-white shadow-[0_10px_28px_rgba(217,106,41,0.25)] hover:bg-[#D94625] active:scale-[0.97] transition"
           >
-            Ver nossos bolos <IconChevronRight className="w-4 h-4" />
+            Ver nossos bolos <IconChevronRight className="w-3 h-3 md:w-4 md:h-4" />
           </Link>
           <LinkButton
             variant="ghost"
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-[#F2B591]/40 text-[#F2EDDC] hover:bg-[#A66D3C]/25"
+            className="h-11 md:h-12 px-1 md:px-5 rounded-lg md:rounded-2xl text-[10px] md:text-[13px] whitespace-nowrap border border-[#F2B591]/40 text-[#F2EDDC] hover:bg-[#A66D3C]/25"
           >
             <WhatsAppIcon className="w-4 h-4 text-[#F2B591]" /> Falar no WhatsApp
           </LinkButton>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-[#F2EDDC]/70">
+        <div className="mt-4 md:mt-6 flex flex-wrap items-center gap-x-4 md:gap-x-5 gap-y-2 text-[9px] md:text-[11px] text-[#F2EDDC]/70">
           <span className="inline-flex items-center gap-1.5">
             <IconStar filled className="w-3.5 h-3.5 text-[#D96A29]" />
             <CountUp to={1300} suffix="+ clientes" />
@@ -130,7 +131,7 @@ const Hero = () => (
         initial={{ opacity: 0, x: 18 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-        className="relative mx-auto mt-1 w-full max-w-[34rem] md:mt-0"
+        className="relative mx-auto order-1 md:order-2 mt-0 w-full max-w-[34rem]"
       >
         <div className="absolute -inset-5 rounded-[30px] bg-[#A66D3C]/20 blur-2xl" aria-hidden />
         <div className="relative overflow-hidden rounded-[22px] sm:rounded-[28px] border border-[#F2B591]/55 bg-[#3E2D21] shadow-[0_28px_70px_rgba(0,0,0,0.38)]">
@@ -141,7 +142,7 @@ const Hero = () => (
             fetchPriority="high"
             sizes="(min-width: 768px) 48vw, 100vw"
             wrapperClassName="relative overflow-hidden"
-            className="w-full aspect-[4/4.2] md:aspect-[1.04] object-cover object-center"
+            className="w-full aspect-square md:aspect-[1.04] object-cover object-center"
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-[#3E2D21]/45 via-transparent to-[#3E2D21]/[0.04] pointer-events-none"
