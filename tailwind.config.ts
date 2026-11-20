@@ -20,11 +20,11 @@ export default {
       },
       colors: {
         /* Paleta oficial da Doceria Dalpizzol */
-        rosa: { DEFAULT: "#D96A29", deep: "#D94625", soft: "#F2B591" },
+        rosa: { DEFAULT: "#A66D3C", deep: "#D96A29", soft: "#F2B591" },
         salvia: { DEFAULT: "#F2B591", deep: "#A66D3C", soft: "#F2EDDC" },
         creme: { DEFAULT: "#F2EDDC", deep: "#F2B591" },
-        dourado: { DEFAULT: "#A66D3C", deep: "#D96A29" },
-        marrom: { DEFAULT: "#A66D3C", deep: "#3E2D21" },
+        dourado: { DEFAULT: "#D96A29", deep: "#A66D3C" },
+        marrom: { DEFAULT: "#A66D3C", deep: "#5B3A26" },
         offwhite: "#F2EDDC",
         ink: "#3E2D21",
         border: "hsl(var(--border))",

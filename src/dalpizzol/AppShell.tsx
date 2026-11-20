@@ -112,17 +112,29 @@ const InstallBanner = () => {
 /* ---- Barra superior ---- */
 const TopBar = () => {
   const { count } = useCart();
+  const [solid, setSolid] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setSolid(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header
-      className="fixed top-0 inset-x-0 z-50 topbar-framed border-b border-[#F2B591]/20 bg-[#3E2D21]/96 text-[#F2EDDC] shadow-[0_8px_24px_rgba(32,20,12,0.18)] backdrop-blur-md"
+      className={cn(
+        "fixed top-0 inset-x-0 z-50 transition-all duration-300 topbar-framed",
+        solid
+          ? "glass-warm border-x-0 border-t-0 rounded-none"
+          : "bg-transparent border-transparent shadow-none",
+      )}
     >
-      <div className="max-w-5xl mx-auto px-5 md:px-0 h-[96px] md:h-[108px] flex items-center justify-between gap-3">
+      <div className="max-w-5xl mx-auto px-4 h-[90px] md:h-[98px] flex items-center justify-between gap-3">
         <NavLink to="/" aria-label={BRAND.name} className="flex items-center min-w-0">
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="w-[108px] h-[104px] md:w-[124px] md:h-[116px] object-contain shrink-0"
+            className="w-[96px] h-[90px] md:w-[104px] md:h-[98px] object-contain shrink-0"
           />
         </NavLink>
 
@@ -136,8 +148,8 @@ const TopBar = () => {
                 cn(
                   "px-4 h-9 rounded-full text-[12.5px] font-semibold inline-flex items-center transition",
                   isActive
-                    ? "bg-[#D96A29]/20 text-[#F2B591]"
-                    : "text-[#F2EDDC]/85 hover:bg-[#A66D3C]/40",
+                    ? "bg-rosa/20 text-rosa-deep"
+                    : "text-marrom-deep hover:bg-creme-deep",
                 )
               }
             >
@@ -150,7 +162,7 @@ const TopBar = () => {
           <NavLink
             to="/encomendar"
             aria-label="Meu pedido"
-            className="relative medallion w-11 h-11 text-[#3E2D21] active:scale-95"
+            className="relative medallion w-11 h-11 text-marrom-deep active:scale-95"
           >
             <IconBag className="w-[18px] h-[18px]" />
             <Badge count={count} className="-top-1 -right-1" />
@@ -159,7 +171,7 @@ const TopBar = () => {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 px-4 h-10 rounded-full bg-[#D96A29] text-white text-[12px] font-semibold shadow-[0_6px_16px_rgba(217,106,41,0.28)] active:scale-95"
+            className="hidden sm:inline-flex items-center gap-2 px-4 h-10 rounded-full bg-salvia-deep text-white text-[12px] font-semibold active:scale-95"
           >
             <WhatsAppIcon className="w-4 h-4" /> WhatsApp
           </a>

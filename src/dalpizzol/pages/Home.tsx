@@ -1,8 +1,14 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   Icon,
+  IconChevronDown,
   IconChevronRight,
   IconCalendarHeart,
   IconClock,
@@ -55,107 +61,180 @@ const LEAF_PATHS = [
   "M34 6c1.5 3.5 1.5 6.5 0 10",
 ];
 
-/* ============ 1 · HERO — fotografia cinematográfica inspirada na arte A4 ============ */
-const Hero = () => (
-  <section className="relative hero-cinematic border-b border-[#A66D3C]/55 pt-32 sm:pt-36 pb-12 sm:pb-16 px-5 overflow-hidden">
-    <div className="absolute inset-0 pointer-events-none" aria-hidden>
-      <FloralPattern color="#F2EDDC" opacity={0.035} />
-    </div>
+/* ============ 1 · HERO — parallax em camadas + saída suave ao rolar ============ */
+const Hero = () => {
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const patternY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const s = (v: unknown) => (reduce ? undefined : (v as never));
 
-    <div className="relative max-w-5xl mx-auto grid md:grid-cols-[0.9fr_1.1fr] gap-8 md:gap-12 items-center">
+  return (
+    <section
+      ref={ref}
+      className="relative pattern-creme pt-28 pb-14 px-5 overflow-hidden"
+    >
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55 }}
-        className="relative z-10 max-w-xl"
+        style={{ y: s(patternY) }}
+        className="absolute -inset-y-16 inset-x-0 pointer-events-none"
       >
-        <p
-          aria-label={BRAND.city}
-          className="inline-flex items-center gap-2 text-[9px] sm:text-[10px] font-semibold tracking-[0.24em] uppercase text-[#F2B591]"
-        >
-          <IconPin className="w-3 h-3 text-[#D96A29]" />
-          {BRAND.district} <span className="text-[#D96A29]">·</span> {BRAND.cityState}
-        </p>
-
-        <h1 className="mt-5 font-serif font-semibold uppercase tracking-[0.025em] text-[clamp(2.7rem,6.4vw,4.6rem)] leading-[0.88]">
-          <span className="block text-[#F2EDDC]">Taste the</span>
-          <span className="block mt-1 text-[#D96A29]">Island</span>
-        </h1>
-
-        <div className="mt-5 space-y-1">
-          <p className="text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase text-[#F2EDDC]">
-            Um doce da ilha
-          </p>
-          <p className="text-[10px] sm:text-[11px] font-medium tracking-[0.2em] uppercase text-[#F2B591]">
-            Un dulce de la isla
-          </p>
-        </div>
-
-        <p className="mt-5 max-w-md text-[13.5px] sm:text-[15px] text-[#F2EDDC]/78 leading-relaxed">
-          Feito com amor, na Barra da Lagoa. Bolos e doces artesanais para levar
-          um sabor da ilha com você.
-        </p>
-
-        <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
-          <Link
-            to="/bolos"
-            className="inline-flex items-center justify-center gap-2 rounded-xl px-6 h-12 text-[13px] font-semibold bg-[#D96A29] text-white shadow-[0_10px_28px_rgba(217,106,41,0.25)] hover:bg-[#D94625] active:scale-[0.97] transition"
-          >
-            Ver nossos bolos <IconChevronRight className="w-4 h-4" />
-          </Link>
-          <LinkButton
-            variant="ghost"
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-[#F2B591]/40 text-[#F2EDDC] hover:bg-[#A66D3C]/25"
-          >
-            <WhatsAppIcon className="w-4 h-4 text-[#F2B591]" /> Falar no WhatsApp
-          </LinkButton>
-        </div>
-
-        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-[#F2EDDC]/70">
-          <span className="inline-flex items-center gap-1.5">
-            <IconStar filled className="w-3.5 h-3.5 text-[#D96A29]" />
-            <CountUp to={1300} suffix="+ clientes" />
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <IconClock className="w-3.5 h-3.5 text-[#F2B591]" />
-            {BRAND.hours}
-          </span>
-        </div>
+        <FloralPattern color="#A66D3C" opacity={0.09} />
       </motion.div>
 
-      <motion.figure
-        initial={{ opacity: 0, x: 18 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-        className="relative mx-auto mt-1 w-full max-w-[34rem] md:mt-0"
-      >
-        <div className="absolute -inset-5 rounded-[30px] bg-[#A66D3C]/20 blur-2xl" aria-hidden />
-        <div className="relative overflow-hidden rounded-[22px] sm:rounded-[28px] border border-[#F2B591]/55 bg-[#3E2D21] shadow-[0_28px_70px_rgba(0,0,0,0.38)]">
+      <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+        <motion.div
+          style={{ y: s(textY), opacity: s(textOpacity) }}
+          className="relative z-10"
+        >
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            aria-label={`${BRAND.district}, ${BRAND.cityState}`}
+            className="inline-flex items-center gap-1 text-[7px] font-semibold tracking-[0.12em] uppercase text-marrom/70 bg-white/55 px-2 py-0.5 rounded-full"
+          >
+            <IconPin className="w-2.5 h-2.5" /> {BRAND.district}
+          </motion.p>
+          <h1 className="mt-4 font-serif text-[38px] leading-[1.05] sm:text-5xl md:text-[56px] text-ink">
+            <motion.span
+              initial={{ opacity: 0, x: -24, rotate: -3 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{
+                delay: 0.1,
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="font-script text-rosa-deep text-[46px] sm:text-6xl md:text-7xl leading-none block -mb-1 origin-left"
+            >
+              Feito com amor,
+            </motion.span>
+            <Words
+              text="para momentos inesquecíveis."
+              delay={0.35}
+              stagger={0.09}
+            />
+          </h1>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="mt-4 text-[14.5px] sm:text-base text-ink/70 leading-relaxed max-w-md"
+          >
+            Bolos, doces finos e presentes com sabor — feitos à mão, todos os
+            dias, por duas confeiteiras apaixonadas.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.75, duration: 0.6 }}
+            className="mt-6 flex flex-col sm:flex-row gap-2.5"
+          >
+            <Link
+              to="/bolos"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 h-12 text-[13px] font-semibold bg-rosa text-white shadow-[0_10px_26px_rgba(166,109,60,0.45)] active:scale-[0.97] transition"
+            >
+              Ver nossos bolos <IconChevronRight className="w-4 h-4" />
+            </Link>
+            <LinkButton
+              variant="ghost"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon className="w-4 h-4 text-salvia-deep" /> Falar no
+              WhatsApp
+            </LinkButton>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.95 }}
+            className="mt-6 flex items-center gap-4 text-[11.5px] text-ink/60"
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <IconStar filled className="w-3.5 h-3.5 text-dourado" />
+              <CountUp to={1300} suffix="+ clientes" />
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <IconClock className="w-3.5 h-3.5 text-salvia-deep" />{" "}
+              {BRAND.hours}
+            </span>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          style={{ y: s(imgY), scale: s(imgScale) }}
+          initial={false}
+          className="relative mx-auto w-full max-w-sm md:max-w-md"
+        >
+          <div className="absolute -inset-8 halo-rosa blur-2xl" aria-hidden />
           <Img
             src={HERO_IMAGE}
-            alt="Bolo de Oreo em camadas da Doceria Dalpizzol"
+            alt="Bolo de Oreo da Doceria Dalpizzol"
             loading="eager"
             fetchPriority="high"
-            sizes="(min-width: 768px) 48vw, 100vw"
-            wrapperClassName="relative overflow-hidden"
-            className="w-full aspect-[4/4.2] md:aspect-[1.04] object-cover object-center"
+            sizes="(min-width: 768px) 42vw, 100vw"
+            wrapperClassName="relative rounded-[36px] shadow-[0_30px_70px_-20px_rgba(167,141,109,0.45)] ring-1 ring-dourado/40 outline outline-[6px] outline-white/80"
+            className="w-full aspect-[4/4.2] object-cover"
           />
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-[#3E2D21]/45 via-transparent to-[#3E2D21]/[0.04] pointer-events-none"
+          <motion.div
             aria-hidden
-          />
-          <figcaption className="absolute bottom-0 inset-x-0 flex items-center justify-between gap-3 px-4 py-3 sm:px-5 sm:py-4 text-[#F2EDDC]">
-            <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.16em] uppercase">Bolo de Oreo</span>
-            <span className="text-[9px] sm:text-[10px] tracking-[0.12em] uppercase text-[#F2B591]">Feito à mão</span>
-          </figcaption>
-        </div>
-      </motion.figure>
-    </div>
-  </section>
-);
+            animate={{ y: [0, -7, 0] }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            className="absolute -top-8 -left-4 sm:-left-9 w-[86px] h-[86px] rounded-full glass-warm grid place-items-center text-marrom"
+          >
+            <Seal className="w-[74px] h-[74px]" />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20, x: 10 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            transition={{ delay: 1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute -bottom-5 left-4 right-4 sm:left-auto sm:right-6 sm:w-64 card-lux edge-gold px-4 py-3 flex items-center gap-3"
+          >
+            <img
+              src={BRAND.logo}
+              alt=""
+              className="w-11 h-11 object-contain shrink-0"
+            />
+            <div className="leading-tight">
+              <p className="text-[12px] font-semibold text-ink">
+                Feito com ingredientes selecionados
+              </p>
+              <p className="font-script text-rosa-deep text-lg leading-none mt-0.5">
+                Feito com amor ♡
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <motion.div
+        style={{ opacity: s(cueOpacity) }}
+        className="relative mt-10 flex justify-center text-marrom/60 md:hidden"
+        aria-hidden
+      >
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+          className="inline-flex flex-col items-center gap-0.5 text-[10px] tracking-[0.2em] uppercase"
+        >
+          role
+          <IconChevronDown className="w-4 h-4" />
+        </motion.span>
+      </motion.div>
+    </section>
+  );
+};
+
 /* ============ 2 · CATEGORIAS — leque que abre a partir do centro ============ */
 const Categories = () => (
   <section className="px-5 pt-8">
