@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Icon,
   IconChevronRight,
@@ -53,8 +53,82 @@ const LEAF_PATHS = [
   "M34 6c1.5 3.5 1.5 6.5 0 10",
 ];
 
-/* ============ 1 · HERO — composição editorial da referência oficial ============ */
-const Hero = () => (
+const HERO_SLIDES = [
+  {
+    src: HERO_IMAGE,
+    category: "Feito em camadas",
+    title: "Bolo de chocolate",
+    alt: "Fatia completa de bolo de chocolate com biscoito e creme",
+  },
+  {
+    src: "/catalog/bolo-marta-rocha.webp",
+    category: "Bolos especiais",
+    title: "Marta Rocha",
+    alt: "Bolo Marta Rocha com nozes, suspiros e camadas de creme",
+  },
+  {
+    src: "/catalog/torta-mineira.webp",
+    category: "Bolos refinados",
+    title: "Torta Mineira",
+    alt: "Torta Mineira com abacaxi, coco e camadas de creme",
+  },
+  {
+    src: "/catalog/brigadeiro-amendoas.webp",
+    category: "Brigadeiros gourmet",
+    title: "Amêndoas",
+    alt: "Brigadeiros gourmet cobertos com amêndoas",
+  },
+] as const;
+
+const HEADLINE_WORDS = ["inesquecíveis", "memoráveis", "especiais"] as const;
+const HERO_ROTATION_MS = 6500;
+
+const CarouselControlIcon = ({ paused }: { paused: boolean }) => (
+  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    {paused ? <path d="m8 5 11 7-11 7V5Z" /> : <path d="M9 5v14M15 5v14" />}
+  </svg>
+);
+
+/* ============ 1 · HERO — carrossel editorial da vitrine ============ */
+const Hero = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [headlineIndex, setHeadlineIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [hasFocus, setHasFocus] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const slide = HERO_SLIDES[slideIndex];
+  const autoRotate = !reduceMotion && !paused && !hovered && !hasFocus;
+
+  useEffect(() => {
+    if (!autoRotate) return;
+    const timer = window.setInterval(() => {
+      setSlideIndex((current) => (current + 1) % HERO_SLIDES.length);
+    }, HERO_ROTATION_MS);
+    return () => window.clearInterval(timer);
+  }, [autoRotate]);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const timer = window.setInterval(() => {
+      setHeadlineIndex((current) => (current + 1) % HEADLINE_WORDS.length);
+    }, 3900);
+    return () => window.clearInterval(timer);
+  }, [reduceMotion]);
+
+  useEffect(() => {
+    const nextSlide = HERO_SLIDES[(slideIndex + 1) % HERO_SLIDES.length];
+    const image = new window.Image();
+    image.decoding = "async";
+    image.src = nextSlide.src;
+  }, [slideIndex]);
+
+  const showPrevious = () =>
+    setSlideIndex((current) => (current - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+  const showNext = () =>
+    setSlideIndex((current) => (current + 1) % HERO_SLIDES.length);
+
+  return (
   <section className="relative hero-brand border-b border-[#BABDA2]/50 pt-[64px] md:pt-24 pb-10 sm:pb-16 px-5 overflow-hidden">
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
       <FloralPattern color="#BABDA2" opacity={0.2} />
@@ -71,24 +145,107 @@ const Hero = () => (
 
     <div className="relative mx-auto flex max-w-6xl flex-col items-center text-center">
       <motion.figure
+        role="group"
+        aria-roledescription="carrossel"
+        aria-label="Destaques de bolos e doces da Doceria Dalpizzol"
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative order-first mb-5 w-[calc(100%+1rem)] max-w-[54rem] sm:w-full md:mb-10"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        onFocusCapture={() => setHasFocus(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+            setHasFocus(false);
+          }
+        }}
+        className="group relative order-first mb-6 w-[calc(100%+1rem)] max-w-[54rem] sm:w-full md:mb-10"
       >
         <div className="absolute -inset-3 rounded-[28px] bg-[#EAC29E]/30 blur-2xl" aria-hidden />
         <div className="relative overflow-hidden rounded-[18px] border border-[#BABDA2]/55 bg-[#FAF5E2] shadow-[0_24px_60px_rgba(80,85,62,0.16)] sm:rounded-[26px]">
-          <Img
-            src={HERO_IMAGE}
-            alt="Fatia de bolo de chocolate com camadas de creme e biscoito Oreo"
-            loading="eager"
-            fetchPriority="high"
-            sizes="(min-width: 900px) 864px, 100vw"
-            wrapperClassName="relative aspect-square overflow-hidden"
-            className="h-full w-full object-contain"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#4F5145]/8 via-transparent to-white/5" aria-hidden />
+          <div className="relative aspect-square w-full overflow-hidden">
+            <AnimatePresence initial={false} mode="sync">
+              <motion.img
+                key={slide.src}
+                src={slide.src}
+                alt={slide.alt}
+                loading={slideIndex === 0 ? "eager" : "lazy"}
+                fetchPriority={slideIndex === 0 ? "high" : "auto"}
+                decoding="async"
+                sizes="(min-width: 900px) 864px, 100vw"
+                initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.025 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.985 }}
+                transition={{ duration: reduceMotion ? 0.18 : 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 h-full w-full object-contain"
+              />
+            </AnimatePresence>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#30372A]/10 via-transparent to-white/5" aria-hidden />
+
+            <button
+              type="button"
+              onClick={showPrevious}
+              aria-label="Ver destaque anterior"
+              className="absolute left-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/70 bg-[#FAF5E2]/90 text-[#666D52] shadow-[0_4px_14px_rgba(44,51,36,0.18)] backdrop-blur transition hover:bg-white active:scale-95 sm:left-5 sm:h-12 sm:w-12"
+            >
+              <IconChevronRight className="h-4 w-4 rotate-180 sm:h-5 sm:w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={showNext}
+              aria-label="Ver próximo destaque"
+              className="absolute right-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/70 bg-[#FAF5E2]/90 text-[#666D52] shadow-[0_4px_14px_rgba(44,51,36,0.18)] backdrop-blur transition hover:bg-white active:scale-95 sm:right-5 sm:h-12 sm:w-12"
+            >
+              <IconChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+            </button>
+          </div>
         </div>
+        <figcaption className="mt-3 flex items-center justify-between gap-3 px-1">
+          <div className="min-w-0 text-left" aria-live={autoRotate ? "off" : "polite"} aria-atomic="true">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#737A5D]">
+              {slide.category}
+            </p>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.p
+                key={slide.title}
+                initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: reduceMotion ? 0.12 : 0.35 }}
+                className="truncate font-serif text-[17px] leading-tight text-[#4F5145] sm:text-lg"
+              >
+                {slide.title}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+          <div className="flex shrink-0 items-center gap-2.5">
+            <div className="flex items-center gap-1.5" role="group" aria-label="Selecionar destaque">
+              {HERO_SLIDES.map((item, index) => (
+                <button
+                  key={item.src}
+                  type="button"
+                  onClick={() => setSlideIndex(index)}
+                  aria-label={`Exibir ${item.title}`}
+                  aria-pressed={index === slideIndex}
+                  className={`h-2 rounded-full transition-all ${index === slideIndex ? "w-5 bg-[#666D52]" : "w-2 bg-[#BABDA2] hover:bg-[#A97A4C]"}`}
+                />
+              ))}
+            </div>
+            <span className="hidden text-[10px] font-semibold tabular-nums text-[#737A5D] sm:inline">
+              {String(slideIndex + 1).padStart(2, "0")} / {String(HERO_SLIDES.length).padStart(2, "0")}
+            </span>
+            <button
+              type="button"
+              onClick={() => setPaused((value) => !value)}
+              disabled={Boolean(reduceMotion)}
+              aria-label={reduceMotion ? "Rotação automática desativada pela preferência de movimento reduzido" : paused ? "Retomar rotação automática" : "Pausar rotação automática"}
+              aria-pressed={paused}
+              className="grid h-8 w-8 place-items-center rounded-full border border-[#BABDA2]/70 bg-[#FCFAF3] text-[#666D52] transition hover:bg-[#EAC29E]/30 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <CarouselControlIcon paused={paused} />
+            </button>
+          </div>
+        </figcaption>
       </motion.figure>
 
       <motion.div
@@ -107,15 +264,27 @@ const Hero = () => (
           <span className="h-px w-5 bg-[#D08040] sm:w-10" aria-hidden />
         </p>
 
-        <h1 className="mt-6 max-w-5xl font-serif font-semibold leading-[0.98]">
-          <span className="block italic text-[#737A5D] text-[clamp(2.25rem,8vw,5rem)]">
+        <h1 aria-label="Bolos artesanais para momentos inesquecíveis" className="mt-6 max-w-5xl font-serif font-semibold leading-[0.98]">
+          <span className="block italic text-[#737A5D] text-[clamp(2.4rem,10vw,5rem)]">
             Bolos artesanais
           </span>
-          <span className="mt-1 block text-[#4F5145] text-[clamp(1.9rem,5.8vw,3.8rem)]">
-            que transformam
+          <span className="mt-2 block text-[#4F5145] text-[clamp(1.75rem,6.6vw,3.25rem)]">
+            para momentos
           </span>
-          <span className="mt-1 block italic text-[#C7815C] text-[clamp(1.75rem,5.4vw,3.5rem)]">
-            momentos em doces memórias.
+          <span className="relative mt-1 block h-[1.14em] overflow-hidden text-[clamp(2.25rem,9vw,4.5rem)] italic text-[#C7815C]" aria-hidden="true">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={HEADLINE_WORDS[headlineIndex]}
+                initial={reduceMotion ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -18, filter: "blur(6px)" }}
+                transition={{ duration: reduceMotion ? 0.12 : 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-x-0 block"
+              >
+                {HEADLINE_WORDS[headlineIndex]}
+              </motion.span>
+            </AnimatePresence>
+            <span className="absolute bottom-[0.06em] left-1/2 h-[3px] w-16 -translate-x-1/2 rounded-full bg-[#EAC29E] sm:w-24" />
           </span>
         </h1>
 
@@ -155,13 +324,19 @@ const Hero = () => (
       </motion.div>
     </div>
   </section>
-);
+  );
+};
 /* ============ 2 · CATEGORIAS — leque que abre a partir do centro ============ */
 const Categories = () => (
   <section className="px-5 pt-8">
     <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-3">
       {CATEGORIES.map((c, i) => (
-        <FanIn key={c.id} index={i} total={CATEGORIES.length}>
+        <FanIn
+          key={c.id}
+          index={i}
+          total={CATEGORIES.length}
+          className={i === CATEGORIES.length - 1 ? "col-span-2 sm:col-span-1" : ""}
+        >
           <Link
             to={`/bolos?cat=${c.id}`}
             className="group card-lux flex flex-col items-center gap-2 py-4 active:scale-95 transition"

@@ -10,7 +10,6 @@ import { FooterBand } from "./Home";
 import { useFavorites } from "../favorites";
 import { FloralPattern } from "../Pattern";
 import { motion } from "framer-motion";
-import { ClipReveal } from "../motion";
 
 const ProductSheet = lazy(() =>
   import("../ProductSheet").then(({ ProductSheet }) => ({ default: ProductSheet })),
@@ -230,29 +229,27 @@ const Catalog = () => {
 
   return (
     <>
-      <section className="relative pattern-creme pt-28 pb-5 px-5 overflow-hidden">
+      <section className="relative pattern-creme pt-20 pb-5 px-5 overflow-hidden md:pt-24">
         <div className="absolute inset-0 pointer-events-none">
           <FloralPattern color="#BABDA2" opacity={0.16} />
         </div>
         <div className="relative max-w-5xl mx-auto">
-          <ClipReveal>
-            <div className="text-center">
-              <SectionTitle
-                center
-                eyebrow="Cardápio"
-                title="Escolha o seu doce"
-                subtitle="Veja os destaques, confira o cardápio completo e monte o seu pedido."
-              />
-              <GoldRule className="mx-auto mt-3 text-dourado" width={130} />
-            </div>
-          </ClipReveal>
-          <label className="mt-5 flex items-center gap-2.5 h-12 rounded-2xl card-lux px-4">
+          <div className="text-center">
+            <SectionTitle
+              center
+              eyebrow="Cardápio"
+              title="Escolha o seu doce"
+              subtitle="Veja os destaques, confira o cardápio completo e monte o seu pedido."
+            />
+            <GoldRule className="mx-auto mt-3 text-dourado" width={130} />
+          </div>
+          <label className="mt-4 flex items-center gap-2.5 h-12 rounded-2xl card-lux px-4">
             <IconSearch className="w-[18px] h-[18px] text-marrom" />
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Buscar bolos, doces…"
-              className="flex-1 bg-transparent outline-none text-[14px] text-ink placeholder:text-ink/40"
+              className="flex-1 bg-transparent outline-none text-base text-ink placeholder:text-ink/40 md:text-sm"
               aria-label="Buscar no cardápio"
             />
             {q && (
