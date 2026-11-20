@@ -9,7 +9,7 @@ import {
   IconHome,
   IconOrderList,
 } from "./icons";
-import { BRAND, WHATSAPP_URL } from "./data";
+import { BRAND, HERO_IMAGE, WHATSAPP_URL } from "./data";
 import { useCart } from "./cart";
 import { WhatsAppIcon } from "./ui";
 import { cn } from "@/lib/utils";
@@ -115,9 +115,17 @@ const TopBar = () => {
 
   return (
     <header
-      className="fixed top-0 inset-x-0 z-50 topbar-framed border-b border-[#F2B591]/25 bg-[#2B170F]/96 text-[#F2EDDC] shadow-[0_8px_24px_rgba(32,20,12,0.24)] backdrop-blur-md"
+      className="fixed top-0 inset-x-0 z-50 isolate topbar-framed border-b border-[#F2B591]/25 bg-[#2B170F]/75 text-[#F2EDDC] shadow-[0_8px_24px_rgba(32,20,12,0.24)] backdrop-blur-md"
     >
-      <div className="relative max-w-5xl mx-auto px-5 md:px-0 h-[64px] md:h-[80px] flex items-center justify-between gap-3">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+        <img
+          src={HERO_IMAGE}
+          alt=""
+          className="absolute inset-0 h-full w-full scale-110 object-cover object-center opacity-45 blur-[12px]"
+        />
+        <div className="absolute inset-0 bg-[#2B170F]/65" />
+      </div>
+      <div className="relative z-10 max-w-5xl mx-auto px-5 md:px-0 h-[56px] md:h-[72px] flex items-center justify-between gap-3">
         <NavLink to="/" aria-label={BRAND.name} className="flex items-center min-w-0">
           <img
             src={BRAND.logo}

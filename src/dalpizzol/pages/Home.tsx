@@ -55,7 +55,7 @@ const LEAF_PATHS = [
 
 /* ============ 1 · HERO — composição editorial da referência oficial ============ */
 const Hero = () => (
-  <section className="relative hero-cinematic border-b border-[#D96A29]/45 pt-[84px] md:pt-28 pb-10 sm:pb-16 px-5 overflow-hidden">
+  <section className="relative hero-cinematic border-b border-[#D96A29]/45 pt-[64px] md:pt-24 pb-10 sm:pb-16 px-5 overflow-hidden">
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
       <FloralPattern color="#D96A29" opacity={0.09} />
       <svg
@@ -74,7 +74,7 @@ const Hero = () => (
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative order-first mb-7 w-[calc(100%+2.5rem)] max-w-[54rem] sm:w-full md:mb-10"
+        className="relative order-first mb-5 w-[calc(100%+1rem)] max-w-[54rem] sm:w-full md:mb-10"
       >
         <div className="absolute -inset-3 rounded-[28px] bg-[#D96A29]/15 blur-2xl" aria-hidden />
         <div className="relative overflow-hidden rounded-[18px] border border-[#D96A29]/35 bg-[#2B170F] shadow-[0_28px_80px_rgba(15,7,3,0.52)] sm:rounded-[26px]">
@@ -85,7 +85,7 @@ const Hero = () => (
             fetchPriority="high"
             sizes="(min-width: 900px) 864px, 100vw"
             wrapperClassName="relative overflow-hidden"
-            className="aspect-square w-full object-cover object-center"
+            className="aspect-[1.52] w-full object-cover object-[center_90%]"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2B170F]/35 via-transparent to-[#2B170F]/10" aria-hidden />
         </div>
