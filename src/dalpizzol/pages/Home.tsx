@@ -84,8 +84,8 @@ const Hero = () => (
             loading="eager"
             fetchPriority="high"
             sizes="(min-width: 900px) 864px, 100vw"
-            wrapperClassName="relative overflow-hidden"
-            className="aspect-[1.52] w-full object-cover object-[center_90%]"
+            wrapperClassName="relative aspect-square overflow-hidden"
+            className="h-full w-full object-contain"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2B170F]/35 via-transparent to-[#2B170F]/10" aria-hidden />
         </div>
