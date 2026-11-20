@@ -115,14 +115,14 @@ const TopBar = () => {
 
   return (
     <header
-      className="fixed top-0 inset-x-0 z-50 topbar-framed border-b border-[#F2B591]/20 bg-[#3E2D21]/96 text-[#F2EDDC] shadow-[0_8px_24px_rgba(32,20,12,0.18)] backdrop-blur-md"
+      className="fixed top-0 inset-x-0 z-50 topbar-framed border-b border-[#F2B591]/25 bg-[#2B170F]/96 text-[#F2EDDC] shadow-[0_8px_24px_rgba(32,20,12,0.24)] backdrop-blur-md"
     >
-      <div className="max-w-5xl mx-auto px-5 md:px-0 h-[96px] md:h-[108px] flex items-center justify-between gap-3">
-        <NavLink to="/" aria-label={BRAND.name} className="flex items-center min-w-0">
+      <div className="relative max-w-5xl mx-auto px-5 md:px-0 h-[96px] md:h-[108px] flex items-center justify-between gap-3">
+        <NavLink to="/" aria-label={BRAND.name} className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center min-w-0">
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="w-[108px] h-[104px] md:w-[124px] md:h-[116px] object-contain shrink-0"
+            className="w-[112px] h-[108px] md:w-[124px] md:h-[116px] object-contain shrink-0"
           />
         </NavLink>
 
@@ -150,7 +150,7 @@ const TopBar = () => {
           <NavLink
             to="/encomendar"
             aria-label="Meu pedido"
-            className="relative medallion w-11 h-11 text-[#3E2D21] active:scale-95"
+            className="relative medallion w-11 h-11 ml-auto text-[#3E2D21] active:scale-95"
           >
             <IconBag className="w-[18px] h-[18px]" />
             <Badge count={count} className="-top-1 -right-1" />

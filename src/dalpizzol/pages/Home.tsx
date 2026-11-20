@@ -5,7 +5,6 @@ import {
   Icon,
   IconChevronRight,
   IconCalendarHeart,
-  IconClock,
   IconPin,
   IconStar,
   IconTruck,
@@ -35,7 +34,6 @@ const ProductSheet = lazy(() =>
 import {
   BlurIn,
   ClipReveal,
-  CountUp,
   DrawPath,
   FanIn,
   FlipIn,
@@ -55,95 +53,106 @@ const LEAF_PATHS = [
   "M34 6c1.5 3.5 1.5 6.5 0 10",
 ];
 
-/* ============ 1 · HERO — fotografia cinematográfica inspirada na arte A4 ============ */
+/* ============ 1 · HERO — composição editorial da referência oficial ============ */
 const Hero = () => (
-  <section className="relative hero-cinematic border-b border-[#A66D3C]/55 pt-[112px] md:pt-36 pb-8 sm:pb-16 px-5 overflow-hidden">
+  <section className="relative hero-cinematic border-b border-[#D96A29]/45 pt-[108px] md:pt-36 pb-10 sm:pb-16 px-5 overflow-hidden">
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
-      <FloralPattern color="#F2EDDC" opacity={0.035} />
+      <FloralPattern color="#D96A29" opacity={0.09} />
+      <svg
+        className="absolute inset-0 h-full w-full opacity-45"
+        viewBox="0 0 1440 1400"
+        preserveAspectRatio="none"
+        fill="none"
+      >
+        <path d="M-80 280C130 72 360 80 580 110" stroke="#D96A29" strokeWidth="2" />
+        <path d="M1520 1090c-180 165-450 205-690 184" stroke="#D96A29" strokeWidth="2" />
+      </svg>
     </div>
 
-    <div className="relative max-w-5xl mx-auto grid md:grid-cols-[0.9fr_1.1fr] gap-5 md:gap-12 items-center">
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
+    <div className="relative mx-auto flex max-w-6xl flex-col items-center text-center">
+      <motion.figure
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55 }}
-        className="relative z-10 order-2 md:order-1 max-w-xl"
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="relative order-first mb-7 w-[calc(100%+2.5rem)] max-w-[54rem] sm:w-full md:mb-10"
+      >
+        <div className="absolute -inset-3 rounded-[28px] bg-[#D96A29]/15 blur-2xl" aria-hidden />
+        <div className="relative overflow-hidden rounded-[18px] border border-[#D96A29]/35 bg-[#2B170F] shadow-[0_28px_80px_rgba(15,7,3,0.52)] sm:rounded-[26px]">
+          <Img
+            src={HERO_IMAGE}
+            alt="Fatia de bolo de chocolate com camadas de creme e biscoito Oreo"
+            loading="eager"
+            fetchPriority="high"
+            sizes="(min-width: 900px) 864px, 100vw"
+            wrapperClassName="relative overflow-hidden"
+            className="aspect-square w-full object-cover object-center"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2B170F]/35 via-transparent to-[#2B170F]/10" aria-hidden />
+        </div>
+      </motion.figure>
+
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, delay: 0.12 }}
+        className="relative z-10 flex w-full flex-col items-center"
       >
         <p
           aria-label={BRAND.city}
-          className="inline-flex items-center gap-1.5 text-[8.5px] md:text-[10px] font-semibold tracking-[0.16em] md:tracking-[0.24em] uppercase text-[#F2B591]"
+          className="flex items-center justify-center gap-2.5 text-[8px] font-semibold tracking-[0.14em] text-[#F2EDDC]/90 uppercase sm:gap-3 sm:text-[10px] sm:tracking-[0.2em]"
         >
-          <IconPin className="w-3 h-3 text-[#D96A29]" />
-          {BRAND.district} <span className="text-[#D96A29]">·</span> {BRAND.cityState}
+          <span className="h-px w-5 bg-[#D96A29] sm:w-10" aria-hidden />
+          <IconPin className="h-3.5 w-3.5 shrink-0 text-[#D96A29]" />
+          <span>{BRAND.district} <span className="px-1 text-[#D96A29]">·</span> {BRAND.cityState}</span>
+          <span className="h-px w-5 bg-[#D96A29] sm:w-10" aria-hidden />
         </p>
 
-        <h1 className="mt-3 md:mt-5 font-serif font-semibold tracking-normal text-[clamp(2.2rem,10vw,3.2rem)] md:text-[clamp(2.7rem,6.4vw,4.6rem)] leading-[0.94]">
-          <span className="block font-script font-normal normal-case text-[#D96A29] text-[clamp(2.6rem,12vw,4.2rem)] md:text-[clamp(3.4rem,6.4vw,5rem)] leading-[0.98]">Feito com amor,</span>
-          <span className="block mt-1 normal-case text-[#F2EDDC] text-[clamp(2.1rem,9.5vw,3.6rem)] md:text-[clamp(2.7rem,5.6vw,4.2rem)] leading-[0.96]">para momentos inesquecíveis.</span>
+        <h1 className="mt-6 max-w-5xl font-serif font-semibold leading-[0.98]">
+          <span className="block italic text-[#F2EDDC] text-[clamp(2.25rem,8vw,5rem)]">
+            Bolos artesanais
+          </span>
+          <span className="mt-1 block text-[#F2EDDC] text-[clamp(1.9rem,5.8vw,3.8rem)]">
+            que transformam
+          </span>
+          <span className="mt-1 block italic text-[#D96A29] text-[clamp(1.75rem,5.4vw,3.5rem)]">
+            momentos em doces memórias.
+          </span>
         </h1>
 
-        <p className="mt-3 md:mt-5 max-w-md text-[12px] md:text-[15px] text-[#F2EDDC]/78 leading-relaxed">
-          Bolos, doces finos e presentes com sabor — feitos à mão, todos os dias,
+        <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-[#F2EDDC]/85 sm:text-[16px] md:text-[18px]">
+          Bolos, doces finos e presentes com sabor único — feitos à mão, todos os dias,
           por duas confeiteiras apaixonadas.
         </p>
 
-        <div className="mt-4 md:mt-6 grid grid-cols-2 gap-2 md:flex md:flex-row md:gap-2.5">
+        <div className="mt-6 grid w-full max-w-[48rem] grid-cols-2 gap-2.5 sm:mt-8 sm:gap-4">
           <Link
             to="/bolos"
-            className="inline-flex items-center justify-center gap-1 md:gap-2 rounded-lg md:rounded-xl px-2 md:px-6 h-11 md:h-12 text-[11px] md:text-[13px] font-semibold whitespace-nowrap bg-[#D96A29] text-white shadow-[0_10px_28px_rgba(217,106,41,0.25)] hover:bg-[#D94625] active:scale-[0.97] transition"
+            className="inline-flex h-12 items-center justify-center gap-1 rounded-full bg-gradient-to-r from-[#F0781C] to-[#C94A0A] px-2 text-[10px] font-semibold text-white shadow-[0_10px_28px_rgba(217,106,41,0.28)] transition hover:brightness-110 active:scale-[0.97] sm:h-[58px] sm:gap-2 sm:px-6 sm:text-[15px]"
           >
-            Ver nossos bolos <IconChevronRight className="w-3 h-3 md:w-4 md:h-4" />
+            Ver nossos bolos <IconChevronRight className="h-4 w-4 shrink-0" />
           </Link>
           <LinkButton
             variant="ghost"
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-11 md:h-12 px-1 md:px-5 rounded-lg md:rounded-2xl text-[10px] md:text-[13px] whitespace-nowrap border border-[#F2B591]/40 text-[#F2EDDC] hover:bg-[#A66D3C]/25"
+            className="h-12 gap-1 rounded-full border border-[#F2B591]/80 px-1.5 text-[10px] text-[#F2EDDC] hover:bg-[#A66D3C]/25 sm:h-[58px] sm:gap-2 sm:px-6 sm:text-[15px]"
           >
-            <WhatsAppIcon className="w-4 h-4 text-[#F2B591]" /> Falar no WhatsApp
+            <WhatsAppIcon className="h-4 w-4 shrink-0 text-[#F2B591] sm:h-5 sm:w-5" />
+            Falar no WhatsApp
           </LinkButton>
         </div>
 
-        <div className="mt-4 md:mt-6 flex flex-wrap items-center gap-x-4 md:gap-x-5 gap-y-2 text-[9px] md:text-[11px] text-[#F2EDDC]/70">
-          <span className="inline-flex items-center gap-1.5">
-            <IconStar filled className="w-3.5 h-3.5 text-[#D96A29]" />
-            <CountUp to={1300} suffix="+ clientes" />
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <IconClock className="w-3.5 h-3.5 text-[#F2B591]" />
-            {BRAND.hours}
-          </span>
-        </div>
+        <svg className="mt-7 h-12 w-64 text-[#D96A29] sm:mt-9 sm:w-80" viewBox="0 0 320 48" fill="none" aria-hidden>
+          <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5">
+            <path d="M8 24h74M238 24h74" />
+            <path d="M160 16c-9-12-25-1-16 10l16 14 16-14c9-11-7-22-16-10Z" />
+            <path d="M145 27c-20 0-35-5-51-17M175 27c20 0 35-5 51-17" />
+            <path d="M108 19c-9-1-14-6-17-12 9 0 15 4 17 12ZM123 25c-8 1-15-1-20-6 8-3 15-1 20 6ZM136 28c-7 3-14 3-20 0 6-5 13-5 20 0Z" />
+            <path d="M212 19c9-1 14-6 17-12-9 0-15 4-17 12ZM197 25c8 1 15-1 20-6-8-3-15-1-20 6ZM184 28c7 3 14 3 20 0-6-5-13-5-20 0Z" />
+          </g>
+        </svg>
       </motion.div>
-
-      <motion.figure
-        initial={{ opacity: 0, x: 18 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-        className="relative mx-auto order-1 md:order-2 mt-0 w-full max-w-[34rem]"
-      >
-        <div className="absolute -inset-5 rounded-[30px] bg-[#A66D3C]/20 blur-2xl" aria-hidden />
-        <div className="relative overflow-hidden rounded-[22px] sm:rounded-[28px] border border-[#F2B591]/55 bg-[#3E2D21] shadow-[0_28px_70px_rgba(0,0,0,0.38)]">
-          <Img
-            src={HERO_IMAGE}
-            alt="Bolo de Oreo em camadas da Doceria Dalpizzol"
-            loading="eager"
-            fetchPriority="high"
-            sizes="(min-width: 768px) 48vw, 100vw"
-            wrapperClassName="relative overflow-hidden"
-            className="w-full aspect-square md:aspect-[1.04] object-cover object-center"
-          />
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-[#3E2D21]/45 via-transparent to-[#3E2D21]/[0.04] pointer-events-none"
-            aria-hidden
-          />
-          <figcaption className="absolute bottom-0 inset-x-0 flex items-center justify-between gap-3 px-4 py-3 sm:px-5 sm:py-4 text-[#F2EDDC]">
-            <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.16em] uppercase">Bolo de Oreo</span>
-            <span className="text-[9px] sm:text-[10px] tracking-[0.12em] uppercase text-[#F2B591]">Feito à mão</span>
-          </figcaption>
-        </div>
-      </motion.figure>
     </div>
   </section>
 );

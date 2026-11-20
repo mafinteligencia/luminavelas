@@ -240,19 +240,19 @@
   /* Hero de cacau escuro inspirado no topo cinematográfico da arte A4. */
   .hero-cinematic {
     color: #F2EDDC;
-    background-color: #3E2D21;
+    background-color: #2B170F;
     background-image:
       radial-gradient(
-        ellipse 56% 86% at 88% 48%,
-        rgba(166, 109, 60, 0.25) 0%,
-        transparent 72%
+        ellipse 58% 44% at 50% 2%,
+        rgba(217, 106, 41, 0.2) 0%,
+        transparent 74%
       ),
       radial-gradient(
-        ellipse 34% 44% at 8% 100%,
-        rgba(217, 106, 41, 0.1) 0%,
-        transparent 78%
+        ellipse 48% 42% at 50% 100%,
+        rgba(166, 109, 60, 0.18) 0%,
+        transparent 76%
       ),
-      linear-gradient(115deg, #3E2D21 0%, #3E2D21 55%, #302219 100%);
+      linear-gradient(145deg, #2B170F 0%, #351B10 48%, #24120B 100%);
   }
 
   /* Faixa caramelo inspirada nos detalhes do logotipo. */
