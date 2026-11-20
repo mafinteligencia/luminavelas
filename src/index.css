@@ -5,7 +5,7 @@
 /* =====================================================
    Doceria Dalpizzol — paleta oficial
    Creme #F2EDDC · Caramelo #A66D3C · Laranja #D96A29
-   Pêssego #F2B591 · Terracota #D94625
+   Pêssego #F2B591 · Terracota #D94625 · Cacau #3E2D21
    ===================================================== */
 @layer base {
   :root {
@@ -18,7 +18,7 @@
     --popover: 46.4 45.8% 90.6%;
     --popover-foreground: 24.8 30.5% 18.6%;
 
-    --primary: 27.7 46.9% 44.3%; /* #A66D3C */
+    --primary: 22.2 69.8% 50.6%; /* #D96A29 */
     --primary-foreground: 46.4 45.8% 90.6%;
 
     --secondary: 22.3 78.9% 75.9%; /* #F2B591 */
@@ -27,7 +27,7 @@
     --muted: 46.4 45.8% 90.6%; /* creme */
     --muted-foreground: 24 21% 35%;
 
-    --accent: 22.2 69.8% 50.6%; /* #D96A29 */
+    --accent: 27.7 46.9% 44.3%; /* #A66D3C */
     --accent-foreground: 46.4 45.8% 90.6%;
 
     --destructive: 0 70% 55%;
@@ -35,7 +35,7 @@
 
     --border: 30 25% 80%;
     --input: 30 25% 80%;
-    --ring: 27.7 46.9% 44.3%;
+    --ring: 22.2 69.8% 50.6%;
 
     --radius: 1.25rem;
 
@@ -195,7 +195,7 @@
     padding-top: env(safe-area-inset-top);
   }
   .topbar-framed {
-    padding-top: calc(env(safe-area-inset-top) + 10px);
+    padding-top: calc(env(safe-area-inset-top) + 8px);
   }
   .topbar-framed::before {
     content: "";
@@ -208,8 +208,8 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(166, 109, 60, 0.58) 12%,
-      rgba(166, 109, 60, 0.58) 88%,
+      rgba(217, 106, 41, 0.9) 12%,
+      rgba(217, 106, 41, 0.9) 88%,
       transparent
     );
     pointer-events: none;
@@ -221,31 +221,38 @@
     @apply bg-white/85 border border-marrom/10 rounded-3xl;
     box-shadow: 0 12px 32px rgba(166, 109, 60, 0.1);
   }
-  /* Fundo creme com malha de luz em várias camadas (mesh gradient). */
+  /* Campo de papel creme: pêssego restrito a reflexos leves. */
   .pattern-creme {
     background-color: #F2EDDC;
     background-image:
       radial-gradient(
-        ellipse 70% 55% at 12% 8%,
-        rgba(242, 181, 145, 0.3) 0%,
-        transparent 62%
+        ellipse 58% 45% at 0% 0%,
+        rgba(242, 181, 145, 0.12) 0%,
+        transparent 72%
       ),
       radial-gradient(
-        ellipse 60% 50% at 92% 4%,
-        rgba(166, 109, 60, 0.12) 0%,
-        transparent 60%
+        ellipse 40% 38% at 100% 100%,
+        rgba(166, 109, 60, 0.055) 0%,
+        transparent 74%
+      );
+  }
+
+  /* Hero de cacau escuro inspirado no topo cinematográfico da arte A4. */
+  .hero-cinematic {
+    color: #F2EDDC;
+    background-color: #3E2D21;
+    background-image:
+      radial-gradient(
+        ellipse 56% 86% at 88% 48%,
+        rgba(166, 109, 60, 0.25) 0%,
+        transparent 72%
       ),
       radial-gradient(
-        ellipse 80% 60% at 78% 92%,
-        rgba(217, 106, 41, 0.18) 0%,
-        transparent 64%
+        ellipse 34% 44% at 8% 100%,
+        rgba(217, 106, 41, 0.1) 0%,
+        transparent 78%
       ),
-      radial-gradient(
-        ellipse 55% 45% at 30% 100%,
-        rgba(242, 181, 145, 0.16) 0%,
-        transparent 60%
-      ),
-      linear-gradient(180deg, #F2EDDC 0%, #F2EDDC 55%, #F2B591 100%);
+      linear-gradient(115deg, #3E2D21 0%, #3E2D21 55%, #302219 100%);
   }
 
   /* Faixa caramelo inspirada nos detalhes do logotipo. */
