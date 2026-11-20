@@ -65,10 +65,18 @@ const HERO_SLIDES = [...PRODUCTS]
   });
 
 const HERO_ROTATION_MS = 5200;
+const HERO_HEADLINE_LINES = [
+  "Bolos artesanais",
+  "que transformam",
+  "momentos em doces",
+  "memórias.",
+] as const;
+const HERO_HEADLINE_TEXT = HERO_HEADLINE_LINES.join("\n");
 
 /* ============ 1 · HERO — carrossel editorial da vitrine ============ */
 const Hero = () => {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [typedHeadlineChars, setTypedHeadlineChars] = useState(0);
   const reduceMotion = useReducedMotion();
   const slide = HERO_SLIDES[slideIndex];
 
@@ -80,14 +88,59 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
+    if (reduceMotion) {
+      setTypedHeadlineChars(HERO_HEADLINE_TEXT.length);
+      return;
+    }
+
+    let typedChars = 0;
+    let timer = 0;
+    const typeNextCharacter = () => {
+      typedChars += 1;
+      setTypedHeadlineChars(typedChars);
+      if (typedChars < HERO_HEADLINE_TEXT.length) {
+        const nextCharacter = HERO_HEADLINE_TEXT[typedChars];
+        timer = window.setTimeout(typeNextCharacter, nextCharacter === "\n" ? 300 : 42);
+      }
+    };
+
+    timer = window.setTimeout(typeNextCharacter, 450);
+    return () => window.clearTimeout(timer);
+  }, [reduceMotion]);
+
+  useEffect(() => {
     const nextSlide = HERO_SLIDES[(slideIndex + 1) % HERO_SLIDES.length];
     const image = new window.Image();
     image.decoding = "async";
     image.src = nextSlide.src;
   }, [slideIndex]);
 
+  const renderHeadlineLine = (lineIndex: number, className: string) => {
+    const text = HERO_HEADLINE_LINES[lineIndex];
+    const start = HERO_HEADLINE_LINES.slice(0, lineIndex).reduce((length, line) => length + line.length + 1, 0);
+    const visibleText = HERO_HEADLINE_TEXT.slice(start, Math.min(typedHeadlineChars, start + text.length));
+    const isTyping = typedHeadlineChars >= start && typedHeadlineChars < start + text.length && !reduceMotion;
+
+    return (
+      <span className={`grid min-h-[1.04em] place-items-center ${className}`} aria-hidden="true">
+        <span className="invisible col-start-1 row-start-1">{text}</span>
+        <span className="col-start-1 row-start-1">
+          {visibleText}
+          {isTyping && (
+            <motion.span
+              aria-hidden="true"
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+              className="ml-0.5 inline-block h-[0.72em] w-[2px] translate-y-[0.08em] rounded-full bg-current"
+            />
+          )}
+        </span>
+      </span>
+    );
+  };
+
   return (
-  <section className="relative hero-brand border-b border-[#BABDA2]/50 pt-[64px] md:pt-24 pb-10 sm:pb-16 px-5 overflow-hidden">
+  <section className="relative hero-brand border-b border-[#BABDA2]/50 pt-[60px] md:pt-24 pb-10 sm:pb-16 px-5 overflow-hidden">
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
       <FloralPattern color="#BABDA2" opacity={0.2} />
       <svg
@@ -109,11 +162,11 @@ const Hero = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="group relative order-first mb-6 w-[calc(100%+1rem)] max-w-[54rem] sm:w-full md:mb-10"
+        className="group relative order-first mb-4 w-[calc(100%+1rem)] max-w-[54rem] sm:w-full md:mb-10"
       >
         <div className="absolute -inset-3 rounded-[28px] bg-[#EAC29E]/30 blur-2xl" aria-hidden />
         <div className="relative overflow-hidden rounded-[18px] border border-[#BABDA2]/55 bg-[#FAF5E2] shadow-[0_24px_60px_rgba(80,85,62,0.16)] sm:rounded-[26px]">
-          <div className="relative aspect-square w-full overflow-hidden">
+          <div className="relative aspect-[1.2] w-full overflow-hidden sm:aspect-square">
             <AnimatePresence initial={false} mode="sync">
               <motion.img
                 key={slide.src}
@@ -134,8 +187,8 @@ const Hero = () => {
 
           </div>
         </div>
-        <figcaption className="mt-3 min-h-[42px] px-1 text-center" aria-live="off" aria-atomic="true">
-          <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#737A5D]">
+        <figcaption className="mt-1 min-h-[34px] px-1 text-center" aria-live="off" aria-atomic="true">
+          <p className="text-[8px] font-semibold uppercase tracking-[0.18em] text-[#737A5D]">
             {slide.category}
           </p>
           <AnimatePresence mode="wait" initial={false}>
@@ -145,7 +198,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: reduceMotion ? 0.12 : 0.35 }}
-              className="truncate font-serif text-[17px] leading-tight text-[#4F5145] sm:text-lg"
+              className="truncate font-serif text-[15px] leading-tight text-[#4F5145] sm:text-lg"
             >
               {slide.title}
             </motion.p>
@@ -169,24 +222,11 @@ const Hero = () => {
           <span className="h-px w-5 bg-[#D08040] sm:w-10" aria-hidden />
         </p>
 
-        <h1 aria-label="Bolos artesanais que transformam momentos em doces memórias" className="mt-6 max-w-5xl font-serif font-semibold leading-[0.98]">
-          <span className="block whitespace-nowrap italic text-[#737A5D] text-[clamp(2.15rem,9vw,5.25rem)]">
-            Bolos artesanais
-          </span>
-          <span className="mt-2 block text-[#4F5145] text-[clamp(1.55rem,6.2vw,3.1rem)]">
-            que transformam
-          </span>
-          <span className="mt-2 block italic leading-[1.02] text-[#C7815C] text-[clamp(1.6rem,7vw,3.65rem)]">
-            momentos em doces
-          </span>
-          <motion.span
-            initial={reduceMotion ? false : { opacity: 0, y: 20, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: reduceMotion ? 0.12 : 0.8, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-0.5 block italic leading-[1.02] text-[#C7815C] text-[clamp(2rem,8vw,4.2rem)]"
-          >
-            memórias.
-          </motion.span>
+        <h1 aria-label="Bolos artesanais que transformam momentos em doces memórias" className="mt-3 max-w-5xl font-serif font-semibold leading-[0.98] sm:mt-6">
+          {renderHeadlineLine(0, "whitespace-nowrap italic text-[#737A5D] text-[clamp(2rem,8.5vw,5.25rem)]")}
+          {renderHeadlineLine(1, "mt-1 text-[#4F5145] text-[clamp(1.4rem,5.8vw,3.1rem)] sm:mt-2")}
+          {renderHeadlineLine(2, "mt-1 italic leading-[1.02] text-[#C7815C] text-[clamp(1.5rem,6.4vw,3.65rem)] sm:mt-2")}
+          {renderHeadlineLine(3, "mt-0.5 italic leading-[1.02] text-[#C7815C] text-[clamp(1.8rem,7.2vw,4.2rem)]")}
         </h1>
 
         <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-[#626553] sm:text-[16px] md:text-[18px]">
